@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e62f2e75eae76543b8e7eaabb656309, type: 3}
+  m_Name: Kirmizi Okcu
+  m_EditorClassIdentifier: 
+  cardName: "Ok\xE7u"
+  cardType: 1
+  faction: 0
+  faceImage: {fileID: 2800000, guid: b24e016d9bccead4e94558a1135f0056, type: 3}
+  backImage: {fileID: 2800000, guid: dfcf59a60056b244d83f7f6eff591d17, type: 3}
+  priority: 30
+  power: 0
+  abilities:
+  - {fileID: 2483632230966960231, guid: 62b9a7bd2ff19a543a0ba9d985ea7a41, type: 3}

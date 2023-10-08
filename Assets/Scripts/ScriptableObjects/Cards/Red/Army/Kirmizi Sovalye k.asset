@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e62f2e75eae76543b8e7eaabb656309, type: 3}
+  m_Name: Kirmizi Sovalye k
+  m_EditorClassIdentifier: 
+  cardName: "\u015E\xF6valye"
+  cardType: 0
+  faction: 0
+  faceImage: {fileID: 2800000, guid: 8a86569a389f221459f289c8a48988e5, type: 3}
+  backImage: {fileID: 2800000, guid: e4af4c280d06c92458841c18bada45a0, type: 3}
+  priority: 0
+  power: 5
+  abilities: []
