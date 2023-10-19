@@ -6,6 +6,9 @@ public class CardDisplayer : MonoBehaviour
 {
     private CardSO _cardObject;
 
+    [SerializeField] private SpriteRenderer _frontFace;
+    [SerializeField] private SpriteRenderer _backFace;
+
     [SerializeField] private MeshRenderer frontFace;
     [SerializeField] private MeshRenderer backFace;
 
@@ -14,6 +17,9 @@ public class CardDisplayer : MonoBehaviour
     public void Initialize(CardSO cardSO)
     {
         _cardObject = cardSO;
+
+        _frontFace.sprite = cardSO.faceSprite;
+        _backFace.sprite = cardSO.backSprite;
 
         frontFace.material.SetTexture("_BaseMap", _cardObject.faceImage);
         backFace.material.SetTexture("_BaseMap", _cardObject.backImage);

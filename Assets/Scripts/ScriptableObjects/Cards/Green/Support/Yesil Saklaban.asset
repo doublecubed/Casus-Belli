@@ -15,9 +15,12 @@ MonoBehaviour:
   cardName: "\u015Eaklaban"
   cardType: 1
   faction: 1
+  faceSprite: {fileID: 21300000, guid: fcc1aa0d59e4f354998e1a42fb75c541, type: 3}
+  backSprite: {fileID: 21300000, guid: 5e8acc0fa49617f4286dc5d6730bae73, type: 3}
   faceImage: {fileID: 2800000, guid: fcc1aa0d59e4f354998e1a42fb75c541, type: 3}
   backImage: {fileID: 2800000, guid: 5e8acc0fa49617f4286dc5d6730bae73, type: 3}
   priority: 0
   power: 0
   abilities:
-  - {fileID: 2483632230966960231, guid: 62b9a7bd2ff19a543a0ba9d985ea7a41, type: 3}
+  - {fileID: 5261652545539397743, guid: 60a83b3e14e78024cae5f3c5cbc67363, type: 3}
+  - {fileID: 5261652545539397743, guid: 60a83b3e14e78024cae5f3c5cbc67363, type: 3}

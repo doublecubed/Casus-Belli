@@ -9,6 +9,9 @@ public class CardSO : ScriptableObject
     public CardType cardType;
     public Affiliation faction;
 
+    public Sprite faceSprite;
+    public Sprite backSprite;
+
     public Texture faceImage;
     public Texture backImage;
 

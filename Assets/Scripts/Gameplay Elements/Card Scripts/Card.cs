@@ -46,7 +46,7 @@ public class Card : MonoBehaviour, IButtonClickReceiver
     {
         _cardObject = cardSO;
 
-        CardImage = Sprite.Create((Texture2D)cardSO.faceImage, new Rect(0, 0, 651, 946), new Vector2(325.5f, 473f));
+        CardImage = cardSO.faceSprite;
         CardName = _cardObject.cardName;
         CardType = _cardObject.cardType;
         Faction = _cardObject.faction;
@@ -127,7 +127,7 @@ public class Card : MonoBehaviour, IButtonClickReceiver
 
     public void ButtonClicked(int index)
     {
-        
+        Debug.Log($"Button no {index} is clicked");
     }
 
     #endregion
