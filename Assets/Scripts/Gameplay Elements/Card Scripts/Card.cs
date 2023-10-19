@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-public class Card : MonoBehaviour
+public class Card : MonoBehaviour, IButtonClickReceiver
 {
     #region REFERENCES
 
@@ -16,6 +16,7 @@ public class Card : MonoBehaviour
 
     #region Card Properties
 
+    [field: SerializeField] public Sprite CardImage { get; private set; }
     [field: SerializeField] public string CardName { get; private set; }
     [field: SerializeField] public CardType CardType { get; private set; }
     [field: SerializeField] public Affiliation Faction { get; private set; }
@@ -45,6 +46,7 @@ public class Card : MonoBehaviour
     {
         _cardObject = cardSO;
 
+        CardImage = Sprite.Create((Texture2D)cardSO.faceImage, new Rect(0, 0, 651, 946), new Vector2(325.5f, 473f));
         CardName = _cardObject.cardName;
         CardType = _cardObject.cardType;
         Faction = _cardObject.faction;
@@ -76,7 +78,17 @@ public class Card : MonoBehaviour
 
         if (Abilities.Length == 1) _abilityScripts[0].UseAbility();
 
-        if (Abilities.Length == 2) { }
+        if (Abilities.Length >= 2) 
+        {
+            List<Card> cardList = new List<Card>();
+            
+            for (int i = 0; i < Abilities.Length; i++)
+            {
+                cardList.Add(this);
+            }
+
+            UIManager.Instance.DisplaySelectionCards(cardList, this);
+        }
     }
 
 
@@ -111,6 +123,11 @@ public class Card : MonoBehaviour
     private void AbilityResolved()
     {
         OnCardResolutionCompleted?.Invoke();
+    }
+
+    public void ButtonClicked(int index)
+    {
+        
     }
 
     #endregion

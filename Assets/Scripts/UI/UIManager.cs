@@ -6,7 +6,13 @@ using TMPro;
 
 public class UIManager : MonoBehaviour
 {
+    #region REFERENCES
+
     public static UIManager Instance;
+
+    #endregion
+
+    #region VARIABLES
 
     [SerializeField] private GameObject _mainMenu;
     [SerializeField] private GameObject _startButton;
@@ -17,6 +23,11 @@ public class UIManager : MonoBehaviour
     [SerializeField] private TextMeshProUGUI _winnerText;
     [Space(10)]
     [SerializeField] private GameObject _cardSelectPrefab;
+
+    #endregion
+
+    #region MONOBEHAVIOUR
+
     private void Awake()
     {
         if (Instance != null && Instance != this)
@@ -37,6 +48,13 @@ public class UIManager : MonoBehaviour
         DisplayGameEndPanel(false);
     }
 
+
+    #endregion
+
+    #region METHODS
+
+    #region Display UI Elements
+
     public void DisplayDoneButton(bool condition)
     {
         _doneButton.SetActive(condition);
@@ -53,10 +71,14 @@ public class UIManager : MonoBehaviour
         _mainMenu.SetActive(condition);
     }
 
-    public void DisplayCardSelection(bool condition)
+    public void DisplayCardSelectionUI(bool condition)
     {
         _cardSelectionPanel.SetActive(condition);
     }
+
+    #endregion
+
+    #region Game end
 
     public void SetWinningPlayer(string name)
     {
@@ -68,13 +90,18 @@ public class UIManager : MonoBehaviour
         _gameEndPanel.SetActive(condition);
     }
 
+    #endregion
+
     public void DisplaySelectionCards(List<Card> cardsToDisplay, IButtonClickReceiver receiver)
     {
         for (int i = 0; i < cardsToDisplay.Count; i++)
         {
             GameObject selection = Instantiate(_cardSelectPrefab, _cardSelectPrefab.transform);
-            Button buttonComponent = selection.GetComponent<Button>();
-            buttonComponent.onClick.AddListener(()=> receiver.ButtonClicked(i));
+            CardImage cardImage = selection.GetComponent<CardImage>();
+            cardImage.Initialize(cardsToDisplay[i].CardImage, i);
+            cardImage.OnButtonPressed += receiver.ButtonClicked;
         }
     }
+
+    #endregion
 }
