@@ -60,7 +60,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 735c0860b0feb36428d9943b40be0ac2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ImageComponent: {fileID: 0}
+  ImageComponent: {fileID: 4508506545245236266}
   ImageButton: {fileID: 5767599793390097890}
   ImageIndex: 0
 --- !u!114 &4508506545245236266

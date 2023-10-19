@@ -2578,6 +2578,7 @@ GameObject:
   - component: {fileID: 1069577602}
   - component: {fileID: 1069577601}
   - component: {fileID: 1069577604}
+  - component: {fileID: 1069577605}
   m_Layer: 5
   m_Name: Game Canvas
   m_TagString: Untagged
@@ -2690,7 +2691,20 @@ MonoBehaviour:
   _gameEndPanel: {fileID: 1221930944}
   _gameStartPanel: {fileID: 0}
   _winnerText: {fileID: 0}
-  _cardSelectPrefab: {fileID: 2003615997808428622, guid: 66b0a61fd28d18c419df8c35d3a42153,
+--- !u!114 &1069577605
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1069577599}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2e09f938b4d5feb41a286f5dae22ff34, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _displayParent: {fileID: 1513977080}
+  _cardPrefab: {fileID: 2003615997808428622, guid: 66b0a61fd28d18c419df8c35d3a42153,
     type: 3}
 --- !u!1 &1071479405
 GameObject:
@@ -4992,7 +5006,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &2125594762
 RectTransform:
   m_ObjectHideFlags: 0

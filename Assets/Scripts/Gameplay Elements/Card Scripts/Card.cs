@@ -87,7 +87,7 @@ public class Card : MonoBehaviour, IButtonClickReceiver
                 cardList.Add(this);
             }
 
-            UIManager.Instance.DisplaySelectionCards(cardList, this);
+            UIManager.Instance.GetComponent<CardSelectionDisplayer>().DisplaySelectionCards(cardList, this);
         }
     }
 
@@ -127,6 +127,8 @@ public class Card : MonoBehaviour, IButtonClickReceiver
 
     public void ButtonClicked(int index)
     {
+        _abilityScripts[index].UseAbility();
+
         Debug.Log($"Button no {index} is clicked");
     }
 

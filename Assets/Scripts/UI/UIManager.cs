@@ -10,10 +10,6 @@ public class UIManager : MonoBehaviour
 
     public static UIManager Instance;
 
-    #endregion
-
-    #region VARIABLES
-
     [SerializeField] private GameObject _mainMenu;
     [SerializeField] private GameObject _startButton;
     [SerializeField] private GameObject _doneButton;
@@ -21,8 +17,6 @@ public class UIManager : MonoBehaviour
     [SerializeField] private GameObject _gameEndPanel;
     [SerializeField] private GameObject _gameStartPanel;
     [SerializeField] private TextMeshProUGUI _winnerText;
-    [Space(10)]
-    [SerializeField] private GameObject _cardSelectPrefab;
 
     #endregion
 
@@ -46,6 +40,7 @@ public class UIManager : MonoBehaviour
         DisplayMainMenu(true);
         DisplayDoneButton(false);
         DisplayGameEndPanel(false);
+        DisplayCardSelectionUI(false);
     }
 
 
@@ -91,17 +86,7 @@ public class UIManager : MonoBehaviour
     }
 
     #endregion
-
-    public void DisplaySelectionCards(List<Card> cardsToDisplay, IButtonClickReceiver receiver)
-    {
-        for (int i = 0; i < cardsToDisplay.Count; i++)
-        {
-            GameObject selection = Instantiate(_cardSelectPrefab, _cardSelectPrefab.transform);
-            CardImage cardImage = selection.GetComponent<CardImage>();
-            cardImage.Initialize(cardsToDisplay[i].CardImage, i);
-            cardImage.OnButtonPressed += receiver.ButtonClicked;
-        }
-    }
+   
 
     #endregion
 }
