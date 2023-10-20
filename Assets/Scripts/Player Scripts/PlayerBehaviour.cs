@@ -7,6 +7,7 @@ public class PlayerBehaviour : MonoBehaviour
     private PlayerKnowledge _playerKnowledge;
     private CardMover _cardMover;
 
+
     private void Awake()
     {
         _playerKnowledge = GetComponent<PlayerKnowledge>();
@@ -62,5 +63,23 @@ public class PlayerBehaviour : MonoBehaviour
     public void PutBackAtDeckBottom(Card card)
     {
         _cardMover.MoveCard(card, card.StartingDeck, card.StartingDeck.transform.position, PlacementFacing.Down, _playerKnowledge.TableDirection);
+    }
+
+    public void SelectAbility(Card card, AbilityBase[] abilities)
+    {
+        if (TryGetComponent(out HumanPlayer humanPlayer))
+        {
+            List<Card> cardList = new List<Card>();
+
+            for (int i = 0; i < abilities.Length; i++)
+            {
+                cardList.Add(card);
+            }
+
+            UIManager.Instance.GetComponent<CardSelectionDisplayer>().DisplaySelectionCards(cardList, card);
+        } else
+        {
+            abilities[0].UseAbility();
+        }
     }
 }

@@ -45,6 +45,7 @@ public class AbilityPlayPhase : GameStateBase, IButtonClickReceiver
 
     }
 
+
     private void SortCardOrder()
     {
         GetCardsInPlay();
@@ -84,6 +85,8 @@ public class AbilityPlayPhase : GameStateBase, IButtonClickReceiver
 
     private void SortCardsInPlay()
     {
+        _cardResolveOrder = new List<Card>();
+
         List<Card> veryFastCards = _cardsInPlay.Where(x => x.Priority == CardPriority.VeryFast).ToList();
         _cardResolveOrder.AddRange(veryFastCards);
 

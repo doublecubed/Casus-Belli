@@ -80,14 +80,7 @@ public class Card : MonoBehaviour, IButtonClickReceiver
 
         if (Abilities.Length >= 2) 
         {
-            List<Card> cardList = new List<Card>();
-            
-            for (int i = 0; i < Abilities.Length; i++)
-            {
-                cardList.Add(this);
-            }
-
-            UIManager.Instance.GetComponent<CardSelectionDisplayer>().DisplaySelectionCards(cardList, this);
+            GlobalKnowledge.Instance.Behaviour(Faction).SelectAbility(this, _abilityScripts);
         }
     }
 
