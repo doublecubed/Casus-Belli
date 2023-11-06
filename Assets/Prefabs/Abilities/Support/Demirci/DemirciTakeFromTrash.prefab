@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &3345522845690996140
+--- !u!1 &7453561910509151022
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,22 +8,22 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 2722505311025584325}
-  - component: {fileID: 7324345225997518531}
+  - component: {fileID: 633600333886579273}
+  - component: {fileID: 6265971420318191798}
   m_Layer: 0
-  m_Name: Avci-TrashSupport
+  m_Name: DemirciTakeFromTrash
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &2722505311025584325
+--- !u!4 &633600333886579273
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3345522845690996140}
+  m_GameObject: {fileID: 7453561910509151022}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
@@ -32,20 +32,20 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &7324345225997518531
+--- !u!114 &6265971420318191798
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3345522845690996140}
+  m_GameObject: {fileID: 7453561910509151022}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b3eacde9dba441d42984edc7597164e8, type: 3}
+  m_Script: {fileID: 11500000, guid: 709be43ba01d6b649852a2914f4dc9c8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _selfKnowledge: {fileID: 0}
-  _cardMover: {fileID: 0}
-  _deckToSend: {fileID: 0}
-  _opponentPlayArea: {fileID: 0}
-  _selectedCard: {fileID: 0}
+  _knowledge: {fileID: 0}
+  _mover: {fileID: 0}
+  _selfCard: {fileID: 0}
+  _playPhase: {fileID: 0}
+  _selfBehaviour: {fileID: 0}

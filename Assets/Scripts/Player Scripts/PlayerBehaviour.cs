@@ -76,7 +76,7 @@ public class PlayerBehaviour : MonoBehaviour
                 cardList.Add(card);
             }
 
-            UIManager.Instance.GetComponent<CardSelectionDisplayer>().DisplaySelectionCards(cardList, card);
+            UIManager.Instance.GetComponent<CardSelectionDisplayer>().DisplaySelection(cardList, card);
         } else
         {
             abilities[0].UseAbility();

@@ -7,25 +7,31 @@ public class GlobalKnowledge : MonoBehaviour
     public static GlobalKnowledge Instance;
 
     public AbilityPlayPhase AbilityPhase;
+    public PlayerInput PlayerInput;
 
+    [Header("Draw Decks")]
     [SerializeField] private Deck _redArmyDeck;
     [SerializeField] private Deck _greenArmyDeck;
 
     [SerializeField] private Deck _redSupportDeck;
     [SerializeField] private Deck _greenSupportDeck;
 
+    [Header("Trash Decks")]
     [SerializeField] private Deck _redArmyTrash;
     [SerializeField] private Deck _greenArmyTrash;
 
     [SerializeField] private Deck _redSupportTrash;
     [SerializeField] private Deck _greenSupportTrash;
 
+    [Header("Hands")]
     [SerializeField] private Hand _redHand;
     [SerializeField] private Hand _greenHand;
 
+    [Header("Play Areas")]
     [SerializeField] private PlayArea _redPlayArea;
     [SerializeField] private PlayArea _greenPlayArea;
 
+    [Header("Players")]
     [SerializeField] GameObject _redPlayer;
     [SerializeField] GameObject _greenPlayer;
 
@@ -140,5 +146,15 @@ public class GlobalKnowledge : MonoBehaviour
     public PlayerBehaviour Behaviour(Affiliation faction)
     {
         return _behaviours[faction];
+    }
+
+    public bool HumanPlayer(PlayerBehaviour behaviour)
+    {
+        return behaviour.GetComponent<HumanPlayer>();
+    }
+
+    public Affiliation OpponentFaction(Affiliation faction)
+    {
+        return faction == Affiliation.Red ? Affiliation.Green : Affiliation.Red;
     }
 }

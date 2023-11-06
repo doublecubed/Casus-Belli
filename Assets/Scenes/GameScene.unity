@@ -2706,6 +2706,7 @@ MonoBehaviour:
   _displayParent: {fileID: 1513977080}
   _cardPrefab: {fileID: 2003615997808428622, guid: 66b0a61fd28d18c419df8c35d3a42153,
     type: 3}
+  _tokenPrefab: {fileID: 0}
 --- !u!1 &1071479405
 GameObject:
   m_ObjectHideFlags: 0
@@ -4606,6 +4607,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   AbilityPhase: {fileID: 1258230665}
+  PlayerInput: {fileID: 354957186}
   _redArmyDeck: {fileID: 2111402768}
   _greenArmyDeck: {fileID: 1468153271}
   _redSupportDeck: {fileID: 1396374244}

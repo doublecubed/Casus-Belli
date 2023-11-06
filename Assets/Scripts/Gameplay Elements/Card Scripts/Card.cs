@@ -19,7 +19,7 @@ public class Card : MonoBehaviour, IButtonClickReceiver
     [field: SerializeField] public Sprite CardImage { get; private set; }
     [field: SerializeField] public string CardName { get; private set; }
     [field: SerializeField] public CardType CardType { get; private set; }
-    [field: SerializeField] public Affiliation Faction { get; private set; }
+    [field: SerializeField] public Affiliation Faction { get; set; }
     [field: SerializeField] public CardPriority Priority { get; private set; }
     [field: SerializeField] public int Power { get; private set; }
     [field: SerializeField] public GameObject[] Abilities { get; private set; }
