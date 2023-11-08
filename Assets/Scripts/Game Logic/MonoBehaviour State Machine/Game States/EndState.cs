@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -8,7 +9,7 @@ public class EndState : GameStateBase
     [SerializeField] private PlayerKnowledge _playerKnowledge;
     [SerializeField] private PlayerKnowledge _opponentKnowledge;
 
-
+    public event Action OnTurnEnded;
 
     protected override void OnEnable()
     {

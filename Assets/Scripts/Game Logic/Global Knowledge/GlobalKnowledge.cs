@@ -38,6 +38,9 @@ public class GlobalKnowledge : MonoBehaviour
     [SerializeField] PlayerBehaviour _greenBehaviour;
     [SerializeField] PlayerBehaviour _redBehaviour;
 
+    [SerializeField] PlayerStateVariables _greenStates;
+    [SerializeField] PlayerStateVariables _redStates;
+
     private Dictionary<Affiliation, Vector3> _lookDirection;
 
     private Dictionary<Affiliation, Deck> _armyDecks;
