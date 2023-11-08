@@ -20,12 +20,12 @@ public class Hand : MonoBehaviour, ICardContainer
 
     private void OnEnable()
     {
-        EditorApplication.hierarchyChanged += RecreateHand;
+        HierarchySnapshotter.Instance.OnHierarchyChanged += RecreateHand;
     }
 
     private void OnDisable()
     {
-        EditorApplication.hierarchyChanged -= RecreateHand;
+        HierarchySnapshotter.Instance.OnHierarchyChanged -= RecreateHand;
     }
 
     #endregion

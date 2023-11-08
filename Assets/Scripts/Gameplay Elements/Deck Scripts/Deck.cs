@@ -40,7 +40,7 @@ public class Deck : MonoBehaviour, ICardContainer
 
     private void Awake()
     {
-        EditorApplication.hierarchyChanged += OnDeckUpdated;
+        HierarchySnapshotter.Instance.OnHierarchyChanged += OnDeckUpdated;
     }
 
     #endregion

@@ -10,8 +10,6 @@ public class PlayerStateVariables : MonoBehaviour
     #region STATES
     public int CannotAffectDeck {  get; private set; }
 
-
-
     #endregion
 
     #region REFERENCES
@@ -30,7 +28,7 @@ public class PlayerStateVariables : MonoBehaviour
 
     #region MONOBEHAVIOUR
 
-    private void OnEnable()
+    private void Awake()
     {
         CompileStatesAndGenerateDictionary();
         _endState.OnTurnEnded += TurnEnded;

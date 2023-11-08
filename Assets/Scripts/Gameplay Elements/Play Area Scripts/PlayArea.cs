@@ -18,12 +18,12 @@ public class PlayArea : MonoBehaviour, ICardContainer
 
     private void OnEnable()
     {
-        EditorApplication.hierarchyChanged += RecreatePlayArea;
+        HierarchySnapshotter.Instance.OnHierarchyChanged += RecreatePlayArea;
     }
 
     private void OnDisable()
     {
-        EditorApplication.hierarchyChanged -= RecreatePlayArea;
+        HierarchySnapshotter.Instance.OnHierarchyChanged -= RecreatePlayArea;
     }
 
 
