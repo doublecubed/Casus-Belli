@@ -20,12 +20,12 @@ public class Hand : MonoBehaviour, ICardContainer
 
     private void OnEnable()
     {
-        HierarchySnapshotter.Instance.OnHierarchyChanged += RecreateHand;
+        //HierarchySnapshotter.Instance.OnHierarchyChanged += RecreateHand;
     }
 
     private void OnDisable()
     {
-        HierarchySnapshotter.Instance.OnHierarchyChanged -= RecreateHand;
+        //HierarchySnapshotter.Instance.OnHierarchyChanged -= RecreateHand;
     }
 
     #endregion
@@ -45,9 +45,16 @@ public class Hand : MonoBehaviour, ICardContainer
         }
     }
 
+    public void RemoveCard(Card card)
+    {
+        card.transform.parent = null;
+        RecreateHand();
+    }
+
     public void AddCard(Card card, DeckSide side)
     {
         card.transform.SetParent(transform);
+        RecreateHand();
     }
 
 }

@@ -40,7 +40,7 @@ public class Deck : MonoBehaviour, ICardContainer
 
     private void Awake()
     {
-        HierarchySnapshotter.Instance.OnHierarchyChanged += OnDeckUpdated;
+        //HierarchySnapshotter.Instance.OnHierarchyChanged += OnDeckUpdated;
     }
 
     #endregion
@@ -103,9 +103,16 @@ public class Deck : MonoBehaviour, ICardContainer
 
     }
 
+    public void RemoveCard(Card card)
+    {
+        card.transform.parent = null;
+        OnDeckUpdated?.Invoke();
+    }
+
     public void AddCard(Card card, DeckSide side)
     {
         PutCard(card, side);
+        OnDeckUpdated?.Invoke();
     }
 
     public void PutCard(Card card, DeckSide side)
@@ -136,7 +143,7 @@ public class Deck : MonoBehaviour, ICardContainer
         if (side == DeckSide.Random) childIndex = Random.Range(0, _cardParent.childCount - 1);
 
         Transform cardToReturn = _cardParent.GetChild(childIndex);
-        cardToReturn.SetParent(null);
+        //cardToReturn.SetParent(null);
 
         return cardToReturn.GetComponent<Card>();
     }

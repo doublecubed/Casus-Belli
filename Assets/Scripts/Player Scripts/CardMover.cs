@@ -24,6 +24,9 @@ public class CardMover : MonoBehaviour
     {
         OnCardMovementStarted?.Invoke(card);
 
+        ICardContainer exitingContainer = card.GetComponentInParent<ICardContainer>();
+        exitingContainer.RemoveCard(card);
+
         card.transform.DOMove(position, _defaultMoveDuration).OnComplete(() => 
         { 
             container.AddCard(card, order); 

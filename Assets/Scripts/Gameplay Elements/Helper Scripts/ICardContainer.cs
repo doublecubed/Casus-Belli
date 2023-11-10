@@ -5,4 +5,6 @@ using UnityEngine;
 public interface ICardContainer
 {
     public void AddCard(Card card, DeckSide side);
+
+    public void RemoveCard(Card card);
 }

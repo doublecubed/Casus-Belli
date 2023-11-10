@@ -18,12 +18,12 @@ public class PlayArea : MonoBehaviour, ICardContainer
 
     private void OnEnable()
     {
-        HierarchySnapshotter.Instance.OnHierarchyChanged += RecreatePlayArea;
+        //HierarchySnapshotter.Instance.OnHierarchyChanged += RecreatePlayArea;
     }
 
     private void OnDisable()
     {
-        HierarchySnapshotter.Instance.OnHierarchyChanged -= RecreatePlayArea;
+        //HierarchySnapshotter.Instance.OnHierarchyChanged -= RecreatePlayArea;
     }
 
 
@@ -49,9 +49,16 @@ public class PlayArea : MonoBehaviour, ICardContainer
 
     }
 
+    public void RemoveCard(Card card)
+    {
+        card.transform.parent = null;
+        RecreatePlayArea();
+    }
+
     public void AddCard(Card card, DeckSide side)
     {
         card.transform.SetParent(transform);
+        RecreatePlayArea();
     }
 
 }
