@@ -160,4 +160,9 @@ public class GlobalKnowledge : MonoBehaviour
     {
         return faction == Affiliation.Red ? Affiliation.Green : Affiliation.Red;
     }
+
+    public PlayerStateVariables PlayerStates(Affiliation faction)
+    {
+        return faction == Affiliation.Red ? _redStates : _greenStates;
+    }
 }

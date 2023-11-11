@@ -4,20 +4,31 @@ using UnityEngine;
 
 public class AIPlayer : MonoBehaviour
 {
-    private PlayerKnowledge _playerKnowledge;
+    private GlobalKnowledge _knowledge;
     private PlayerBehaviour _playerBehaviour;
-    private PlayerStats _playerStats;
+    private PlayerStateVariables _playerVariables;
+    private Affiliation _faction;
+
+    private Hand _selfHand;
+    private Deck _selfArmyDeck;
+    private Deck _selfSupportDeck;
 
     public bool DoneDrawing {  get; private set; }
     public bool DonePlaying { get; private set; }
 
-    private void Awake()
-    {
-        _playerKnowledge = GetComponent<PlayerKnowledge>();
-        _playerBehaviour = GetComponent<PlayerBehaviour>();
-        _playerStats = GetComponent<PlayerStats>();
-    }
 
+    private void OnEnable()
+    {
+        _knowledge = GlobalKnowledge.Instance;
+        _playerVariables = GetComponent<PlayerStateVariables>();
+        _faction = _playerVariables.Faction;
+
+        _playerBehaviour = GetComponent<PlayerBehaviour>();
+
+        _selfHand = _knowledge.Hand(_faction);
+        _selfArmyDeck = _knowledge.ArmyDeck(_faction);
+        _selfSupportDeck = _knowledge.SupportDeck(_faction);
+    }
 
     public void DrawCards()
     {
@@ -26,7 +37,7 @@ public class AIPlayer : MonoBehaviour
 
     public void PlayCards()
     {
-        int numberToPlay = Random.Range(1, _playerKnowledge.HandSelf.CardsInHand.Count + 1);
+        int numberToPlay = Random.Range(1, _selfHand.CardsInHand.Count + 1);
 
         StartCoroutine(PlayCardsOnTable(numberToPlay));
 
@@ -38,7 +49,7 @@ public class AIPlayer : MonoBehaviour
     {
         for (int i = 0; i < numberToPlay; i++)
         {
-            _playerBehaviour.PutFromHandToPlay(_playerKnowledge.HandSelf.CardsInHand[0]);
+            _playerBehaviour.PutFromHandToPlay(_selfHand.CardsInHand[0]);
 
             yield return new WaitForSeconds(1);
         }
@@ -48,21 +59,21 @@ public class AIPlayer : MonoBehaviour
 
     private IEnumerator DrawCardsToHand()
     {
-        for (int i = 0; i < _playerStats.MaxCardsPerRound; i++)
+        for (int i = 0; i < _playerVariables.MaxCardsToDraw; i++)
         {
             if ( i == 0)
             {
-                DrawFromDeck(_playerKnowledge.ArmyDeckSelf);
+                DrawFromDeck(_selfArmyDeck);
             }
             else
             {
-                if (_playerKnowledge.ArmyDeckSelf.CardsInDeck() == 0 && _playerKnowledge.SupportDeckSelf.CardsInDeck() == 0)
+                if (_selfArmyDeck.CardsInDeck() == 0 && _selfSupportDeck.CardsInDeck() == 0)
                 {
                     continue;
                 }
 
                 int chooseDeck = Random.Range(0, 2);
-                DrawFromDeck(chooseDeck == 0 ? _playerKnowledge.ArmyDeckSelf : _playerKnowledge.SupportDeckSelf);
+                DrawFromDeck(chooseDeck == 0 ? _selfArmyDeck : _selfSupportDeck);
             }
 
             yield return new WaitForSeconds(1);
@@ -74,11 +85,11 @@ public class AIPlayer : MonoBehaviour
 
     public void SendUnPlayedCardsToDecks()
     {
-        int numberOfCards = _playerKnowledge.HandSelf.CardsInHand.Count;
+        int numberOfCards = _selfHand.CardsInHand.Count;
 
         for (int i = 0; i < numberOfCards; i++)
         {
-            _playerBehaviour.PutBackAtDeckBottom(_playerKnowledge.HandSelf.CardsInHand[0]);
+            _playerBehaviour.PutBackAtDeckBottom(_selfHand.CardsInHand[0]);
         }
     }
 
@@ -91,7 +102,7 @@ public class AIPlayer : MonoBehaviour
     {
         if (deck.CardsInDeck() == 0)
         {
-            _playerBehaviour.DrawFromDeckToHand(deck == _playerKnowledge.ArmyDeckSelf ? _playerKnowledge.SupportDeckSelf : _playerKnowledge.ArmyDeckSelf);
+            _playerBehaviour.DrawFromDeckToHand(deck == _selfArmyDeck ? _selfSupportDeck : _selfArmyDeck);
         }
         else
         {

@@ -992,6 +992,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _endState: {fileID: 1542097235}
+  <Faction>k__BackingField: 0
+  <MaxCardsToDraw>k__BackingField: 2
 --- !u!1 &330585543
 GameObject:
   m_ObjectHideFlags: 0
@@ -1270,6 +1272,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _endState: {fileID: 1542097235}
+  <Faction>k__BackingField: 1
+  <MaxCardsToDraw>k__BackingField: 2
 --- !u!1 &410087039
 GameObject:
   m_ObjectHideFlags: 0
@@ -5328,6 +5332,79 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2132130803}
   m_CullTransparentMesh: 1
+--- !u!1001 &6310909098051509997
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 415296581656767408, guid: 5799641c46281944191eb9e10ddfa5b8,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 415296581656767408, guid: 5799641c46281944191eb9e10ddfa5b8,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 415296581656767408, guid: 5799641c46281944191eb9e10ddfa5b8,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 415296581656767408, guid: 5799641c46281944191eb9e10ddfa5b8,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 415296581656767408, guid: 5799641c46281944191eb9e10ddfa5b8,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 415296581656767408, guid: 5799641c46281944191eb9e10ddfa5b8,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 415296581656767408, guid: 5799641c46281944191eb9e10ddfa5b8,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 415296581656767408, guid: 5799641c46281944191eb9e10ddfa5b8,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 415296581656767408, guid: 5799641c46281944191eb9e10ddfa5b8,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 415296581656767408, guid: 5799641c46281944191eb9e10ddfa5b8,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 415296581656767408, guid: 5799641c46281944191eb9e10ddfa5b8,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4066368132636950541, guid: 5799641c46281944191eb9e10ddfa5b8,
+        type: 3}
+      propertyPath: m_Name
+      value: KralSetArmyToOne
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 5799641c46281944191eb9e10ddfa5b8, type: 3}
 --- !u!1001 &7389357411748990398
 PrefabInstance:
   m_ObjectHideFlags: 0
