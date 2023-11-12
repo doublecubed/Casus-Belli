@@ -12,6 +12,12 @@ public class PlayerStateVariables : MonoBehaviour
     public int CannotAffectDeck {  get; private set; }
     public int SetArmiesToOne { get; private set; }
     public int DrawTwiceCards { get; private set; }
+    public int PickACardFromHand { get; private set; }
+    public int CantPlaySupportCards { get; private set; }
+    public int TakeSupportFromTrash { get; private set; }
+    public int PlayHandOpen { get; private set; }
+
+    public int TakeKingAndPrince { get; private set; }
 
     #endregion
 
@@ -29,9 +35,10 @@ public class PlayerStateVariables : MonoBehaviour
     private Dictionary<PlayerStateVariable, PropertyInfo> _propertyDictionary;
     private Dictionary<PlayerStateVariable, int> _previousValues;
 
-    [field: SerializeField] public Affiliation Faction { get; private set; }
-    [field: SerializeField] public int MaxCardsToDraw { get; private set; }
+    public int CardsToDraw { get; private set; }
 
+    [field: SerializeField] public Affiliation Faction { get; private set; }
+    [field: SerializeField] public int DefaultCardsToDraw { get; private set; }
     #endregion
 
     #region MONOBEHAVIOUR
@@ -61,6 +68,11 @@ public class PlayerStateVariables : MonoBehaviour
         _propertyDictionary[PlayerStateVariable.CannotAffectDeck] = typeof(PlayerStateVariables).GetProperty("CannotAffectDeck");
         _propertyDictionary[PlayerStateVariable.SetArmiesToOne] = typeof(PlayerStateVariables).GetProperty("SetArmiesToOne");
         _propertyDictionary[PlayerStateVariable.DrawTwiceCards] = typeof(PlayerStateVariables).GetProperty("DrawTwiceCards");
+        _propertyDictionary[PlayerStateVariable.PickACardFromHand] = typeof(PlayerStateVariables).GetProperty("PickACardFromHand");
+        _propertyDictionary[PlayerStateVariable.CantPlaySupportCards] = typeof(PlayerStateVariables).GetProperty("CantPlaySupportCards");
+        _propertyDictionary[PlayerStateVariable.TakeSupportFromTrash] = typeof(PlayerStateVariables).GetProperty("TakeSupportFromTrash");
+        _propertyDictionary[PlayerStateVariable.PlayHandOpen] = typeof(PlayerStateVariables).GetProperty("PlayHandOpen");
+        _propertyDictionary[PlayerStateVariable.TakeKingAndPrince] = typeof(PlayerStateVariables).GetProperty("TakeKingAndPrince");
     }
 
     #endregion
@@ -126,9 +138,34 @@ public class PlayerStateVariables : MonoBehaviour
 
     #region STATE METHODS
 
-    public void CheckTurnStartStates()
+    public void CheckState(GameStateBase state)
+    {
+        switch (state)
+        {
+            case StartState startstate when state is StartState:                
+                break;
+            case DrawState drawState when state is DrawState:
+                CheckDrawStartStates();
+                break;
+            case PlayState playState when state is PlayState:
+                break;
+            case ResolveState resolveState when state is ResolveState:
+                CheckResolveStartStates();
+                break;
+            case EndState endState when state is EndState:
+                break;
+        }
+    }
+
+    public void CheckDrawStartStates()
     {
         CheckDrawTwiceCards();
+        CheckPlayHandOpen();
+    }
+
+    public void CheckPlayStartStates()
+    {
+        CheckPickACardFromHand();
     }
 
     public void CheckResolveStartStates()
@@ -138,7 +175,9 @@ public class PlayerStateVariables : MonoBehaviour
 
     private void CheckDrawTwiceCards()
     {
+        bool drawTwice = StateActive(PlayerStateVariable.DrawTwiceCards);
 
+        CardsToDraw = DefaultCardsToDraw * (drawTwice ? 2 : 1);
     }
 
     private void CheckSetArmiesToOne()
@@ -153,8 +192,15 @@ public class PlayerStateVariables : MonoBehaviour
         }
     }
 
-    
+    private void CheckPickACardFromHand()
+    {
 
+    }
+
+    private void CheckPlayHandOpen()
+    {
+
+    }
 
     #endregion
 }
@@ -163,5 +209,10 @@ public enum PlayerStateVariable
 {
     CannotAffectDeck,
     SetArmiesToOne,
-    DrawTwiceCards
+    DrawTwiceCards,
+    PickACardFromHand,
+    CantPlaySupportCards,
+    TakeSupportFromTrash,
+    PlayHandOpen,
+    TakeKingAndPrince
 }

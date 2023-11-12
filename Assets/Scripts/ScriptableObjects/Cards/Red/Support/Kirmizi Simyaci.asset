@@ -22,5 +22,5 @@ MonoBehaviour:
   priority: 20
   power: 0
   abilities:
-  - {fileID: 5261652545539397743, guid: 60a83b3e14e78024cae5f3c5cbc67363, type: 3}
-  - {fileID: 5261652545539397743, guid: 60a83b3e14e78024cae5f3c5cbc67363, type: 3}
+  - {fileID: 3186126904122344451, guid: 1b39d5ee770250a41b8bef8a4ed11971, type: 3}
+  - {fileID: 1904290735471262333, guid: 81f1554e0f6deb94faf16de36bd08135, type: 3}

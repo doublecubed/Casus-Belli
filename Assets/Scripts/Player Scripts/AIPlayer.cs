@@ -44,7 +44,6 @@ public class AIPlayer : MonoBehaviour
     }
 
 
-
     private IEnumerator PlayCardsOnTable(int numberToPlay)
     {
         for (int i = 0; i < numberToPlay; i++)
@@ -59,7 +58,7 @@ public class AIPlayer : MonoBehaviour
 
     private IEnumerator DrawCardsToHand()
     {
-        for (int i = 0; i < _playerVariables.MaxCardsToDraw; i++)
+        for (int i = 0; i < _playerVariables.CardsToDraw; i++)
         {
             if ( i == 0)
             {
