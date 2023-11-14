@@ -17,13 +17,13 @@ public class EndState : GameStateBase
 
         _cameraController.MoveCameraTo(_cameraController.GeneralPosition);
 
-        if (_playerKnowledge.ArmyDeckSelf.CardsInDeck() == 0 && _playerKnowledge.SupportDeckSelf.CardsInDeck() == 0)
+        if (_playerKnowledge.ArmyDeckSelf.NumberOfCardsInDeck() == 0 && _playerKnowledge.SupportDeckSelf.NumberOfCardsInDeck() == 0)
         {
             UIManager.Instance.SetWinningPlayer("Yeşil Kazandı");
             _stateMachine.StopMachine();
         }
 
-        if (_opponentKnowledge.ArmyDeckSelf.CardsInDeck() == 0 && _opponentKnowledge.SupportDeckOpponent.CardsInDeck() == 0)
+        if (_opponentKnowledge.ArmyDeckSelf.NumberOfCardsInDeck() == 0 && _opponentKnowledge.SupportDeckOpponent.NumberOfCardsInDeck() == 0)
         {
             UIManager.Instance.SetWinningPlayer("Kırmızı Kazandı");
             _stateMachine.StopMachine();

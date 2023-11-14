@@ -33,12 +33,12 @@ public class HirsizStealCard : AbilityBase, IButtonClickReceiver
 
     private void GetTargetCards()
     {
-        if (_knowledge.ArmyDeck(_targetFaction).CardsInDeck() <= 0)
+        if (_knowledge.ArmyDeck(_targetFaction).NumberOfCardsInDeck() <= 0)
         {
             _selectedDeck = _knowledge.SupportDeck(_targetFaction);
             _phaseCompleted = true;
         }
-        else if (_knowledge.SupportDeck(_targetFaction).CardsInDeck() <= 0)
+        else if (_knowledge.SupportDeck(_targetFaction).NumberOfCardsInDeck() <= 0)
         {
             _selectedDeck = _knowledge.ArmyDeck(_targetFaction);
             _phaseCompleted = true;
@@ -80,7 +80,7 @@ public class HirsizStealCard : AbilityBase, IButtonClickReceiver
     {
         if (deck == _knowledge.ArmyDeck(_targetFaction) || deck == _knowledge.SupportDeck(_targetFaction))
         {
-            if (deck.CardsInDeck() <= 0) return; 
+            if (deck.NumberOfCardsInDeck() <= 0) return; 
 
             _selectedDeck = deck;
             _playerInput.OnDeckClicked -= DeckClicked;

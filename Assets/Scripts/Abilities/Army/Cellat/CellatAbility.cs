@@ -2,32 +2,30 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PrensesTakeKingAndPrince : AbilityBase
+public class CellatAbility : AbilityBase
 {
     private Card _selfCard;
     private GlobalKnowledge _knowledge;
-    private PlayArea _opponentPlayArea;
-
     private Affiliation _opponentFaction;
+    private PlayerStateVariables _opponentStates;
+
 
     public override void Initialize()
     {
         _selfCard = GetComponentInParent<Card>();
         _knowledge = GlobalKnowledge.Instance;
-
         _opponentFaction = _knowledge.OpponentFaction(_selfCard.Faction);
-        _opponentPlayArea = _knowledge.PlayArea(_opponentFaction);
+        _opponentStates = _knowledge.PlayerStates(_opponentFaction);
 
-        base._abilityPhase.Add(CheckForKingAndPrince);
+        base._abilityPhase.Add(SetUpCannotPlaySupport);
 
         base.Initialize();
     }
 
-    private void CheckForKingAndPrince()
-    {
-        List<Card> opponentCardsInPlay = _opponentPlayArea.CardsInPlay;
-        // TODO: Add the ability here
 
+    private void SetUpCannotPlaySupport()
+    {
+        _opponentStates.UpdateState(PlayerStateVariable.CannotPlaySupportCards, 1);
         base.AbilityCompleted();
     }
 

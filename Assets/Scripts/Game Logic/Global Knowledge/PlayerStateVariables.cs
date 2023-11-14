@@ -16,8 +16,10 @@ public class PlayerStateVariables : MonoBehaviour
     public int CantPlaySupportCards { get; private set; }
     public int TakeSupportFromTrash { get; private set; }
     public int PlayHandOpen { get; private set; }
-
     public int TakeKingAndPrince { get; private set; }
+    public int ReturnPlayedSupportsToHand { get; private set; }
+    public int CannotPlaySupportCards { get; private set; }
+
 
     #endregion
 
@@ -73,6 +75,8 @@ public class PlayerStateVariables : MonoBehaviour
         _propertyDictionary[PlayerStateVariable.TakeSupportFromTrash] = typeof(PlayerStateVariables).GetProperty("TakeSupportFromTrash");
         _propertyDictionary[PlayerStateVariable.PlayHandOpen] = typeof(PlayerStateVariables).GetProperty("PlayHandOpen");
         _propertyDictionary[PlayerStateVariable.TakeKingAndPrince] = typeof(PlayerStateVariables).GetProperty("TakeKingAndPrince");
+        _propertyDictionary[PlayerStateVariable.ReturnPlayedSupportsToHand] = typeof(PlayerStateVariables).GetProperty("ReturnPlayedSupportsToHand");
+        _propertyDictionary[PlayerStateVariable.CannotPlaySupportCards] = typeof(PlayerStateVariables).GetProperty("CannotPlaySupportCards");
     }
 
     #endregion
@@ -214,5 +218,7 @@ public enum PlayerStateVariable
     CantPlaySupportCards,
     TakeSupportFromTrash,
     PlayHandOpen,
-    TakeKingAndPrince
+    TakeKingAndPrince,
+    ReturnPlayedSupportsToHand,
+    CannotPlaySupportCards
 }

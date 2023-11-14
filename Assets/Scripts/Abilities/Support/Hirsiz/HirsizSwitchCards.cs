@@ -45,8 +45,8 @@ public class HirsizSwitchCards : AbilityBase, IButtonClickReceiver
 
     private void SwitchCards()
     {
-        int armyCardCount = Mathf.Min(5, _opponentArmyDeck.CardsInDeck());
-        int supportCardCount = Mathf.Min(5, _opponentSupportDeck.CardsInDeck());
+        int armyCardCount = Mathf.Min(5, _opponentArmyDeck.NumberOfCardsInDeck());
+        int supportCardCount = Mathf.Min(5, _opponentSupportDeck.NumberOfCardsInDeck());
 
         _totalCardsToMove = armyCardCount + supportCardCount;
         _cardsMoved = 0;

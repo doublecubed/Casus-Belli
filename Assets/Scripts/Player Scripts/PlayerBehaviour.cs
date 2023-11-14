@@ -17,7 +17,7 @@ public class PlayerBehaviour : MonoBehaviour
 
     public void DrawFromDeckToHand(Deck deckDrawnFrom)
     {
-        if (deckDrawnFrom.CardsInDeck() == 0) return;
+        if (deckDrawnFrom.NumberOfCardsInDeck() == 0) return;
 
         Card drawnCard = deckDrawnFrom.DrawFrom(DeckSide.Top);
         Transform targetParent = _playerKnowledge.HandSelf.transform;
@@ -32,7 +32,7 @@ public class PlayerBehaviour : MonoBehaviour
 
     public Card PutFromDeckToPlay(Deck deckDrawnFrom)
     {
-        if (deckDrawnFrom.CardsInDeck() == 0) return null;
+        if (deckDrawnFrom.NumberOfCardsInDeck() == 0) return null;
         
         Card drawnCard = deckDrawnFrom.DrawFrom(DeckSide.Top);
         PlayArea targetArea = _playerKnowledge.AreaSelf;

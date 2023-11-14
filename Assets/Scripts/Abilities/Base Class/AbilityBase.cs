@@ -14,6 +14,7 @@ public abstract class AbilityBase : MonoBehaviour
 
     protected List<Action> _abilityPhase = new List<Action>();
 
+    protected bool _abilityCancelled;
 
     public virtual void Initialize()
     {
@@ -24,12 +25,19 @@ public abstract class AbilityBase : MonoBehaviour
     public virtual void UseAbility()
     {
         OnAbilityExecutionStarted?.Invoke();
+
+        if (_abilityCancelled)
+        {
+            AbilityCompleted();
+            return;
+        }
+
         StartNextPhase();
     }
 
     public virtual void CancelAbility()
     {
-
+        _abilityCancelled = true;
     }
 
     protected virtual void StartNextPhase()
@@ -64,5 +72,6 @@ public abstract class AbilityBase : MonoBehaviour
     protected virtual void AbilityCompleted()
     {
         OnAbilityExecutionCompleted?.Invoke();
+        _abilityCancelled = false;
     }
 }

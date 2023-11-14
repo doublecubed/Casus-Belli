@@ -47,7 +47,7 @@ public class Deck : MonoBehaviour, ICardContainer
 
 
 
-    public int CardsInDeck()
+    public int NumberOfCardsInDeck()
     {
         return _cardParent.childCount;
     }

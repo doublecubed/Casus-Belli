@@ -41,10 +41,10 @@ public class DemirciTakeFromTrash : AbilityBase, IButtonClickReceiver
     {
         _allArmyCardsInTrash = new List<Card>();
 
-        List<Card> cardsInArmyTrash = _armyTrash.LookAtCards(DeckSide.Top, _armyTrash.CardsInDeck()).Where(x => x.CardType == CardType.Army).ToList();
+        List<Card> cardsInArmyTrash = _armyTrash.LookAtCards(DeckSide.Top, _armyTrash.NumberOfCardsInDeck()).Where(x => x.CardType == CardType.Army).ToList();
         _allArmyCardsInTrash.AddRange(cardsInArmyTrash);
 
-        List<Card> cardsInSupportTrash = _supportTrash.LookAtCards(DeckSide.Top, _supportTrash.CardsInDeck()).Where(x => x.CardType == CardType.Army).ToList();
+        List<Card> cardsInSupportTrash = _supportTrash.LookAtCards(DeckSide.Top, _supportTrash.NumberOfCardsInDeck()).Where(x => x.CardType == CardType.Army).ToList();
         _allArmyCardsInTrash.AddRange(cardsInSupportTrash);
 
         if (_knowledge.HumanPlayer(_selfBehaviour))

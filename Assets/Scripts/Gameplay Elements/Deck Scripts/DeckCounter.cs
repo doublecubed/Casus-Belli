@@ -17,7 +17,7 @@ public class DeckCounter : MonoBehaviour
 
     private void UpdateCounter()
     {
-        _counterText.text = _deck.CardsInDeck().ToString();
+        _counterText.text = _deck.NumberOfCardsInDeck().ToString();
     }
 
 

@@ -50,7 +50,7 @@ public class DrawState : GameStateBase
 
         if (_opponentPlayer.DoneDrawing)
         {
-            if (_playerHand.CardsInHand.Count < _playerStats.MaxCardsPerRound && _playerKnowledge.ArmyDeckSelf.CardsInDeck() == 0 && _playerKnowledge.SupportDeckSelf.CardsInDeck() == 0)
+            if (_playerHand.CardsInHand.Count < _playerStats.MaxCardsPerRound && _playerKnowledge.ArmyDeckSelf.NumberOfCardsInDeck() == 0 && _playerKnowledge.SupportDeckSelf.NumberOfCardsInDeck() == 0)
             {
                 base._isDone = true;
             }

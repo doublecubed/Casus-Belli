@@ -8,9 +8,6 @@ public class PrensAbility : AbilityBase
     [SerializeField] private CardMover _mover;
     [SerializeField] private Card _selfCard;
 
-    [SerializeField] private bool _abilityCancelled;
-
-
     public override void Initialize()
     {
         _selfCard = GetComponentInParent<Card>();
@@ -25,11 +22,6 @@ public class PrensAbility : AbilityBase
     }
 
 
-    public override void CancelAbility()
-    {
-        _abilityCancelled = true;
-    }
-
     private void RiseCard()
     {
         Debug.Log($"Rising Card {_selfCard.name}");
@@ -42,21 +34,18 @@ public class PrensAbility : AbilityBase
         Debug.Log($"Updating Power for {_selfCard.name}");
         List<Card> cardsInPlay = _knowledge.PlayArea(_selfCard.Faction).CardsInPlay;
 
-        if (!_abilityCancelled)
+
+        for (int i = 0; i < cardsInPlay.Count; i++)
         {
-            for (int i = 0; i < cardsInPlay.Count; i++)
+            if (cardsInPlay[i].CardType == CardType.Army && cardsInPlay[i] != _selfCard)
             {
-                if (cardsInPlay[i].CardType == CardType.Army && cardsInPlay[i] != _selfCard)
-                {
-                    if (cardsInPlay[i].gameObject.GetComponentInChildren<BarbarAbility>()) continue;
-                    cardsInPlay[i].SetPower(cardsInPlay[i].Power + 3);
-                }
+                if (cardsInPlay[i].gameObject.GetComponentInChildren<BarbarAbility>()) continue;
+                cardsInPlay[i].SetPower(cardsInPlay[i].Power + 3);
             }
         }
+        
 
         _phaseCompleted = true;
-
-        _abilityCancelled = false;
     }
 
     private void LowerCard()

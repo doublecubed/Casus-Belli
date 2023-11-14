@@ -66,7 +66,7 @@ public class AIPlayer : MonoBehaviour
             }
             else
             {
-                if (_selfArmyDeck.CardsInDeck() == 0 && _selfSupportDeck.CardsInDeck() == 0)
+                if (_selfArmyDeck.NumberOfCardsInDeck() == 0 && _selfSupportDeck.NumberOfCardsInDeck() == 0)
                 {
                     continue;
                 }
@@ -99,7 +99,7 @@ public class AIPlayer : MonoBehaviour
 
     private void DrawFromDeck(Deck deck)
     {
-        if (deck.CardsInDeck() == 0)
+        if (deck.NumberOfCardsInDeck() == 0)
         {
             _playerBehaviour.DrawFromDeckToHand(deck == _selfArmyDeck ? _selfSupportDeck : _selfArmyDeck);
         }
