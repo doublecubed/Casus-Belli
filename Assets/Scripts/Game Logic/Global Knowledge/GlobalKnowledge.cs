@@ -61,6 +61,7 @@ public class GlobalKnowledge : MonoBehaviour
         } else
         {
             Instance = this;
+            Debug.Log("GlobalKnowledge instance created");
         }
 
         CreateDictionaries();

@@ -993,7 +993,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _endState: {fileID: 1542097235}
   <Faction>k__BackingField: 0
-  <DefaultCardsToDraw>k__BackingField: 0
+  <DefaultCardsToDraw>k__BackingField: 2
 --- !u!1 &330585543
 GameObject:
   m_ObjectHideFlags: 0
@@ -1273,7 +1273,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _endState: {fileID: 1542097235}
   <Faction>k__BackingField: 1
-  <DefaultCardsToDraw>k__BackingField: 0
+  <DefaultCardsToDraw>k__BackingField: 2
 --- !u!1 &410087039
 GameObject:
   m_ObjectHideFlags: 0

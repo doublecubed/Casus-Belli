@@ -66,6 +66,8 @@ public class AbilityPlayPhase : GameStateBase, IButtonClickReceiver
         _cardInEffect = _cardResolveOrder[_cardResolveIndex];
         _cardInEffect.OnCardResolutionCompleted += CardResolved;
 
+
+        Debug.Log("Starting ability use for " + _cardInEffect.CardName);
         _cardInEffect.StartAbilityUse();
     }
 

@@ -16,6 +16,8 @@ public class CardSelectionDisplayer : MonoBehaviour
     [SerializeField] private GameObject _cardPrefab;
     [SerializeField] private GameObject _tokenPrefab;
 
+    private List<CardImage> _cardImageComponents;
+
     #endregion
 
     #region MONOBEHAVIOUR
@@ -41,12 +43,16 @@ public class CardSelectionDisplayer : MonoBehaviour
     {
         ClearSelectionCards();
 
+        _cardImageComponents = new List<CardImage>();
+
         for (int i = 0; i < spritesToDisplay.Count; i++)
         {
             GameObject selection = Instantiate(_cardPrefab, _displayParent);
             CardImage cardImage = selection.GetComponent<CardImage>();
+            _cardImageComponents.Add(cardImage);
             cardImage.Initialize(spritesToDisplay[i], i);
             cardImage.OnButtonPressed += receiver.ButtonClicked;
+            cardImage.OnButtonPressed += ButtonClicked;
 
             // TODO: These events have to be unsubscribed in some way after selection is done.
         }
@@ -62,6 +68,16 @@ public class CardSelectionDisplayer : MonoBehaviour
         {
             Destroy(_displayParent.GetChild(i).gameObject);
         }
+    }
+
+    private void ButtonClicked(int index)
+    {
+        for (int i = 0; i < _cardImageComponents.Count; i++)
+        {
+            _cardImageComponents[i].OnButtonPressed -= ButtonClicked;
+        }
+
+        _uiManager.DisplayCardSelectionUI(false);
     }
 
 

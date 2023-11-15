@@ -21,6 +21,7 @@ public class AIPlayer : MonoBehaviour
     {
         _knowledge = GlobalKnowledge.Instance;
         _playerVariables = GetComponent<PlayerStateVariables>();
+        Debug.Log("PlayerVariables = " + _playerVariables.name.ToString());
         _faction = _playerVariables.Faction;
 
         _playerBehaviour = GetComponent<PlayerBehaviour>();
@@ -58,6 +59,8 @@ public class AIPlayer : MonoBehaviour
 
     private IEnumerator DrawCardsToHand()
     {
+        Debug.Log($"Drawing {_playerVariables.CardsToDraw} cards to hand");
+
         for (int i = 0; i < _playerVariables.CardsToDraw; i++)
         {
             if ( i == 0)

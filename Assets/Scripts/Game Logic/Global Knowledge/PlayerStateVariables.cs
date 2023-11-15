@@ -17,9 +17,10 @@ public class PlayerStateVariables : MonoBehaviour
     public int TakeSupportFromTrash { get; private set; }
     public int PlayHandOpen { get; private set; }
     public int TakeKingAndPrince { get; private set; }
-    public int ReturnPlayedSupportsToHand { get; private set; }
+    public int ReturnPlayedSupportsToDeck { get; private set; }
     public int CannotPlaySupportCards { get; private set; }
 
+    public int ReturnSupportsBuyucu {  get; private set; }
 
     #endregion
 
@@ -54,6 +55,7 @@ public class PlayerStateVariables : MonoBehaviour
     private void OnEnable()
     {
         _globalKnowledge = GlobalKnowledge.Instance;
+        CardsToDraw = DefaultCardsToDraw;
     }
 
     #endregion
@@ -75,8 +77,9 @@ public class PlayerStateVariables : MonoBehaviour
         _propertyDictionary[PlayerStateVariable.TakeSupportFromTrash] = typeof(PlayerStateVariables).GetProperty("TakeSupportFromTrash");
         _propertyDictionary[PlayerStateVariable.PlayHandOpen] = typeof(PlayerStateVariables).GetProperty("PlayHandOpen");
         _propertyDictionary[PlayerStateVariable.TakeKingAndPrince] = typeof(PlayerStateVariables).GetProperty("TakeKingAndPrince");
-        _propertyDictionary[PlayerStateVariable.ReturnPlayedSupportsToHand] = typeof(PlayerStateVariables).GetProperty("ReturnPlayedSupportsToHand");
+        _propertyDictionary[PlayerStateVariable.ReturnPlayedSupportsToDeck] = typeof(PlayerStateVariables).GetProperty("ReturnPlayedSupportsToDeck");
         _propertyDictionary[PlayerStateVariable.CannotPlaySupportCards] = typeof(PlayerStateVariables).GetProperty("CannotPlaySupportCards");
+        _propertyDictionary[PlayerStateVariable.ReturnSupportsBuyucu] = typeof(PlayerStateVariables).GetProperty("ReturnSupportsBuyucu");
     }
 
     #endregion
@@ -219,6 +222,7 @@ public enum PlayerStateVariable
     TakeSupportFromTrash,
     PlayHandOpen,
     TakeKingAndPrince,
-    ReturnPlayedSupportsToHand,
-    CannotPlaySupportCards
+    ReturnPlayedSupportsToDeck,
+    CannotPlaySupportCards,
+    ReturnSupportsBuyucu
 }
