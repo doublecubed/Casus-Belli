@@ -18,8 +18,6 @@ public class PlayerStateVariables : MonoBehaviour
     public int PlayHandOpen { get; private set; }
     public int TakeKingAndPrince { get; private set; }
     public int ReturnPlayedSupportsToDeck { get; private set; }
-    public int CannotPlaySupportCards { get; private set; }
-
     public int ReturnSupportsBuyucu {  get; private set; }
 
     #endregion
@@ -36,7 +34,6 @@ public class PlayerStateVariables : MonoBehaviour
 
 
     private Dictionary<PlayerStateVariable, PropertyInfo> _propertyDictionary;
-    private Dictionary<PlayerStateVariable, int> _previousValues;
 
     public int CardsToDraw { get; private set; }
 
@@ -67,7 +64,6 @@ public class PlayerStateVariables : MonoBehaviour
     private void CompileStatesAndGenerateDictionary()
     {
         _propertyDictionary = new Dictionary<PlayerStateVariable, PropertyInfo>();
-        _previousValues = new Dictionary<PlayerStateVariable, int>();
 
         _propertyDictionary[PlayerStateVariable.CannotAffectDeck] = typeof(PlayerStateVariables).GetProperty("CannotAffectDeck");
         _propertyDictionary[PlayerStateVariable.SetArmiesToOne] = typeof(PlayerStateVariables).GetProperty("SetArmiesToOne");
@@ -78,7 +74,6 @@ public class PlayerStateVariables : MonoBehaviour
         _propertyDictionary[PlayerStateVariable.PlayHandOpen] = typeof(PlayerStateVariables).GetProperty("PlayHandOpen");
         _propertyDictionary[PlayerStateVariable.TakeKingAndPrince] = typeof(PlayerStateVariables).GetProperty("TakeKingAndPrince");
         _propertyDictionary[PlayerStateVariable.ReturnPlayedSupportsToDeck] = typeof(PlayerStateVariables).GetProperty("ReturnPlayedSupportsToDeck");
-        _propertyDictionary[PlayerStateVariable.CannotPlaySupportCards] = typeof(PlayerStateVariables).GetProperty("CannotPlaySupportCards");
         _propertyDictionary[PlayerStateVariable.ReturnSupportsBuyucu] = typeof(PlayerStateVariables).GetProperty("ReturnSupportsBuyucu");
     }
 
@@ -99,10 +94,9 @@ public class PlayerStateVariables : MonoBehaviour
 
     public bool StateActive(PlayerStateVariable state)
     {
-        int previousValue = _previousValues[state];
         int currentValue = (int)_propertyDictionary[state].GetValue(this);
 
-        return !(previousValue == 0 && currentValue != 0) || currentValue == 0;
+        return currentValue > 0;
     }
 
     public void DisableState(PlayerStateVariable state)
@@ -116,7 +110,6 @@ public class PlayerStateVariables : MonoBehaviour
 
     private void TurnEnded()
     {
-        UpdatePreviousValues();
         DecrementStateValues();
     }
 
@@ -131,13 +124,6 @@ public class PlayerStateVariables : MonoBehaviour
         }
     }
 
-    private void UpdatePreviousValues()
-    {
-        foreach (KeyValuePair<PlayerStateVariable, PropertyInfo> variable in _propertyDictionary) 
-        {
-            _previousValues[variable.Key] = (int)_propertyDictionary[variable.Key].GetValue(this);
-        }
-    }
 
     #endregion
 
@@ -223,6 +209,5 @@ public enum PlayerStateVariable
     PlayHandOpen,
     TakeKingAndPrince,
     ReturnPlayedSupportsToDeck,
-    CannotPlaySupportCards,
     ReturnSupportsBuyucu
 }

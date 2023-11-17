@@ -21,7 +21,6 @@ public class AIPlayer : MonoBehaviour
     {
         _knowledge = GlobalKnowledge.Instance;
         _playerVariables = GetComponent<PlayerStateVariables>();
-        Debug.Log("PlayerVariables = " + _playerVariables.name.ToString());
         _faction = _playerVariables.Faction;
 
         _playerBehaviour = GetComponent<PlayerBehaviour>();
@@ -47,9 +46,16 @@ public class AIPlayer : MonoBehaviour
 
     private IEnumerator PlayCardsOnTable(int numberToPlay)
     {
+        List<Card> cardsToPlay = _selfHand.CardsInHand;
+
         for (int i = 0; i < numberToPlay; i++)
         {
-            _playerBehaviour.PutFromHandToPlay(_selfHand.CardsInHand[0]);
+            if (_playerVariables.CantPlaySupportCards <= 0 || cardsToPlay[i].CardType != CardType.Support)
+            {
+                _playerBehaviour.PutFromHandToPlay(cardsToPlay[i]);
+            }
+
+            //_playerBehaviour.PutFromHandToPlay(_selfHand.CardsInHand[0]);
 
             yield return new WaitForSeconds(1);
         }

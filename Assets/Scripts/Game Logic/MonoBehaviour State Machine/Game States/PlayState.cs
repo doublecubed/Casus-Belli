@@ -17,12 +17,24 @@ public class PlayState : GameStateBase
     [SerializeField] private PlayerKnowledge _playerKnowledge;
     [SerializeField] private PlayerKnowledge _opponentKnowledge;
 
+    private Affiliation _playerFaction = Affiliation.Green;
+    private Affiliation _aiFaction = Affiliation.Red;
+
+    private PlayerStateVariables _playerStates;
+
     private bool _hasMovingCard;
     private bool _playerIsDonePlaying;
 
     #endregion
 
     #region MONOBEHAVIOUR
+
+    protected override void Start()
+    {
+        base.Start();
+        _playerStates = _knowledge.PlayerStates(_playerFaction);
+    }
+
 
     protected override void OnEnable()
     {
@@ -68,8 +80,11 @@ public class PlayState : GameStateBase
     {
         if (card.transform.parent = _playerKnowledge.HandSelf.transform)
         {
-            _playerBehaviour.PutFromHandToPlay(card);
-            UIManager.Instance.DisplayDoneButton(true);
+            if (!_playerStates.StateActive(PlayerStateVariable.CantPlaySupportCards) || card.CardType != CardType.Support)
+            {
+                _playerBehaviour.PutFromHandToPlay(card);
+                UIManager.Instance.DisplayDoneButton(true);
+            }
         }
     }
 

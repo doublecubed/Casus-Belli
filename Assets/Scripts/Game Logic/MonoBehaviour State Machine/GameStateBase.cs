@@ -8,9 +8,16 @@ public abstract class GameStateBase : MonoBehaviour
 
     [SerializeField] protected bool _isDone;
 
+    protected GlobalKnowledge _knowledge;
+
     protected virtual void Awake()
     {
         _stateMachine = GetComponentInParent<MonoBehaviourStateMachine>();
+    }
+
+    protected virtual void Start()
+    {
+        _knowledge = GlobalKnowledge.Instance;
     }
 
     protected virtual void OnEnable()

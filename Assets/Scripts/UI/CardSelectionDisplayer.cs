@@ -77,7 +77,7 @@ public class CardSelectionDisplayer : MonoBehaviour
             _cardImageComponents[i].OnButtonPressed -= ButtonClicked;
         }
 
-        _uiManager.DisplayCardSelectionUI(false);
+        _uiManager.DisplayCardSelectionUI(false); 
     }
 
 

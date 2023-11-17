@@ -6,7 +6,10 @@ public class GlobalKnowledge : MonoBehaviour
 {
     public static GlobalKnowledge Instance;
 
+
     public AbilityPlayPhase AbilityPhase;
+    public EndState EndState;
+
     public PlayerInput PlayerInput;
 
     [Header("Draw Decks")]
