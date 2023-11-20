@@ -33,14 +33,18 @@ public class PlayerStateVariables : MonoBehaviour, IButtonClickReceiver
 
     private Hand _selfHand;
     private Hand _opponentHand;
+    private PlayArea _selfPlayArea;
 
     private Deck _selfSupportTrash;
+    private Deck _selfSupportDeck;
 
     private PlayerStateVariable _currentAbility;
 
     // Take card in hand
     private List<Card> _cardSelectionList;
     private Card _selectedCard;
+
+    private List<Card> _saklabanCardList;
 
     private bool _supportCardNegated;
 
@@ -78,6 +82,8 @@ public class PlayerStateVariables : MonoBehaviour, IButtonClickReceiver
         _opponentHand = _knowledge.Hand(_opponentFaction);
         _cardSelectionDisplayer = UIManager.Instance.GetComponent<CardSelectionDisplayer>();
         _selfSupportTrash = _knowledge.SupportTrash(Faction);
+        _selfPlayArea = _knowledge.PlayArea(Faction);
+        _selfSupportDeck = _knowledge.SupportDeck(Faction);
 
         CardsToDraw = DefaultCardsToDraw;
     }
@@ -196,6 +202,7 @@ public class PlayerStateVariables : MonoBehaviour, IButtonClickReceiver
 
     public void CheckResolveStartStates()
     {
+        CheckReturnPlayedSupportsToDeck();
         CheckSetArmiesToOne();
     }
 
@@ -260,6 +267,17 @@ public class PlayerStateVariables : MonoBehaviour, IButtonClickReceiver
         }
     }
 
+    private void CheckReturnPlayedSupportsToDeck()
+    {
+        if (ReturnPlayedSupportsToDeck <= 1) return;
+
+        _saklabanCardList = _selfPlayArea.CardsInPlay.Where(x => x.CardType == CardType.Support).ToList();
+
+        _endState.OnTurnEnded += ResolveReturnPlayedSupportsToDeck;
+    }
+
+
+
     private void ResolvePickACardFromHand()
     {
         _mover.MoveCard(_selectedCard, _selfHand, _selfHand.PlacementPosition(), PlacementFacing.ToCamera, _knowledge.LookDirection(Faction));
@@ -268,6 +286,16 @@ public class PlayerStateVariables : MonoBehaviour, IButtonClickReceiver
     private void ResolveTakeSupportFromTrash()
     {
         ResolvePickACardFromHand();
+    }
+
+    private void ResolveReturnPlayedSupportsToDeck()
+    {
+        _endState.OnTurnEnded -= ResolveReturnPlayedSupportsToDeck;
+        
+        foreach (Card card in _saklabanCardList)
+        {
+            _mover.MoveCard(card, _selfSupportDeck, _selfSupportDeck.transform.position, PlacementFacing.Down, DeckSide.Bottom, _knowledge.LookDirection(Faction));
+        }
     }
 
     #endregion

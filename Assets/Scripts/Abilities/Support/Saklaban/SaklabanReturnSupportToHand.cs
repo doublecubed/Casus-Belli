@@ -22,7 +22,7 @@ public class SaklabanReturnSupportToHand : AbilityBase
 
     private void SetUpReturnSupportCardsToHand()
     {
-        _selfStates.UpdateState(PlayerStateVariable.ReturnPlayedSupportsToDeck, 1);
+        _selfStates.UpdateState(PlayerStateVariable.ReturnPlayedSupportsToDeck, 2);
         AbilityCompleted();
     }
 
