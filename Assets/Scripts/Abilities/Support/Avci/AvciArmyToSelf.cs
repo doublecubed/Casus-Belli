@@ -27,6 +27,8 @@ public class AvciArmyToSelf : AbilityBase, IButtonClickReceiver
         base.Initialize();
     }
 
+
+
     private void SelectOpponentArmyCard()
     {
         _targetFaction = _selfCard.Faction == Affiliation.Red ? Affiliation.Green : Affiliation.Red;

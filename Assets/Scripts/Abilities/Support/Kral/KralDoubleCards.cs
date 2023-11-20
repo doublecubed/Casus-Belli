@@ -27,7 +27,7 @@ public class KralDoubleCards : AbilityBase
 
     private void SetUpDoubleCards()
     {
-        _selfStates.UpdateState(PlayerStateVariable.DrawTwiceCards, 1, true);
+        _selfStates.UpdateState(PlayerStateVariable.DrawTwiceCards, 2, true);
         base.AbilityCompleted();
     }
 

@@ -10,6 +10,11 @@ public class Card : MonoBehaviour, IButtonClickReceiver
 
     private CardSO _cardObject;
 
+    private GlobalKnowledge _knowledge;
+    private EndState _endState;
+    private PlayerStateVariables _selfStates;
+    private PlayerBehaviour _selfBehaviour;
+
     #endregion
 
     #region VARIABLES
@@ -22,11 +27,17 @@ public class Card : MonoBehaviour, IButtonClickReceiver
     [field: SerializeField] public Affiliation Faction { get; set; }
     [field: SerializeField] public CardPriority Priority { get; private set; }
     [field: SerializeField] public int Power { get; private set; }
+    [field: SerializeField] public bool AffectsDeck { get; private set; }
     [field: SerializeField] public GameObject[] Abilities { get; private set; }
+    
 
     [field: SerializeField] public Deck StartingDeck { get; private set; }
 
+
+
     private AbilityBase[] _abilityScripts;
+
+    private int _defaultPower;
 
     #endregion
 
@@ -44,6 +55,12 @@ public class Card : MonoBehaviour, IButtonClickReceiver
 
     public void Initialize(CardSO cardSO)
     {
+        _knowledge = GlobalKnowledge.Instance;
+        _endState = _knowledge.EndState;
+        _endState.OnTurnEnded += ResetPower;
+        _selfStates = _knowledge.PlayerStates(Faction);
+        _selfBehaviour = _knowledge.Behaviour(Faction);
+
         _cardObject = cardSO;
 
         CardImage = cardSO.faceSprite;
@@ -52,8 +69,10 @@ public class Card : MonoBehaviour, IButtonClickReceiver
         Faction = _cardObject.faction;
         Priority = _cardObject.priority;
         Power = _cardObject.power;
+        _defaultPower = _cardObject.power;
         Abilities = _cardObject.abilities;
         StartingDeck = transform.parent.GetComponentInParent<Deck>();
+        AffectsDeck = _cardObject.affectsDeck;
 
         _abilityScripts = new AbilityBase[Abilities.Length];
 
@@ -80,7 +99,7 @@ public class Card : MonoBehaviour, IButtonClickReceiver
 
         if (Abilities.Length >= 2) 
         {
-            GlobalKnowledge.Instance.Behaviour(Faction).SelectAbility(this, _abilityScripts);
+            _selfBehaviour.SelectAbility(this, _abilityScripts);
         }
     }
 
@@ -107,6 +126,11 @@ public class Card : MonoBehaviour, IButtonClickReceiver
     public void SetPower(int power)
     {
         Power = power;
+    }
+
+    private void ResetPower()
+    {
+        Power = _defaultPower;
     }
 
     #endregion

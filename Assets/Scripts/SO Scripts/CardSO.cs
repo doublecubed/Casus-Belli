@@ -18,6 +18,8 @@ public class CardSO : ScriptableObject
     public CardPriority priority;
     public int power;
 
+    public bool affectsDeck;
+
     public GameObject[] abilities;
  
 }

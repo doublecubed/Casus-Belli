@@ -16,7 +16,17 @@ public class AbilityPlayPhase : GameStateBase, IButtonClickReceiver
     private int _cardsToPlay;
     private int _cardResolveIndex;
 
+    private PlayerStateVariables _greenStates;
+    private PlayerStateVariables _redStates;
+
     [SerializeField] private Card _cardInEffect;
+
+    protected override void Start()
+    {
+        base.Start();
+        _greenStates = base._knowledge.PlayerStates(Affiliation.Green);
+        _redStates = base._knowledge.PlayerStates(Affiliation.Red);
+    }
 
     protected override void OnEnable()
     {
@@ -65,7 +75,6 @@ public class AbilityPlayPhase : GameStateBase, IButtonClickReceiver
 
         _cardInEffect = _cardResolveOrder[_cardResolveIndex];
         _cardInEffect.OnCardResolutionCompleted += CardResolved;
-
 
         Debug.Log("Starting ability use for " + _cardInEffect.CardName);
         _cardInEffect.StartAbilityUse();

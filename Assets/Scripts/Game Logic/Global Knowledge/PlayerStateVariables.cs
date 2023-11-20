@@ -6,7 +6,7 @@ using System.Linq;
 using System.Reflection;
 using UnityEngine;
 
-public class PlayerStateVariables : MonoBehaviour
+public class PlayerStateVariables : MonoBehaviour, IButtonClickReceiver
 {
     #region STATES
     public int CannotAffectDeck {  get; private set; }
@@ -25,7 +25,20 @@ public class PlayerStateVariables : MonoBehaviour
     #region REFERENCES
 
     [SerializeField] private EndState _endState;
-    private GlobalKnowledge _globalKnowledge;
+    private GlobalKnowledge _knowledge;
+    private Affiliation _opponentFaction;
+    private CardSelectionDisplayer _cardSelectionDisplayer;
+
+    private Hand _selfHand;
+    private Hand _opponentHand;
+
+    private PlayerStateVariable _currentAbility;
+
+    // Take card in hand
+    private List<Card> _cardSelectionList;
+    private Card _selectedCard;
+
+    private bool _supportCardNegated;
 
     #endregion
 
@@ -51,7 +64,12 @@ public class PlayerStateVariables : MonoBehaviour
 
     private void OnEnable()
     {
-        _globalKnowledge = GlobalKnowledge.Instance;
+        _knowledge = GlobalKnowledge.Instance;
+        _opponentFaction = _knowledge.OpponentFaction(Faction);
+        _selfHand = _knowledge.Hand(Faction);
+        _opponentHand = _knowledge.Hand(_opponentFaction);
+        _cardSelectionDisplayer = UIManager.Instance.GetComponent<CardSelectionDisplayer>();
+
         CardsToDraw = DefaultCardsToDraw;
     }
 
@@ -141,6 +159,7 @@ public class PlayerStateVariables : MonoBehaviour
                 CheckDrawStartStates();
                 break;
             case PlayState playState when state is PlayState:
+                CheckPlayStartStates();
                 break;
             case ResolveState resolveState when state is ResolveState:
                 CheckResolveStartStates();
@@ -177,7 +196,7 @@ public class PlayerStateVariables : MonoBehaviour
     {
         if (!StateActive(PlayerStateVariable.SetArmiesToOne)) return;
 
-        List<Card> armyCardsInPlay = _globalKnowledge.PlayArea(Faction).CardsInPlay.Where(x => x.CardType == CardType.Army).ToList();
+        List<Card> armyCardsInPlay = _knowledge.PlayArea(Faction).CardsInPlay.Where(x => x.CardType == CardType.Army).ToList();
 
         foreach (Card card in armyCardsInPlay)
         {
@@ -187,12 +206,40 @@ public class PlayerStateVariables : MonoBehaviour
 
     private void CheckPickACardFromHand()
     {
+        if (PickACardFromHand <= 0) return;
+
+        _currentAbility = PlayerStateVariable.PickACardFromHand;
+        _cardSelectionList = _opponentHand.CardsInHand;
+
+        _cardSelectionDisplayer.DisplaySelection(_cardSelectionList, this);
 
     }
 
     private void CheckPlayHandOpen()
     {
 
+    }
+
+    private void ResetCardPowers()
+    {
+
+    }
+
+    public void ButtonClicked(int index)
+    {
+        _selectedCard = _cardSelectionList[index];
+        ResolveAbility(_currentAbility);
+    }
+
+    private void ResolveAbility(PlayerStateVariable ability)
+    {
+        switch (ability)
+        {
+            case PlayerStateVariable.PickACardFromHand:
+
+                break;
+
+        }
     }
 
     #endregion

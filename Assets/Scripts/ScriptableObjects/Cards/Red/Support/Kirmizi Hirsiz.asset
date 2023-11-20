@@ -21,6 +21,7 @@ MonoBehaviour:
   backImage: {fileID: 2800000, guid: dfcf59a60056b244d83f7f6eff591d17, type: 3}
   priority: 30
   power: 0
+  affectsDeck: 1
   abilities:
   - {fileID: 5208981488856395865, guid: 4eca0dc440fc5204c9e9f9b1e1effb09, type: 3}
   - {fileID: 3258244952984870153, guid: 64e97031ac47933488294dcf568838eb, type: 3}
