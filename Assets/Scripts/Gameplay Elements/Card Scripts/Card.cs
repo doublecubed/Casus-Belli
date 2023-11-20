@@ -93,6 +93,13 @@ public class Card : MonoBehaviour, IButtonClickReceiver
 
     public void StartAbilityUse()
     {
+        if (AffectsDeck && _selfStates.CannotAffectDeck > 0)
+        {
+            _selfStates.UpdateState(PlayerStateVariable.CannotAffectDeck, 0);
+            OnCardResolutionCompleted?.Invoke();
+            return;
+        }
+
         if (Abilities.Length == 0) OnCardResolutionCompleted?.Invoke();
 
         if (Abilities.Length == 1) _abilityScripts[0].UseAbility();
