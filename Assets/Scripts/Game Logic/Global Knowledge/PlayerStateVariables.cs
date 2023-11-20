@@ -16,7 +16,8 @@ public class PlayerStateVariables : MonoBehaviour, IButtonClickReceiver
     public int CantPlaySupportCards { get; private set; }
     public int TakeSupportFromTrash { get; private set; }
     public int PlayHandOpen { get; private set; }
-    public int TakeKingAndPrince { get; private set; }
+    public int TakeKingInHand { get; private set; }
+    public int TakePrinceInHand { get; private set; }
     public int ReturnPlayedSupportsToDeck { get; private set; }
     public int ReturnSupportsBuyucu {  get; private set; }
 
@@ -42,6 +43,9 @@ public class PlayerStateVariables : MonoBehaviour, IButtonClickReceiver
     private Card _selectedCard;
 
     private bool _supportCardNegated;
+
+    public Card TargetPrince;
+    public Card TargetKing;
 
     #endregion
 
@@ -95,7 +99,8 @@ public class PlayerStateVariables : MonoBehaviour, IButtonClickReceiver
         _propertyDictionary[PlayerStateVariable.CantPlaySupportCards] = typeof(PlayerStateVariables).GetProperty("CantPlaySupportCards");
         _propertyDictionary[PlayerStateVariable.TakeSupportFromTrash] = typeof(PlayerStateVariables).GetProperty("TakeSupportFromTrash");
         _propertyDictionary[PlayerStateVariable.PlayHandOpen] = typeof(PlayerStateVariables).GetProperty("PlayHandOpen");
-        _propertyDictionary[PlayerStateVariable.TakeKingAndPrince] = typeof(PlayerStateVariables).GetProperty("TakeKingAndPrince");
+        _propertyDictionary[PlayerStateVariable.TakeKingInHand] = typeof(PlayerStateVariables).GetProperty("TakeKingInHand");
+        _propertyDictionary[PlayerStateVariable.TakePrinceInHand] = typeof(PlayerStateVariables).GetProperty("TakePrinceInHand");
         _propertyDictionary[PlayerStateVariable.ReturnPlayedSupportsToDeck] = typeof(PlayerStateVariables).GetProperty("ReturnPlayedSupportsToDeck");
         _propertyDictionary[PlayerStateVariable.ReturnSupportsBuyucu] = typeof(PlayerStateVariables).GetProperty("ReturnSupportsBuyucu");
     }
@@ -178,6 +183,7 @@ public class PlayerStateVariables : MonoBehaviour, IButtonClickReceiver
 
     public void CheckDrawStartStates()
     {
+        CheckTakeKingAndPrince();
         CheckDrawTwiceCards();
         CheckTakeSupportFromTrash();
         CheckPlayHandOpen();
@@ -218,13 +224,12 @@ public class PlayerStateVariables : MonoBehaviour, IButtonClickReceiver
 
     private void CheckPickACardFromHand()
     {
-        if (PickACardFromHand <= 0) return;
+        if (!StateActive(PlayerStateVariable.PickACardFromHand)) return;
 
         _currentAbility = PlayerStateVariable.PickACardFromHand;
         _cardSelectionList = _opponentHand.CardsInHand;
 
         _cardSelectionDisplayer.DisplaySelection(_cardSelectionList, this);
-
     }
 
     private void CheckPlayHandOpen()
@@ -240,6 +245,19 @@ public class PlayerStateVariables : MonoBehaviour, IButtonClickReceiver
         _cardSelectionList = _selfSupportTrash.LookAtCards();
 
         _cardSelectionDisplayer.DisplaySelection(_cardSelectionList, this);
+    }
+
+    private void CheckTakeKingAndPrince()
+    {
+        if (StateActive(PlayerStateVariable.TakePrinceInHand))
+        {
+            _mover.MoveCard(TargetPrince, _selfHand, _selfHand.PlacementPosition(), PlacementFacing.ToCamera, _knowledge.LookDirection(Faction));   
+        } 
+
+        if (StateActive(PlayerStateVariable.TakeKingInHand))
+        {
+            _mover.MoveCard(TargetKing, _selfHand, _selfHand.PlacementPosition(), PlacementFacing.ToCamera, _knowledge.LookDirection(Faction));
+        }
     }
 
     private void ResolvePickACardFromHand()
@@ -289,7 +307,8 @@ public enum PlayerStateVariable
     CantPlaySupportCards,
     TakeSupportFromTrash,
     PlayHandOpen,
-    TakeKingAndPrince,
+    TakeKingInHand,
+    TakePrinceInHand,
     ReturnPlayedSupportsToDeck,
     ReturnSupportsBuyucu
 }
