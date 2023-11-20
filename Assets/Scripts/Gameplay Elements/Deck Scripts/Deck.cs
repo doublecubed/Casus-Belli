@@ -219,6 +219,11 @@ public class Deck : MonoBehaviour, ICardContainer
 
         return lookedCards;
     }
+
+    public List<Card> LookAtCards()
+    {
+        return LookAtCards(DeckSide.Top, NumberOfCardsInDeck());
+    }
 }
 
 public enum DeckSide

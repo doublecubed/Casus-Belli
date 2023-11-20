@@ -21,7 +21,7 @@ public class SimyaciTakeSupportIntoHand : AbilityBase
 
     private void SetUpTakeSupportFromTrash()
     {
-        _selfVariables.UpdateState(PlayerStateVariable.TakeSupportFromTrash, 1);
+        _selfVariables.UpdateState(PlayerStateVariable.TakeSupportFromTrash, 2);
         base.AbilityCompleted();
     }
 }

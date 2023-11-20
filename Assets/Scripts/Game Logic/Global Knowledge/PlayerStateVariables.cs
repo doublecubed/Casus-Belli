@@ -28,9 +28,12 @@ public class PlayerStateVariables : MonoBehaviour, IButtonClickReceiver
     private GlobalKnowledge _knowledge;
     private Affiliation _opponentFaction;
     private CardSelectionDisplayer _cardSelectionDisplayer;
+    private CardMover _mover;
 
     private Hand _selfHand;
     private Hand _opponentHand;
+
+    private Deck _selfSupportTrash;
 
     private PlayerStateVariable _currentAbility;
 
@@ -65,10 +68,12 @@ public class PlayerStateVariables : MonoBehaviour, IButtonClickReceiver
     private void OnEnable()
     {
         _knowledge = GlobalKnowledge.Instance;
+        _mover = _knowledge.Mover(Faction);
         _opponentFaction = _knowledge.OpponentFaction(Faction);
         _selfHand = _knowledge.Hand(Faction);
         _opponentHand = _knowledge.Hand(_opponentFaction);
         _cardSelectionDisplayer = UIManager.Instance.GetComponent<CardSelectionDisplayer>();
+        _selfSupportTrash = _knowledge.SupportTrash(Faction);
 
         CardsToDraw = DefaultCardsToDraw;
     }
@@ -149,6 +154,8 @@ public class PlayerStateVariables : MonoBehaviour, IButtonClickReceiver
 
     #region STATE METHODS
 
+    #region State Checks
+
     public void CheckState(GameStateBase state)
     {
         switch (state)
@@ -172,6 +179,7 @@ public class PlayerStateVariables : MonoBehaviour, IButtonClickReceiver
     public void CheckDrawStartStates()
     {
         CheckDrawTwiceCards();
+        CheckTakeSupportFromTrash();
         CheckPlayHandOpen();
     }
 
@@ -184,6 +192,10 @@ public class PlayerStateVariables : MonoBehaviour, IButtonClickReceiver
     {
         CheckSetArmiesToOne();
     }
+
+    #endregion
+
+    #region State-Specific Methods
 
     private void CheckDrawTwiceCards()
     {
@@ -220,10 +232,29 @@ public class PlayerStateVariables : MonoBehaviour, IButtonClickReceiver
 
     }
 
-    private void ResetCardPowers()
+    private void CheckTakeSupportFromTrash()
     {
+        if (TakeSupportFromTrash <= 0) return;
 
+        _currentAbility = PlayerStateVariable.TakeSupportFromTrash;
+        _cardSelectionList = _selfSupportTrash.LookAtCards();
+
+        _cardSelectionDisplayer.DisplaySelection(_cardSelectionList, this);
     }
+
+    private void ResolvePickACardFromHand()
+    {
+        _mover.MoveCard(_selectedCard, _selfHand, _selfHand.PlacementPosition(), PlacementFacing.ToCamera, _knowledge.LookDirection(Faction));
+    }
+
+    private void ResolveTakeSupportFromTrash()
+    {
+        ResolvePickACardFromHand();
+    }
+
+    #endregion
+
+    #region Non-Ability Methods
 
     public void ButtonClicked(int index)
     {
@@ -236,11 +267,15 @@ public class PlayerStateVariables : MonoBehaviour, IButtonClickReceiver
         switch (ability)
         {
             case PlayerStateVariable.PickACardFromHand:
-
+                ResolvePickACardFromHand();
                 break;
-
+            case PlayerStateVariable.TakeSupportFromTrash:
+                ResolveTakeSupportFromTrash();
+                break;
         }
     }
+
+    #endregion
 
     #endregion
 }
