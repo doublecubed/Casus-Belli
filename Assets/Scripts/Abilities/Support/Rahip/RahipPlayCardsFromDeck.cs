@@ -8,6 +8,7 @@ public class RahipPlayCardsFromDeck : AbilityBase, IButtonClickReceiver
     private GlobalKnowledge _knowledge;
     private CardMover _mover;
     private AbilityPlayPhase _playPhase;
+    private PlayerStateVariables _selfStates;
 
     private PlayArea _selfPlayArea;
 
@@ -32,6 +33,7 @@ public class RahipPlayCardsFromDeck : AbilityBase, IButtonClickReceiver
         _knowledge = GlobalKnowledge.Instance;
         _mover = _knowledge.Mover(_selfCard.Faction);
         _playPhase = _knowledge.AbilityPhase;
+        _selfStates = _knowledge.PlayerStates(_selfCard.Faction);
 
         _selfArmyDeck = _knowledge.ArmyDeck(_selfCard.Faction);
         _selfSupportDeck = _knowledge.SupportDeck(_selfCard.Faction);
@@ -52,7 +54,14 @@ public class RahipPlayCardsFromDeck : AbilityBase, IButtonClickReceiver
         _armyCards = _selfArmyDeck.LookAtCards(DeckSide.Top, 2);
         _currentCards = _armyCards;
 
-        UIManager.Instance.GetComponent<CardSelectionDisplayer>().DisplaySelection(_currentCards, this);
+        if (_selfStates.AIPlayer)
+        {
+            ButtonClicked(0);
+        }
+        else
+        {
+            UIManager.Instance.GetComponent<CardSelectionDisplayer>().DisplaySelection(_currentCards, this);
+        }
     }
 
     private void PlayArmyCard() 
@@ -83,7 +92,14 @@ public class RahipPlayCardsFromDeck : AbilityBase, IButtonClickReceiver
         _supportCards = _selfSupportDeck.LookAtCards(DeckSide.Top, 2);
         _currentCards = _supportCards;
 
-        UIManager.Instance.GetComponent<CardSelectionDisplayer>().DisplaySelection(_currentCards, this);
+        if (_selfStates.AIPlayer)
+        {
+            ButtonClicked(0);
+        }
+        else
+        {
+            UIManager.Instance.GetComponent<CardSelectionDisplayer>().DisplaySelection(_currentCards, this);
+        }
     }
 
     private void PlaySupportCard()

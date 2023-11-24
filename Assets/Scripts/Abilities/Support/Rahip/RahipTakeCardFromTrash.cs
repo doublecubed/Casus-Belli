@@ -12,6 +12,7 @@ public class RahipTakeCardFromTrash : AbilityBase, IButtonClickReceiver
     private Deck _opponentSupportTrash;
     private Deck _selfArmyDeck;
     private Deck _selfSupportDeck;
+    private PlayerBehaviour _selfBehaviour;
 
 
     private List<Card> _allCardsInTrash;
@@ -26,6 +27,7 @@ public class RahipTakeCardFromTrash : AbilityBase, IButtonClickReceiver
         _opponentArmyTrash = _knowledge.ArmyTrash(_opponentFaction);
         _opponentSupportTrash = _knowledge.SupportTrash(_opponentFaction);
         _selfArmyDeck = _knowledge.ArmyDeck(_selfCard.Faction);
+        _selfBehaviour = _knowledge.Behaviour(_selfCard.Faction);
 
         base._abilityPhase.Add(DisplayTrashCards);
         base._abilityPhase.Add(MoveSelectedCardToDeck);
@@ -43,7 +45,14 @@ public class RahipTakeCardFromTrash : AbilityBase, IButtonClickReceiver
         List<Card> cardsInSupportTrash = _opponentSupportTrash.LookAtCards(DeckSide.Top, _opponentSupportTrash.NumberOfCardsInDeck());
         _allCardsInTrash.AddRange(cardsInSupportTrash);
 
-        UIManager.Instance.GetComponent<CardSelectionDisplayer>().DisplaySelection(_allCardsInTrash, this);
+        if (_selfBehaviour.TryGetComponent(out AIPlayer aiPlayer))
+        {
+            ButtonClicked(0);
+        }
+        else
+        {
+            UIManager.Instance.GetComponent<CardSelectionDisplayer>().DisplaySelection(_allCardsInTrash, this);
+        }
 
     }
 

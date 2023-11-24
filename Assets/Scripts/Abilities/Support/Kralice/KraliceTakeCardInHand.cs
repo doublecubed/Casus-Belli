@@ -19,7 +19,6 @@ public class KraliceTakeCardInHand : AbilityBase
 
         base._abilityPhase.Add(SetUpPickACardFromHand);
 
-
         base.Initialize();
     }
 

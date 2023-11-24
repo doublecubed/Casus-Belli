@@ -12,6 +12,7 @@ public class AvciArmyToSelf : AbilityBase, IButtonClickReceiver
     private Affiliation _targetFaction;
     private Card _selectedCard;
     private List<Card> _opponentArmyCards;
+    private PlayerBehaviour _selfBehaviour;
 
     public override void Initialize()
     {
@@ -19,6 +20,7 @@ public class AvciArmyToSelf : AbilityBase, IButtonClickReceiver
         _knowledge = GlobalKnowledge.Instance;
         _mover = _knowledge.Mover(_selfCard.Faction);
         _playPhase = _knowledge.AbilityPhase;
+        _selfBehaviour = _knowledge.Behaviour(_selfCard.Faction);
 
         _abilityPhase.Add(SelectOpponentArmyCard);
         _abilityPhase.Add(RemoveCardFromResolveStack);
@@ -47,7 +49,15 @@ public class AvciArmyToSelf : AbilityBase, IButtonClickReceiver
         }
         else
         {
-            UIManager.Instance.GetComponent<CardSelectionDisplayer>().DisplaySelection(_opponentArmyCards, this);
+            if (_selfBehaviour.TryGetComponent(out AIPlayer aiPlayer))
+            {
+                _selectedCard = _opponentArmyCards[0];
+                _phaseCompleted = true;
+            }
+            else
+            {
+                UIManager.Instance.GetComponent<CardSelectionDisplayer>().DisplaySelection(_opponentArmyCards, this);
+            }
         }
     }
 

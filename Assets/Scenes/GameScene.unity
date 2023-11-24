@@ -992,6 +992,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _endState: {fileID: 1542097235}
+  _cardSelectionDisplayer: {fileID: 1069577605}
+  TargetPrince: {fileID: 0}
+  TargetKing: {fileID: 0}
+  <AIPlayer>k__BackingField: 0
   <Faction>k__BackingField: 0
   <DefaultCardsToDraw>k__BackingField: 2
 --- !u!1 &330585543
@@ -1272,6 +1276,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _endState: {fileID: 1542097235}
+  _cardSelectionDisplayer: {fileID: 1069577605}
+  TargetPrince: {fileID: 0}
+  TargetKing: {fileID: 0}
+  <AIPlayer>k__BackingField: 0
   <Faction>k__BackingField: 1
   <DefaultCardsToDraw>k__BackingField: 2
 --- !u!1 &410087039
@@ -4639,6 +4647,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   AbilityPhase: {fileID: 1258230665}
+  EndState: {fileID: 1542097235}
   PlayerInput: {fileID: 354957186}
   _redArmyDeck: {fileID: 2111402768}
   _greenArmyDeck: {fileID: 1468153271}

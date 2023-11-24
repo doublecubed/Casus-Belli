@@ -6,12 +6,13 @@ public class PlayerBehaviour : MonoBehaviour
 {
     private PlayerKnowledge _playerKnowledge;
     private CardMover _cardMover;
-
+    private PlayerStateVariables _selfStates;
 
     private void Awake()
     {
         _playerKnowledge = GetComponent<PlayerKnowledge>();
         _cardMover = GetComponent<CardMover>();
+        _selfStates = GetComponent<PlayerStateVariables>();
     }
 
 
@@ -67,8 +68,11 @@ public class PlayerBehaviour : MonoBehaviour
 
     public void SelectAbility(Card card, AbilityBase[] abilities)
     {
-        if (TryGetComponent(out HumanPlayer humanPlayer))
+        Debug.Log($"Player name is {gameObject.name}");
+
+        if (!_selfStates.AIPlayer)
         {
+            Debug.Log("Player is human");
             List<Card> cardList = new List<Card>();
 
             for (int i = 0; i < abilities.Length; i++)
@@ -79,6 +83,7 @@ public class PlayerBehaviour : MonoBehaviour
             UIManager.Instance.GetComponent<CardSelectionDisplayer>().DisplaySelection(cardList, card);
         } else
         {
+            Debug.Log("Player is AI");
             abilities[0].UseAbility();
         }
     }

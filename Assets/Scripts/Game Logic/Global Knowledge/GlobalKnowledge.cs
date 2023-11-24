@@ -169,4 +169,9 @@ public class GlobalKnowledge : MonoBehaviour
     {
         return faction == Affiliation.Red ? _redStates : _greenStates;
     }
+
+    public bool AIPLayer(Affiliation faction)
+    {
+        return Behaviour(faction).TryGetComponent(out AIPlayer aiPlayer);
+    }
 }

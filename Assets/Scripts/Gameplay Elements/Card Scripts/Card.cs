@@ -55,12 +55,6 @@ public class Card : MonoBehaviour, IButtonClickReceiver
 
     public void Initialize(CardSO cardSO)
     {
-        _knowledge = GlobalKnowledge.Instance;
-        _endState = _knowledge.EndState;
-        _endState.OnTurnEnded += ResetPower;
-        _selfStates = _knowledge.PlayerStates(Faction);
-        _selfBehaviour = _knowledge.Behaviour(Faction);
-
         _cardObject = cardSO;
 
         CardImage = cardSO.faceSprite;
@@ -73,6 +67,12 @@ public class Card : MonoBehaviour, IButtonClickReceiver
         Abilities = _cardObject.abilities;
         StartingDeck = transform.parent.GetComponentInParent<Deck>();
         AffectsDeck = _cardObject.affectsDeck;
+
+        _knowledge = GlobalKnowledge.Instance;
+        _endState = _knowledge.EndState;
+        _endState.OnTurnEnded += ResetPower;
+        _selfStates = _knowledge.PlayerStates(Faction);
+        _selfBehaviour = _knowledge.Behaviour(Faction);
 
         _abilityScripts = new AbilityBase[Abilities.Length];
 
@@ -93,7 +93,7 @@ public class Card : MonoBehaviour, IButtonClickReceiver
 
     public void StartAbilityUse()
     {
-        if (AffectsDeck && _selfStates.CannotAffectDeck > 0)
+        if (AffectsDeck && _selfStates.StateActive(PlayerStateVariable.CannotAffectDeck))
         {
             _selfStates.UpdateState(PlayerStateVariable.CannotAffectDeck, 0);
             OnCardResolutionCompleted?.Invoke();
@@ -106,6 +106,7 @@ public class Card : MonoBehaviour, IButtonClickReceiver
 
         if (Abilities.Length >= 2) 
         {
+            Debug.Log("The ability selection runs");
             _selfBehaviour.SelectAbility(this, _abilityScripts);
         }
     }

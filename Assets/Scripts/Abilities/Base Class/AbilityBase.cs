@@ -24,6 +24,8 @@ public abstract class AbilityBase : MonoBehaviour
 
     public virtual void UseAbility()
     {
+        Debug.Log($"Ability executing for {gameObject.name}");
+
         OnAbilityExecutionStarted?.Invoke();
 
         if (_abilityCancelled)

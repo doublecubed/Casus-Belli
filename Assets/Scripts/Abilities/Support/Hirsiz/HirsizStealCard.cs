@@ -12,6 +12,7 @@ public class HirsizStealCard : AbilityBase, IButtonClickReceiver
     private PlayerInput _playerInput;
     private Deck _selectedDeck;
     private Card _selectedCard;
+    private PlayerBehaviour _selfBehaviour;
 
     private List<Card> _targetCards;
 
@@ -21,6 +22,7 @@ public class HirsizStealCard : AbilityBase, IButtonClickReceiver
         _knowledge = GlobalKnowledge.Instance;
         _mover = _knowledge.Mover(_selfCard.Faction);
         _playerInput = _knowledge.PlayerInput;
+        _selfBehaviour = _knowledge.Behaviour(_selfCard.Faction);
 
         _targetFaction = _knowledge.OpponentFaction(_selfCard.Faction);
 
@@ -45,7 +47,15 @@ public class HirsizStealCard : AbilityBase, IButtonClickReceiver
         }
         else
         {
-            _playerInput.OnDeckClicked += DeckClicked;
+            if (_knowledge.AIPLayer(_selfCard.Faction))
+            {
+                _selectedDeck = _knowledge.ArmyDeck(_targetFaction);
+                _phaseCompleted = true;
+            }
+            else
+            {
+                _playerInput.OnDeckClicked += DeckClicked;
+            }
         }
     }
 

@@ -23,5 +23,5 @@ MonoBehaviour:
   power: 0
   affectsDeck: 1
   abilities:
-  - {fileID: 5261652545539397743, guid: 60a83b3e14e78024cae5f3c5cbc67363, type: 3}
-  - {fileID: 5261652545539397743, guid: 60a83b3e14e78024cae5f3c5cbc67363, type: 3}
+  - {fileID: 8505951043866672036, guid: ad3a0094cb13e1d4bb551790effa2a7c, type: 3}
+  - {fileID: 6243859975493331015, guid: f0d9acfd4d04eca478def165702a7b11, type: 3}

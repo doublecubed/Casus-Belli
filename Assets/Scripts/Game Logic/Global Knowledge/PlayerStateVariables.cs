@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using UnityEngine;
+using static UnityEngine.Rendering.VolumeComponent;
 
 public class PlayerStateVariables : MonoBehaviour, IButtonClickReceiver
 {
@@ -28,7 +29,7 @@ public class PlayerStateVariables : MonoBehaviour, IButtonClickReceiver
     [SerializeField] private EndState _endState;
     private GlobalKnowledge _knowledge;
     private Affiliation _opponentFaction;
-    private CardSelectionDisplayer _cardSelectionDisplayer;
+    [SerializeField] private CardSelectionDisplayer _cardSelectionDisplayer;
     private CardMover _mover;
 
     private Hand _selfHand;
@@ -51,6 +52,7 @@ public class PlayerStateVariables : MonoBehaviour, IButtonClickReceiver
     public Card TargetPrince;
     public Card TargetKing;
 
+
     #endregion
 
     #region VARIABLES
@@ -60,6 +62,8 @@ public class PlayerStateVariables : MonoBehaviour, IButtonClickReceiver
     private Dictionary<PlayerStateVariable, PropertyInfo> _propertyDictionary;
 
     public int CardsToDraw { get; private set; }
+
+    [field: SerializeField] public bool AIPlayer { get; private set; }
 
     [field: SerializeField] public Affiliation Faction { get; private set; }
     [field: SerializeField] public int DefaultCardsToDraw { get; private set; }
@@ -71,6 +75,8 @@ public class PlayerStateVariables : MonoBehaviour, IButtonClickReceiver
     {
         CompileStatesAndGenerateDictionary();
         _endState.OnTurnEnded += TurnEnded;
+
+        AIPlayer = GetComponent<AIPlayer>();
     }
 
     private void OnEnable()
@@ -80,7 +86,6 @@ public class PlayerStateVariables : MonoBehaviour, IButtonClickReceiver
         _opponentFaction = _knowledge.OpponentFaction(Faction);
         _selfHand = _knowledge.Hand(Faction);
         _opponentHand = _knowledge.Hand(_opponentFaction);
-        _cardSelectionDisplayer = UIManager.Instance.GetComponent<CardSelectionDisplayer>();
         _selfSupportTrash = _knowledge.SupportTrash(Faction);
         _selfPlayArea = _knowledge.PlayArea(Faction);
         _selfSupportDeck = _knowledge.SupportDeck(Faction);
@@ -236,7 +241,13 @@ public class PlayerStateVariables : MonoBehaviour, IButtonClickReceiver
         _currentAbility = PlayerStateVariable.PickACardFromHand;
         _cardSelectionList = _opponentHand.CardsInHand;
 
-        _cardSelectionDisplayer.DisplaySelection(_cardSelectionList, this);
+        if (AIPlayer)
+        {
+            ButtonClicked(0);
+        } else
+        {
+            _cardSelectionDisplayer.DisplaySelection(_cardSelectionList, this);
+        }
     }
 
     private void CheckPlayHandOpen()
@@ -251,7 +262,14 @@ public class PlayerStateVariables : MonoBehaviour, IButtonClickReceiver
         _currentAbility = PlayerStateVariable.TakeSupportFromTrash;
         _cardSelectionList = _selfSupportTrash.LookAtCards();
 
-        _cardSelectionDisplayer.DisplaySelection(_cardSelectionList, this);
+        if (AIPlayer)
+        {
+            ButtonClicked(0);
+        }
+        else
+        {
+            _cardSelectionDisplayer.DisplaySelection(_cardSelectionList, this);
+        }
     }
 
     private void CheckTakeKingAndPrince()
@@ -275,8 +293,6 @@ public class PlayerStateVariables : MonoBehaviour, IButtonClickReceiver
 
         _endState.OnTurnEnded += ResolveReturnPlayedSupportsToDeck;
     }
-
-
 
     private void ResolvePickACardFromHand()
     {

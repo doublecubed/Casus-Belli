@@ -10,9 +10,11 @@ public class AvciSupportToTrash : AbilityBase, IButtonClickReceiver
     [SerializeField] private Card _selfCard;
     [SerializeField] private AbilityPlayPhase _playPhase;
 
+
     private Affiliation _targetFaction;
     private Card _selectedCard;
     private List<Card> _opponentSupportCards;
+    private PlayerBehaviour _selfBehaviour;
 
     public override void Initialize()
     {
@@ -20,6 +22,7 @@ public class AvciSupportToTrash : AbilityBase, IButtonClickReceiver
         _knowledge = GlobalKnowledge.Instance;
         _mover = _knowledge.Mover(_selfCard.Faction);
         _playPhase = _knowledge.AbilityPhase;
+        _selfBehaviour = _knowledge.Behaviour(_selfCard.Faction);
 
         _abilityPhase.Add(SelectOpponentSupportCard);
         _abilityPhase.Add(RemoveCardFromResolveStack);
@@ -45,7 +48,15 @@ public class AvciSupportToTrash : AbilityBase, IButtonClickReceiver
             _phaseCompleted = true;
         } else
         {
-            UIManager.Instance.GetComponent<CardSelectionDisplayer>().DisplaySelection(_opponentSupportCards, this);
+            if (_selfBehaviour.TryGetComponent(out AIPlayer aiPlayer))
+            {
+                _selectedCard = _opponentSupportCards[0];
+                _phaseCompleted = true;
+            }
+            else
+            {
+                UIManager.Instance.GetComponent<CardSelectionDisplayer>().DisplaySelection(_opponentSupportCards, this);
+            }
         }
     }
 
