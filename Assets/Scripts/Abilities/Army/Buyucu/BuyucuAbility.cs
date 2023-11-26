@@ -21,6 +21,7 @@ public class BuyucuAbility : AbilityBase
         _selfPlayArea = _knowledge.PlayArea(_selfCard.Faction);
         _mover = _knowledge.Mover(_selfCard.Faction);
         _selfStates = _knowledge.PlayerStates(_selfCard.Faction);
+        _endState = _knowledge.EndState;
 
         base._abilityPhase.Add(RiseCard);
         base._abilityPhase.Add(GetCardsToReturnToHand);
