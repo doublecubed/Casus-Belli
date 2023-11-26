@@ -73,6 +73,8 @@ public abstract class AbilityBase : MonoBehaviour
 
     protected virtual void AbilityCompleted()
     {
+        Debug.Log($"{gameObject.name} ability completed");
+
         OnAbilityExecutionCompleted?.Invoke();
         _abilityCancelled = false;
     }

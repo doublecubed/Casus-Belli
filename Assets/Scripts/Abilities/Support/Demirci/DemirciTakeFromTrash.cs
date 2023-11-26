@@ -47,6 +47,12 @@ public class DemirciTakeFromTrash : AbilityBase, IButtonClickReceiver
         List<Card> cardsInSupportTrash = _supportTrash.LookAtCards(DeckSide.Top, _supportTrash.NumberOfCardsInDeck()).Where(x => x.CardType == CardType.Army).ToList();
         _allArmyCardsInTrash.AddRange(cardsInSupportTrash);
 
+        if (_allArmyCardsInTrash.Count <= 0)
+        {
+            _phaseCompleted = true;
+            return;
+        }
+
         if (_knowledge.HumanPlayer(_selfBehaviour))
         {
             UIManager.Instance.GetComponent<CardSelectionDisplayer>().DisplaySelection(_allArmyCardsInTrash, this);

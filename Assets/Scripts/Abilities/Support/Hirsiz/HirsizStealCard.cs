@@ -35,6 +35,8 @@ public class HirsizStealCard : AbilityBase, IButtonClickReceiver
 
     private void GetTargetCards()
     {
+        Debug.Log("Hirsiz StealCard ability, GetTargetCards running");
+
         if (_knowledge.ArmyDeck(_targetFaction).NumberOfCardsInDeck() <= 0)
         {
             _selectedDeck = _knowledge.SupportDeck(_targetFaction);
@@ -61,18 +63,21 @@ public class HirsizStealCard : AbilityBase, IButtonClickReceiver
 
     private void SelectCardToSteal()
     {
-        if (_targetCards.Count > 1)
+        Debug.Log("Hirsiz StealCard ability, Select Card to Steal running");
+
+        if (_targetCards.Count > 1 && !_knowledge.AIPLayer(_selfCard.Faction))
         {
             UIManager.Instance.GetComponent<CardSelectionDisplayer>().DisplaySelection(_targetCards, this);
         } else
         {
-            _selectedCard = _targetCards[0];
-            _phaseCompleted = true;
+            ButtonClicked(0);
         }
     }
 
     private void StealCard()
     {
+        Debug.Log("Hirsiz StealCard ability, Steal Card running");
+
         _mover.OnCardMovementCompleted += CardMoveCompleted;
 
         Deck targetDeck = _selectedCard.CardType == CardType.Army ? _knowledge.ArmyDeck(_selfCard.Faction) : _knowledge.SupportDeck(_selfCard.Faction);
