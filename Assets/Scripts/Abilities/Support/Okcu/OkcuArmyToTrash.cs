@@ -33,7 +33,9 @@ public class OkcuArmyToTrash : AbilityBase
 
     private void MoveArmyCardsToTrash()
     {
-        List<Card> armyTopCards = _opponentArmyDeck.LookAtCards(DeckSide.Top, 3);
+        int cardsToCheck = Mathf.Min(3, _opponentArmyDeck.NumberOfCardsInDeck());
+
+        List<Card> armyTopCards = _opponentArmyDeck.LookAtCards(DeckSide.Top, cardsToCheck);
 
         List<Card> selectedCards = armyTopCards.Where(x => x.CardType == CardType.Army && x.Power <= 3).ToList();
 

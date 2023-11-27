@@ -49,7 +49,7 @@ public class DemirciTakeFromTrash : AbilityBase, IButtonClickReceiver
 
         if (_allArmyCardsInTrash.Count <= 0)
         {
-            _phaseCompleted = true;
+            AbilityCompleted();
             return;
         }
 

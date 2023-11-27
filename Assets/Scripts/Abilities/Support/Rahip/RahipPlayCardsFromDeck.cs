@@ -52,6 +52,13 @@ public class RahipPlayCardsFromDeck : AbilityBase, IButtonClickReceiver
     private void SelectArmyCard()
     {
         _armyCards = _selfArmyDeck.LookAtCards(DeckSide.Top, 2);
+
+        if (_armyCards.Count <= 0)
+        {
+            base._phaseCompleted = true;
+            return;
+        }
+
         _currentCards = _armyCards;
 
         if (_selfStates.AIPlayer)
@@ -66,6 +73,12 @@ public class RahipPlayCardsFromDeck : AbilityBase, IButtonClickReceiver
 
     private void PlayArmyCard() 
     {
+        if (_armyCards.Count <= 0)
+        {
+            base._phaseCompleted = true;
+            return;
+        }
+
         _selectedArmyCard = _currentSelectedCard;
         
         _numberOfCardsToMove = _armyCards.Count;
@@ -90,6 +103,13 @@ public class RahipPlayCardsFromDeck : AbilityBase, IButtonClickReceiver
     private void SelectSupportCard()
     {
         _supportCards = _selfSupportDeck.LookAtCards(DeckSide.Top, 2);
+
+        if (_supportCards.Count <=0)
+        {
+            base._phaseCompleted = true;
+            return;
+        }
+
         _currentCards = _supportCards;
 
         if (_selfStates.AIPlayer)
@@ -104,6 +124,12 @@ public class RahipPlayCardsFromDeck : AbilityBase, IButtonClickReceiver
 
     private void PlaySupportCard()
     {
+        if (_supportCards.Count <= 0)
+        {
+            base._phaseCompleted = true;
+            return;
+        }
+
         _selectedSupportCard = _currentSelectedCard;
 
         _numberOfCardsToMove = _supportCards.Count;

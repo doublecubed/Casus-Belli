@@ -37,6 +37,12 @@ public class HirsizStealCard : AbilityBase, IButtonClickReceiver
     {
         Debug.Log("Hirsiz StealCard ability, GetTargetCards running");
 
+        if (_knowledge.ArmyDeck(_targetFaction).NumberOfCardsInDeck() <= 0 && _knowledge.SupportDeck(_targetFaction).NumberOfCardsInDeck() <= 0)
+        {
+            base.AbilityCompleted();
+            return;
+        }
+
         if (_knowledge.ArmyDeck(_targetFaction).NumberOfCardsInDeck() <= 0)
         {
             _selectedDeck = _knowledge.SupportDeck(_targetFaction);

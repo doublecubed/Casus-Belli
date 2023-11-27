@@ -29,6 +29,14 @@ public class SimyaciDrawTopSupportCard : AbilityBase
 
     private void CheckTopCard()
     {
+        List<Card> cards = _opponentSupportDeck.LookAtCards(DeckSide.Top, 1);
+
+        if (cards.Count <= 0)
+        {
+            base.AbilityCompleted();
+            return;
+        }
+
         Card selectedCard = _opponentSupportDeck.LookAtCards(DeckSide.Top, 1)[0];
 
         if (selectedCard.Priority == CardPriority.VerySlow || selectedCard.Priority == CardPriority.Slow)

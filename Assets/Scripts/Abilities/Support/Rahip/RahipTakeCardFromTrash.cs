@@ -45,6 +45,12 @@ public class RahipTakeCardFromTrash : AbilityBase, IButtonClickReceiver
         List<Card> cardsInSupportTrash = _opponentSupportTrash.LookAtCards(DeckSide.Top, _opponentSupportTrash.NumberOfCardsInDeck());
         _allCardsInTrash.AddRange(cardsInSupportTrash);
 
+        if (_allCardsInTrash.Count <= 0)
+        {
+            base.AbilityCompleted();
+            return;
+        }
+
         if (_selfBehaviour.TryGetComponent(out AIPlayer aiPlayer))
         {
             ButtonClicked(0);
