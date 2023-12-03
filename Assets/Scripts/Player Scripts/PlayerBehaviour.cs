@@ -74,13 +74,15 @@ public class PlayerBehaviour : MonoBehaviour
         {
             Debug.Log("Player is human");
             List<Card> cardList = new List<Card>();
+            List<string> abilityDefinition = new List<string>();
 
             for (int i = 0; i < abilities.Length; i++)
             {
                 cardList.Add(card);
+                abilityDefinition.Add(card.Abilities[i].GetComponent<AbilityBase>().AbilityDescription);
             }
 
-            UIManager.Instance.GetComponent<CardSelectionDisplayer>().DisplaySelection(cardList, card);
+            UIManager.Instance.GetComponent<CardSelectionDisplayer>().DisplaySelection(cardList, card, abilityDefinition);
         } else
         {
             Debug.Log("Player is AI");

@@ -44,3 +44,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d87feaea36e65a346b7a2a32952dd641, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  AbilityDescription: "Oynad\u0131\u011F\u0131n\u0131zdan sonraki 2 tur boyunca rakibin
+    oynad\u0131\u011F\u0131 Ordu kartlar\u0131 1 puan kabul edilir."

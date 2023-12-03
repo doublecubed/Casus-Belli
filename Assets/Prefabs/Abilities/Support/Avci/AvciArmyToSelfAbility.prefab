@@ -44,3 +44,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a9aca3e4bd76d7e429eed012741eacec, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  AbilityDescription: "Rakibin oynad\u0131\u011F\u0131 bir Ordu kart\u0131n\u0131,
+    \xF6zellikleri kullan\u0131lmadan, kendi Ordu destenizin en alt\u0131na ekleyiniz."
+  _knowledge: {fileID: 0}
+  _mover: {fileID: 0}
+  _selfCard: {fileID: 0}
+  _playPhase: {fileID: 0}

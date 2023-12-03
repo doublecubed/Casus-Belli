@@ -44,6 +44,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9deddf50ea77808409e79aef668cfbb2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  AbilityDescription: "Prens hari\xE7 masadaki t\xFCm dost ordu kartlar\u0131na 3
+    puan ekleyiniz."
   _knowledge: {fileID: 0}
   _mover: {fileID: 0}
   _selfCard: {fileID: 0}

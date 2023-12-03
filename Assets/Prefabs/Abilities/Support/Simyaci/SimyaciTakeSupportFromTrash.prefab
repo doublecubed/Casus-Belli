@@ -44,3 +44,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aa6244c3731922e4d9a361504f109114, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  AbilityDescription: "Kendi \xE7\xF6p\xFCn\xFCzden bir destek kart\u0131n\u0131
+    sonraki tur elinize al\u0131n\u0131z."

@@ -44,3 +44,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 76ad79ba97e43d54791ed7bc22307c26, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  AbilityDescription: "Sonraki tur rakibin elindeki kartlardan birisini elinize al\u0131n\u0131z."

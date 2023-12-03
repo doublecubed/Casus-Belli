@@ -44,3 +44,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ae53deb788b9cc041a18be7dd5449e70, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  AbilityDescription: "Kendi destek ve ordu destelerinizin en \xFCstteki iki kart\u0131na
+    bakarak iki desteden de birer kart\u0131 o tur hemen oynay\u0131n\u0131z."

@@ -44,3 +44,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d3312880a004ab64a99207f2ae700edd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  AbilityDescription: "Masadaki t\xFCm dost destek kartlar\u0131 tur bitiminde destesine
+    d\xF6ner."

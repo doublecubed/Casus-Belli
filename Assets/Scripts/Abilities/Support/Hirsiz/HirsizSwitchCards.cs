@@ -38,7 +38,14 @@ public class HirsizSwitchCards : AbilityBase, IButtonClickReceiver
 
     private void SelectTopOrBottom()
     {
-        UIManager.Instance.GetComponent<CardSelectionDisplayer>().DisplaySelection(_sprites, this);
+        if (_knowledge.AIPLayer(_selfCard.Faction))
+        {
+            ButtonClicked(0);
+        }
+        else
+        {
+            UIManager.Instance.GetComponent<CardSelectionDisplayer>().DisplaySelection(_sprites, this);
+        }
     }
 
 

@@ -16,6 +16,8 @@ public abstract class AbilityBase : MonoBehaviour
 
     protected bool _abilityCancelled;
 
+    public string AbilityDescription;
+
     public virtual void Initialize()
     {
         _phaseIndex = 0;

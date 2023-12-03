@@ -44,3 +44,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 130968b9910b4294e8a6842c0a385e7f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  AbilityDescription: "Oynad\u0131\u011F\u0131n\u0131zdan sonraki tur iki kat\u0131
+    kart \xE7ekiniz."

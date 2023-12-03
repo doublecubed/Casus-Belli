@@ -10,17 +10,17 @@ using static UnityEngine.Rendering.VolumeComponent;
 public class PlayerStateVariables : MonoBehaviour, IButtonClickReceiver
 {
     #region STATES
-    public int CannotAffectDeck {  get; private set; }
-    public int SetArmiesToOne { get; private set; }
-    public int DrawTwiceCards { get; private set; }
-    public int PickACardFromHand { get; private set; }
-    public int CantPlaySupportCards { get; private set; }
-    public int TakeSupportFromTrash { get; private set; }
-    public int PlayHandOpen { get; private set; }
-    public int TakeKingInHand { get; private set; }
-    public int TakePrinceInHand { get; private set; }
-    public int ReturnPlayedSupportsToDeck { get; private set; }
-    public int ReturnSupportsBuyucu {  get; private set; }
+    [field: SerializeField] public int CannotAffectDeck {  get; private set; }
+    [field: SerializeField] public int SetArmiesToOne { get; private set; }
+    [field: SerializeField] public int DrawTwiceCards { get; private set; }
+    [field: SerializeField] public int PickACardFromHand { get; private set; }
+    [field: SerializeField] public int CantPlaySupportCards { get; private set; }
+    [field: SerializeField] public int TakeSupportFromTrash { get; private set; }
+    [field: SerializeField] public int PlayHandOpen { get; private set; }
+    [field: SerializeField] public int TakeKingInHand { get; private set; }
+    [field: SerializeField] public int TakePrinceInHand { get; private set; }
+    [field: SerializeField] public int ReturnPlayedSupportsToDeck { get; private set; }
+    [field: SerializeField] public int ReturnSupportsBuyucu {  get; private set; }
 
     #endregion
 

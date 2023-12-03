@@ -44,3 +44,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f6b41439b49de1a4aa67468477b3044b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  AbilityDescription: "Sonraki turdan itibaren, 3 tur boyunca rakibin destelere etki
+    eden herhangi bir kart\u0131 etkisiz olur."

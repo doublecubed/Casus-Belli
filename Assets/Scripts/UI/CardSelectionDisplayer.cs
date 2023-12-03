@@ -18,6 +18,8 @@ public class CardSelectionDisplayer : MonoBehaviour
 
     private List<CardImage> _cardImageComponents;
 
+    private List<string> _dedfaultDefinitions = new List<string>();
+
     #endregion
 
     #region MONOBEHAVIOUR
@@ -31,6 +33,29 @@ public class CardSelectionDisplayer : MonoBehaviour
     #endregion
 
     #region METHODS
+
+    public void DisplaySelection(List<Card> cardsToDisplay, IButtonClickReceiver receiver, List<string> definitions)
+    {
+        ClearSelectionCards();
+
+        List<Sprite> spritesToDisplay = cardsToDisplay.Select(card => card.CardImage).ToList();
+
+        _cardImageComponents = new List<CardImage>();
+
+        for (int i = 0; i < spritesToDisplay.Count; i++)
+        {
+            GameObject selection = Instantiate(_cardPrefab, _displayParent);
+            CardImage cardImage = selection.GetComponent<CardImage>();
+            _cardImageComponents.Add(cardImage);
+            cardImage.Initialize(spritesToDisplay[i], i, definitions[i]);
+            cardImage.OnButtonPressed += receiver.ButtonClicked;
+            cardImage.OnButtonPressed += ButtonClicked;
+
+            // TODO: These events have to be unsubscribed in some way after selection is done.
+        }
+
+        _uiManager.DisplayCardSelectionUI(true);
+    }
 
     public void DisplaySelection(List<Card> cardsToDisplay, IButtonClickReceiver receiver)
     {

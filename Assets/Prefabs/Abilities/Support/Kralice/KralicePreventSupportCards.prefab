@@ -44,3 +44,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 317e399b9aa871140bbb4a05775c1d78, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  AbilityDescription: "Rakip 2 tur boyunca hi\xE7bir destek kart\u0131 oynayamaz.
+    Bu \xF6zellik biriktirilebilir."

@@ -44,6 +44,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a018df43a31669e43b4cd0d72cf65d76, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  AbilityDescription: "Masada yan\u0131nda ba\u015Fka bir kart yoksa 6 puan kabul
+    ediniz."
   _knowledge: {fileID: 0}
   _mover: {fileID: 0}
   _selfCard: {fileID: 0}

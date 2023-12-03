@@ -44,3 +44,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 47e2421121ed77744b26d08ebb20c542, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  AbilityDescription: "Kendi taraf\u0131 dahil hi\xE7bir karttan pozitif veya negatif
+    \u015Fekilde  etkilenemez. Sadece puan y\xFCz\xFCnden kaybedebilir."

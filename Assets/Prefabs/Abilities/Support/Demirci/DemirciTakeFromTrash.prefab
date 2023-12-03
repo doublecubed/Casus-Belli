@@ -44,6 +44,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 709be43ba01d6b649852a2914f4dc9c8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  AbilityDescription: "\u0130stedi\u011Finiz bir ordu kart\u0131n\u0131 \xE7\xF6pten
+    al\u0131n\u0131z ve masaya koyunuz. Kart\u0131n \xF6zelliklerini uygulay\u0131n\u0131z."
   _knowledge: {fileID: 0}
   _mover: {fileID: 0}
   _selfCard: {fileID: 0}

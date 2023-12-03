@@ -44,3 +44,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ea60dcfc0c9d7fc46b3ef1c7c5020edc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  AbilityDescription: "Rakip ordu kart\u0131 destesinden en \xFCstteki \xFC\xE7 kart\u0131,
+    e\u011Fer 3 ve daha d\xFC\u015F\xFCk puanl\u0131ysa, \xE7\xF6pe g\xF6nderiniz."

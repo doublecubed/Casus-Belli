@@ -44,3 +44,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 61430343ab4b1af4e83b535afeaa1426, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  AbilityDescription: "Masadaki bir rakip Destek kart\u0131n\u0131, \xF6zellikleri
+    kullan\u0131lmadan, direkt olarak \xC7\xF6p\u2019e g\xF6nderiniz."
+  _knowledge: {fileID: 0}
+  _mover: {fileID: 0}
+  _selfCard: {fileID: 0}
+  _playPhase: {fileID: 0}

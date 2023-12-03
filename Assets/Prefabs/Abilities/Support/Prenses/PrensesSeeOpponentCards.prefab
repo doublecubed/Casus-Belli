@@ -44,3 +44,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 60f3b3c3bad3a8b4cb10e413ff6eb9f8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  AbilityDescription: "Oynad\u0131ktan sonraki 2 tur boyunca rakibin \xE7ekti\u011Fi
+    kartlar\u0131 g\xF6rebilirsiniz. Bu \xF6zellik biriktirilebilir."

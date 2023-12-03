@@ -44,3 +44,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 320874bfffe0682428b16f2a915cc8c2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  AbilityDescription: "Sonraki tur oynad\u0131\u011F\u0131n\u0131z destek kartlar\u0131
+    tur bitiminde destenize d\xF6ner."

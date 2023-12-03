@@ -44,3 +44,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3e70f1513afc8a3449c7c6bcaa6bc5e0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  AbilityDescription: "Rakibin destek kartlar\u0131ndan en \xFCstteki kart\u0131
+    \xE7ekiniz. \xC7ok yava\u015F ya da yava\u015F bir kartsa \xE7\xF6pe g\xF6nderiniz."

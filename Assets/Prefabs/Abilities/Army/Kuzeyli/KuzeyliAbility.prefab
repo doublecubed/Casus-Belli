@@ -44,6 +44,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 249d7ee8eb912f044980534c5ebb4e22, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  AbilityDescription: "Rakibin masadaki t\xFCm \xE7ok yava\u015F destek kartlar\u0131
+    kullan\u0131lmadan direkt destelerine geri d\xF6ner."
   _knowledge: {fileID: 0}
   _mover: {fileID: 0}
   _selfCard: {fileID: 0}

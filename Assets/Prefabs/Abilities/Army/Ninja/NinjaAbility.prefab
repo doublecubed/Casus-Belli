@@ -44,6 +44,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 301d404e789bff24589cdbb6bec07da0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  AbilityDescription: "Masadaki rakip ordu kartlar\u0131ndan \xE7ift puanl\u0131lar\u0131
+    sadece 2 puan olarak kabul ediniz."
   _knowledge: {fileID: 0}
   _mover: {fileID: 0}
   _selfCard: {fileID: 0}

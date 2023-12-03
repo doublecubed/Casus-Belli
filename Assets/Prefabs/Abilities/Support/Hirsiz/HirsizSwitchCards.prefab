@@ -44,6 +44,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ff30d27aa9c680f4086bedf84176bb77, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  AbilityDescription: "Rakibinizin iki destesinin en alt, veya en \xFCst\xFCndeki
+    ilk 5 kart\u0131 birbiriyle yer de\u011Fi\u015Ftiriniz."
   _sprites:
   - {fileID: 21300000, guid: d898ef0412ffe2140be63f66a81b03a7, type: 3}
   - {fileID: 21300000, guid: 0875c6bd97bf4824aa7c8966f64b49f9, type: 3}
