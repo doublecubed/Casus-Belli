@@ -154,6 +154,8 @@ public class PlayerStateVariables : MonoBehaviour, IButtonClickReceiver
 
     private void DecrementStateValues()
     {
+        Debug.Log("Decrementing State values");
+
         foreach (KeyValuePair<PlayerStateVariable, PropertyInfo> variable in _propertyDictionary)
         {
             int propertyValue = (int)_propertyDictionary[variable.Key].GetValue(this);

@@ -67,7 +67,7 @@ public class AbilityPlayPhase : GameStateBase, IButtonClickReceiver
 
     private void ResolveNextCard()
     {
-        if (_cardResolveIndex >= _cardsToPlay)
+        if (_cardResolveIndex >= _cardResolveOrder.Count)
         {
             base._isDone = true;
             return;

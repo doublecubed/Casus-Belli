@@ -64,12 +64,14 @@ public class KuzeyliAbility : AbilityBase
 
     private void CardMovementDone(Card card)
     {
+        Debug.Log("KuzeyliAbility card movement done");
         _phaseCompleted = true;
         _mover.OnCardMovementCompleted -= CardMovementDone;
 
         if (_phaseIndex == 2)
         {
             AbilityCompleted();
+            Debug.Log("KuzeyliAbility completed");
         }
     }
 

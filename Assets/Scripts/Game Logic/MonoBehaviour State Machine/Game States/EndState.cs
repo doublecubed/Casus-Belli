@@ -29,6 +29,7 @@ public class EndState : GameStateBase
             _stateMachine.StopMachine();
         }
 
+        OnTurnEnded?.Invoke();
         _isDone = true;
 
     }
