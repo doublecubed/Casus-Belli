@@ -25,5 +25,6 @@ public class KraliceTakeCardInHand : AbilityBase
     private void SetUpPickACardFromHand()
     {
         _selfStates.UpdateState(PlayerStateVariable.PickACardFromHand, 2);
+        base.AbilityCompleted();
     }
 }

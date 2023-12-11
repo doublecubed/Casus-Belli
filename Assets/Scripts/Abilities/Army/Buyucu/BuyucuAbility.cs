@@ -41,6 +41,7 @@ public class BuyucuAbility : AbilityBase
     {
         List<Card> supportCards = _selfPlayArea.CardsInPlay.Where(x => x.CardType == CardType.Support).ToList();
         _endState.OnTurnEnded += AbilityTriggered;
+        _phaseCompleted = true;
     }
 
 

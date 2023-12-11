@@ -53,6 +53,8 @@ public class RahipPlayCardsFromDeck : AbilityBase, IButtonClickReceiver
     {
         _armyCards = _selfArmyDeck.LookAtCards(DeckSide.Top, 2);
 
+        Debug.Log($"priest ability: looked at {_armyCards.Count} army cards");
+
         if (_armyCards.Count <= 0)
         {
             base._phaseCompleted = true;
@@ -103,6 +105,8 @@ public class RahipPlayCardsFromDeck : AbilityBase, IButtonClickReceiver
     private void SelectSupportCard()
     {
         _supportCards = _selfSupportDeck.LookAtCards(DeckSide.Top, 2);
+
+        Debug.Log($"priest ability: looked at {_supportCards.Count} support cards");
 
         if (_supportCards.Count <=0)
         {

@@ -16,6 +16,9 @@ public class HirsizStealCard : AbilityBase, IButtonClickReceiver
 
     private List<Card> _targetCards;
 
+    private int _numberOfCardsToMove;
+    private int _numberOfCardsMoved;
+
     public override void Initialize()
     {
         _selfCard = GetComponentInParent<Card>();
@@ -85,6 +88,8 @@ public class HirsizStealCard : AbilityBase, IButtonClickReceiver
         Debug.Log("Hirsiz StealCard ability, Steal Card running");
 
         _mover.OnCardMovementCompleted += CardMoveCompleted;
+        _numberOfCardsToMove = 2;
+        _numberOfCardsMoved = 0;
 
         Deck targetDeck = _selectedCard.CardType == CardType.Army ? _knowledge.ArmyDeck(_selfCard.Faction) : _knowledge.SupportDeck(_selfCard.Faction);
         _mover.MoveCard(_selectedCard, targetDeck, targetDeck.transform.position, PlacementFacing.Down, DeckSide.Bottom, _knowledge.LookDirection(_selfCard.Faction));
@@ -137,7 +142,12 @@ public class HirsizStealCard : AbilityBase, IButtonClickReceiver
 
     public void CardMoveCompleted(Card card)
     {
-        _mover.OnCardMovementCompleted -= CardMoveCompleted;
-        AbilityCompleted();
+        _numberOfCardsMoved++;
+
+        if (_numberOfCardsMoved >= _numberOfCardsToMove)
+        {
+            _mover.OnCardMovementCompleted -= CardMoveCompleted;
+            AbilityCompleted();
+        }
     }
 }

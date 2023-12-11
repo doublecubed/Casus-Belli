@@ -15,6 +15,12 @@ public class CombatPhase : GameStateBase
     [SerializeField] List<Card> _playerCards;
     [SerializeField] List<Card> _opponentCards;
 
+    [SerializeField] List<Card> _playerArmyCards;
+    [SerializeField] List<Card> _playerSupportCards;
+
+    [SerializeField] List<Card> _opponentArmyCards;
+    [SerializeField] List<Card> _opponentSupportCards;
+
     protected override void OnEnable()
     {
         base.OnEnable();
@@ -22,26 +28,25 @@ public class CombatPhase : GameStateBase
         _playerCards = _playerKnowledge.AreaSelf.CardsInPlay;
         _opponentCards = _opponentKnowledge.AreaSelf.CardsInPlay;
 
+        _playerArmyCards = _playerCards.Where(x => x.CardType == CardType.Army).ToList();
+        _playerSupportCards = _playerCards.Where(x => x.CardType != CardType.Support).ToList();
+
+        _opponentArmyCards = _opponentCards.Where(x => x.CardType == CardType.Army).ToList();
+        _opponentSupportCards = _opponentCards.Where(x => x.CardType == CardType.Support).ToList();
+
         int playerPower = 0;
         int opponentPower = 0;
 
-        for (int i = 0;  i < _playerCards.Count; i++)
+        for (int i = 0;  i < _playerArmyCards.Count; i++)
         {
-            if (_playerCards[i].CardType == CardType.Army)
-            {
-                _cardMover.RiseInPlace(_playerCards[i]);
-                playerPower += _playerCards[i].Power;
-            }
-
+            _cardMover.RiseInPlace(_playerCards[i]);
+            playerPower += _playerCards[i].Power;
         }
 
-        for (int i = 0; i < _opponentCards.Count; i++)
+        for (int i = 0; i < _opponentArmyCards.Count; i++)
         {
-            if (_opponentCards[i].CardType == CardType.Army)
-            {
-                _cardMover.RiseInPlace(_opponentCards[i]);
-                opponentPower += _opponentCards[i].Power;
-            }
+            _cardMover.RiseInPlace(_opponentCards[i]);
+            opponentPower += _opponentCards[i].Power;
         }
 
         Debug.Log("Player power is: " + playerPower);
@@ -49,63 +54,66 @@ public class CombatPhase : GameStateBase
 
         if (playerPower == opponentPower) // both sides lose
         {
-            SendCardsToTrash(_playerCards, _playerKnowledge.ArmyTrashSelf);
-            SendCardsToTrash(_opponentCards, _opponentKnowledge.ArmyTrashSelf);
+            SendCardsToTrash(_playerArmyCards, _playerKnowledge.ArmyTrashSelf);
+            SendCardsToTrash(_opponentArmyCards, _opponentKnowledge.ArmyTrashSelf);
         }
 
         if (playerPower > opponentPower)
         {
-            if (_opponentCards.Count != 0)
+            if (_opponentArmyCards.Count != 0)
             {
-                int opponentMin = _opponentCards.OrderBy(card => card.Power).First().Power;
+                int opponentMin = _opponentArmyCards.OrderBy(card => card.Power).First().Power;
                 Debug.Log("Opponent's lowest card power is: " + opponentMin);
 
                 List<Card> toTrash = new List<Card>();
                 List<Card> toDeck = new List<Card>();
-                for (int i = 0; i < _playerCards.Count; i++)
+                for (int i = 0; i < _playerArmyCards.Count; i++)
                 {
-                    if (_playerCards[i].Power < opponentMin)
+                    if (_playerArmyCards[i].Power < opponentMin)
                     {
-                        toTrash.Add(_playerCards[i]);
+                        toTrash.Add(_playerArmyCards[i]);
                     } else
                     {
-                        toDeck.Add(_playerCards[i]);
+                        toDeck.Add(_playerArmyCards[i]);
                     }
                 }
 
                 SendCardsToTrash(toTrash, _playerKnowledge.ArmyTrashSelf);
                 SendCardsToDeck(toDeck, _playerKnowledge.ArmyDeckSelf);
             }
-            SendCardsToTrash(_opponentCards, _opponentKnowledge.ArmyTrashSelf);
+            SendCardsToTrash(_opponentArmyCards, _opponentKnowledge.ArmyTrashSelf);
             
         }
 
         if (opponentPower > playerPower)
         {
-            if (_playerCards.Count != 0)
+            if (_playerArmyCards.Count != 0)
             {
-                int playerMin = _playerCards.OrderBy(card => card.Power).First().Power;
+                int playerMin = _playerArmyCards.OrderBy(card => card.Power).First().Power;
                 Debug.Log("Opponent's lowest card power is: " + playerMin);
 
                 List<Card> toTrash = new List<Card>();
                 List<Card> toDeck = new List<Card>();
 
-                for (int i = 0; i < _opponentCards.Count; i++)
+                for (int i = 0; i < _opponentArmyCards.Count; i++)
                 {
-                    if (_opponentCards[i].Power < playerMin)
+                    if (_opponentArmyCards[i].Power < playerMin)
                     {
-                        toTrash.Add(_opponentCards[i]);
+                        toTrash.Add(_opponentArmyCards[i]);
                     } else
                     {
-                        toDeck.Add(_opponentCards[i]);
+                        toDeck.Add(_opponentArmyCards[i]);
                     }
                 }
 
                 SendCardsToTrash(toTrash, _opponentKnowledge.ArmyTrashSelf);
                 SendCardsToDeck(toDeck, _opponentKnowledge.ArmyDeckSelf);
             }
-            SendCardsToTrash(_playerCards, _playerKnowledge.ArmyTrashSelf);
+            SendCardsToTrash(_playerArmyCards, _playerKnowledge.ArmyTrashSelf);
         }
+
+        SendCardsToTrash(_playerSupportCards, _playerKnowledge.SupportTrashSelf);
+        SendCardsToTrash(_opponentSupportCards, _opponentKnowledge.SupportTrashSelf);
 
         _isDone = true;
 

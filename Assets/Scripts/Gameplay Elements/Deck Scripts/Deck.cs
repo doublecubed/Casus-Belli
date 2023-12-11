@@ -204,6 +204,7 @@ public class Deck : MonoBehaviour, ICardContainer
 
     public List<Card> LookAtCards(DeckSide side, int numberOfCards, int cardsToSkip)
     {
+        // Random card selection is not implemented.
         if (side == DeckSide.Random) return new List<Card>();
 
         List<Card> lookedCards = new List<Card>();
@@ -212,7 +213,7 @@ public class Deck : MonoBehaviour, ICardContainer
         {
             int index = i + cardsToSkip;
             if (side == DeckSide.Top) index = _cardParent.childCount - 1 - i - cardsToSkip;
-            if (index >= _cardParent.childCount - 1) break;
+            if (index < 0 || index > _cardParent.childCount - 1) break;
 
             lookedCards.Add(_cardParent.transform.GetChild(index).GetComponent<Card>());
         }
