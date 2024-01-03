@@ -68,6 +68,7 @@ public class UIManager : MonoBehaviour
 
     public void DisplayCardSelectionUI(bool condition)
     {
+        Debug.Log($"Setting card selection display to {condition}");
         _cardSelectionPanel.SetActive(condition);
     }
 

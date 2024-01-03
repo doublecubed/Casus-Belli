@@ -4,11 +4,17 @@ using UnityEngine;
 
 public abstract class GameStateBase : MonoBehaviour
 {
+    #region REFERENCES
+
     [SerializeField] protected MonoBehaviourStateMachine _stateMachine;
 
     [SerializeField] protected bool _isDone;
 
-    protected GlobalKnowledge _knowledge;
+    [SerializeField] protected GlobalKnowledge _knowledge;
+
+    #endregion
+
+    #region MONOBEHAVIOUR
 
     protected virtual void Awake()
     {
@@ -29,4 +35,6 @@ public abstract class GameStateBase : MonoBehaviour
     {
         if (_isDone) _stateMachine.ProceedToNextState();
     }
+
+    #endregion
 }

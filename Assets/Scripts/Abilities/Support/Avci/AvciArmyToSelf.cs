@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class AvciArmyToSelf : AbilityBase, IButtonClickReceiver
 {
-    [SerializeField] private GlobalKnowledge _knowledge;
     [SerializeField] private CardMover _mover;
     [SerializeField] private Card _selfCard;
     [SerializeField] private AbilityPlayPhase _playPhase;
@@ -14,19 +13,18 @@ public class AvciArmyToSelf : AbilityBase, IButtonClickReceiver
     private List<Card> _opponentArmyCards;
     private PlayerBehaviour _selfBehaviour;
 
-    public override void Initialize()
+    public override void Initialize(GlobalKnowledge knowledge)
     {
         _selfCard = GetComponentInParent<Card>();
-        _knowledge = GlobalKnowledge.Instance;
-        _mover = _knowledge.Mover(_selfCard.Faction);
-        _playPhase = _knowledge.AbilityPhase;
-        _selfBehaviour = _knowledge.Behaviour(_selfCard.Faction);
+        _mover = knowledge.Mover(_selfCard.Faction);
+        _playPhase = knowledge.AbilityPhase;
+        _selfBehaviour = knowledge.Behaviour(_selfCard.Faction);
 
         _abilityPhase.Add(SelectOpponentArmyCard);
         _abilityPhase.Add(RemoveCardFromResolveStack);
         _abilityPhase.Add(MoveOpponentArmyCard);
 
-        base.Initialize();
+        base.Initialize(knowledge);
     }
 
 

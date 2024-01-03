@@ -5,24 +5,22 @@ using UnityEngine;
 public class KralDoubleCards : AbilityBase
 {
     private Card _selfCard;
-    private GlobalKnowledge _knowledge;
     private CardMover _mover;
 
     private PlayerStateVariables _selfStates;
 
     private Affiliation _faction;
 
-    public override void Initialize()
+    public override void Initialize(GlobalKnowledge knowledge)
     {
         _selfCard = GetComponentInParent<Card>();
-        _knowledge = GlobalKnowledge.Instance;
-        _mover = _knowledge.Mover(_selfCard.Faction);
+        _mover = knowledge.Mover(_selfCard.Faction);
 
-        _selfStates = _knowledge.PlayerStates(_selfCard.Faction);
+        _selfStates = knowledge.PlayerStates(_selfCard.Faction);
 
         base._abilityPhase.Add(SetUpDoubleCards);
 
-        base.Initialize();
+        base.Initialize(knowledge);
     }
 
     private void SetUpDoubleCards()

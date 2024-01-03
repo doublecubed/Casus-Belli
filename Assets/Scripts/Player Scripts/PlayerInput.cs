@@ -22,9 +22,17 @@ public class PlayerInput : MonoBehaviour
             Ray pickerRay = _camera.ScreenPointToRay(Input.mousePosition);
             if (Physics.Raycast(pickerRay, out RaycastHit hitInfo))
             {
-                if (hitInfo.transform.CompareTag("Card")) OnCardClicked?.Invoke(hitInfo.transform.GetComponent<Card>());
+                if (hitInfo.transform.CompareTag("Card"))
+                {
+                    Debug.Log($"Clicked on Card:{hitInfo.transform.GetComponent<Card>().name} ");
+                    OnCardClicked?.Invoke(hitInfo.transform.GetComponent<Card>());
+                }
 
-                if (hitInfo.transform.CompareTag("Deck")) OnDeckClicked?.Invoke(hitInfo.transform.GetComponent<Deck>());
+                if (hitInfo.transform.CompareTag("Deck"))
+                {
+                    Debug.Log($"Clicked on Deck: {hitInfo.transform.GetComponent<Deck>()}");
+                    OnDeckClicked?.Invoke(hitInfo.transform.GetComponent<Deck>());
+                }
             }
         }
     }

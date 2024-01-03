@@ -4,21 +4,19 @@ using UnityEngine;
 
 public class KesisAbility : AbilityBase
 {
-    [SerializeField] private GlobalKnowledge _knowledge;
     [SerializeField] private CardMover _mover;
     [SerializeField] private Card _selfCard;
 
-    public override void Initialize()
+    public override void Initialize(GlobalKnowledge knowledge)
     {
         _selfCard = GetComponentInParent<Card>();
-        _knowledge = GlobalKnowledge.Instance;
-        _mover = _knowledge.Mover(_selfCard.Faction);
+        _mover = knowledge.Mover(_selfCard.Faction);
 
         _abilityPhase.Add(RiseCard);
         _abilityPhase.Add(UpdatePower);
         _abilityPhase.Add(LowerCard);
 
-        base.Initialize();
+        base.Initialize(knowledge);
     }
 
     private void RiseCard()

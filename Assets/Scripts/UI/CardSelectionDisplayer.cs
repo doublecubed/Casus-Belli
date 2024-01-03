@@ -20,6 +20,10 @@ public class CardSelectionDisplayer : MonoBehaviour
 
     private List<string> _dedfaultDefinitions = new List<string>();
 
+    private IButtonClickReceiver _currentReceiver;
+
+    private bool _cardSelected;
+
     #endregion
 
     #region MONOBEHAVIOUR
@@ -36,9 +40,13 @@ public class CardSelectionDisplayer : MonoBehaviour
 
     public void DisplaySelection(List<Card> cardsToDisplay, IButtonClickReceiver receiver, List<string> definitions)
     {
+        Debug.Log($"First display selection overload running, with {receiver} as the receiver");
+
         ClearSelectionCards();
 
         List<Sprite> spritesToDisplay = cardsToDisplay.Select(card => card.CardImage).ToList();
+
+        _currentReceiver = receiver;
 
         _cardImageComponents = new List<CardImage>();
 
@@ -48,8 +56,8 @@ public class CardSelectionDisplayer : MonoBehaviour
             CardImage cardImage = selection.GetComponent<CardImage>();
             _cardImageComponents.Add(cardImage);
             cardImage.Initialize(spritesToDisplay[i], i, definitions[i]);
-            cardImage.OnButtonPressed += receiver.ButtonClicked;
-            cardImage.OnButtonPressed += ButtonClicked;
+            cardImage.OnButtonPressed += _currentReceiver.ButtonClicked;
+            cardImage.OnButtonPressed += ButtonClickedFirst;
 
             // TODO: These events have to be unsubscribed in some way after selection is done.
         }
@@ -59,6 +67,10 @@ public class CardSelectionDisplayer : MonoBehaviour
 
     public void DisplaySelection(List<Card> cardsToDisplay, IButtonClickReceiver receiver)
     {
+        Debug.Log($"Second display selection overload running, with {receiver} as the receiver");
+
+        _cardSelected = false;
+
         List<Sprite> sprites = cardsToDisplay.Select(card => card.CardImage).ToList();
 
         DisplaySelection(sprites, receiver);
@@ -66,6 +78,8 @@ public class CardSelectionDisplayer : MonoBehaviour
 
     public void DisplaySelection(List<Sprite> spritesToDisplay, IButtonClickReceiver receiver)
     {
+        Debug.Log($"Third display selection overload running, with {receiver} as the receiver");
+
         ClearSelectionCards();
 
         _cardImageComponents = new List<CardImage>();
@@ -77,7 +91,7 @@ public class CardSelectionDisplayer : MonoBehaviour
             _cardImageComponents.Add(cardImage);
             cardImage.Initialize(spritesToDisplay[i], i);
             cardImage.OnButtonPressed += receiver.ButtonClicked;
-            cardImage.OnButtonPressed += ButtonClicked;
+            cardImage.OnButtonPressed += ButtonClickedSecond;
 
             // TODO: These events have to be unsubscribed in some way after selection is done.
         }
@@ -95,16 +109,29 @@ public class CardSelectionDisplayer : MonoBehaviour
         }
     }
 
-    private void ButtonClicked(int index)
+    private void ButtonClickedFirst(int index)
     {
+        Debug.Log($"Button {index} clicked in first card selection displayer");
         for (int i = 0; i < _cardImageComponents.Count; i++)
         {
-            _cardImageComponents[i].OnButtonPressed -= ButtonClicked;
+            _cardImageComponents[i].OnButtonPressed -= _currentReceiver.ButtonClicked;
+            _cardImageComponents[i].OnButtonPressed -= ButtonClickedFirst;
         }
 
-        _uiManager.DisplayCardSelectionUI(false); 
+        //_uiManager.DisplayCardSelectionUI(false); 
     }
 
+    private void ButtonClickedSecond(int index)
+    {
+        Debug.Log($"Button {index} clicked in second card selection displayer");
+        for (int i = 0; i < _cardImageComponents.Count; i++)
+        {
+            _cardImageComponents[i].OnButtonPressed -= _currentReceiver.ButtonClicked;
+            _cardImageComponents[i].OnButtonPressed -= ButtonClickedSecond;
+        }
+
+        _uiManager.DisplayCardSelectionUI(false);
+    }
 
     #endregion
 

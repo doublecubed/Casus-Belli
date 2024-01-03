@@ -5,18 +5,16 @@ using UnityEngine;
 public class SimyaciTakeSupportIntoHand : AbilityBase
 {
     private Card _selfCard;
-    private GlobalKnowledge _knowledge;
     private PlayerStateVariables _selfVariables;
 
-    public override void Initialize()
+    public override void Initialize(GlobalKnowledge knowledge)
     {
         _selfCard = GetComponentInParent<Card>();
-        _knowledge = GlobalKnowledge.Instance;
-        _selfVariables = _knowledge.PlayerStates(_selfCard.Faction);
+        _selfVariables = knowledge.PlayerStates(_selfCard.Faction);
 
         base._abilityPhase.Add(SetUpTakeSupportFromTrash);
 
-        base.Initialize();
+        base.Initialize(knowledge);
     }
 
     private void SetUpTakeSupportFromTrash()

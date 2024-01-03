@@ -4,27 +4,25 @@ using UnityEngine;
 
 public class RahibeAbility : AbilityBase
 {
-    [SerializeField] private GlobalKnowledge _knowledge;
     [SerializeField] private CardMover _mover;
     [SerializeField] private Card _selfCard;
     [SerializeField] private Deck _selfArmyDeck;
     [SerializeField] private PlayArea _selfPlayArea;
     [SerializeField] private PlayerBehaviour _selfBehaviour;
 
-    public override void Initialize()
+    public override void Initialize(GlobalKnowledge knowledge)
     {
         _selfCard = GetComponentInParent<Card>();
-        _knowledge = GlobalKnowledge.Instance;
-        _mover = _knowledge.Mover(_selfCard.Faction);
-        _selfArmyDeck = _knowledge.ArmyDeck(_selfCard.Faction);
-        _selfPlayArea = _knowledge.PlayArea(_selfCard.Faction);
-        _selfBehaviour = _knowledge.Behaviour(_selfCard.Faction);
+        _mover = knowledge.Mover(_selfCard.Faction);
+        _selfArmyDeck = knowledge.ArmyDeck(_selfCard.Faction);
+        _selfPlayArea = knowledge.PlayArea(_selfCard.Faction);
+        _selfBehaviour = knowledge.Behaviour(_selfCard.Faction);
 
         _abilityPhase.Add(RiseCard);
         _abilityPhase.Add(BringInCard);
         _abilityPhase.Add(LowerCard);
 
-        base.Initialize();
+        base.Initialize(knowledge);
     }
 
     private void RiseCard()

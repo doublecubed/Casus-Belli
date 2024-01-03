@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class HirsizStealCard : AbilityBase, IButtonClickReceiver
 {
-    [SerializeField] private GlobalKnowledge _knowledge;
     [SerializeField] private CardMover _mover;
     [SerializeField] private Card _selfCard;
 
@@ -19,21 +18,20 @@ public class HirsizStealCard : AbilityBase, IButtonClickReceiver
     private int _numberOfCardsToMove;
     private int _numberOfCardsMoved;
 
-    public override void Initialize()
+    public override void Initialize(GlobalKnowledge knowledge)
     {
         _selfCard = GetComponentInParent<Card>();
-        _knowledge = GlobalKnowledge.Instance;
-        _mover = _knowledge.Mover(_selfCard.Faction);
-        _playerInput = _knowledge.PlayerInput;
-        _selfBehaviour = _knowledge.Behaviour(_selfCard.Faction);
+        _mover = knowledge.Mover(_selfCard.Faction);
+        _playerInput = knowledge.PlayerInput;
+        _selfBehaviour = knowledge.Behaviour(_selfCard.Faction);
 
-        _targetFaction = _knowledge.OpponentFaction(_selfCard.Faction);
+        _targetFaction = knowledge.OpponentFaction(_selfCard.Faction);
 
         _abilityPhase.Add(GetTargetCards);
         _abilityPhase.Add(SelectCardToSteal);
         _abilityPhase.Add(StealCard);
 
-        base.Initialize();
+        base.Initialize(knowledge);
     }
 
     private void GetTargetCards()

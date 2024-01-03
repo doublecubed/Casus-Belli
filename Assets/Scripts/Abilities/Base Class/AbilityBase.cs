@@ -18,10 +18,14 @@ public abstract class AbilityBase : MonoBehaviour
 
     public string AbilityDescription;
 
-    public virtual void Initialize()
+    protected GlobalKnowledge _knowledge;
+
+
+    public virtual void Initialize(GlobalKnowledge knowledge)
     {
         _phaseIndex = 0;
         _numberOfPhases = _abilityPhase.Count;
+        _knowledge = knowledge;
     }
 
     public virtual void UseAbility()

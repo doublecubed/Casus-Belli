@@ -5,7 +5,6 @@ using UnityEngine;
 public class SaklabanSwitchCards : AbilityBase
 {
     private Card _selfCard;
-    private GlobalKnowledge _knowledge;
     private CardMover _mover;
 
     private Affiliation _selfFaction;
@@ -17,21 +16,20 @@ public class SaklabanSwitchCards : AbilityBase
     private int _numberOfCardsToMove;
     private int _numberOfCardsMoved;
 
-    public override void Initialize()
+    public override void Initialize(GlobalKnowledge knowledge)
     {
         _selfCard = GetComponentInParent<Card>();
-        _knowledge = GlobalKnowledge.Instance;
-        _mover = _knowledge.Mover(_selfCard.Faction);
+        _mover = knowledge.Mover(_selfCard.Faction);
 
         _selfFaction = _selfCard.Faction;
-        _opponentFaction = _knowledge.OpponentFaction(_selfCard.Faction);
+        _opponentFaction = knowledge.OpponentFaction(_selfCard.Faction);
 
-        _opponentSupportDeck = _knowledge.SupportDeck(_opponentFaction);
-        _selfArmyDeck = _knowledge.ArmyDeck(_selfFaction);
+        _opponentSupportDeck = knowledge.SupportDeck(_opponentFaction);
+        _selfArmyDeck = knowledge.ArmyDeck(_selfFaction);
 
         base._abilityPhase.Add(SwitchCards);
 
-        base.Initialize();
+        base.Initialize(knowledge);
     }
 
     private void SwitchCards()

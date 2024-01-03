@@ -15,11 +15,11 @@ public class CardInitializer : MonoBehaviour
         _displayer = GetComponent<CardDisplayer>();
     }
 
-    public void Initialize(CardSO cardSO)
+    public void Initialize(CardSO cardSO, GlobalKnowledge knowledge)
     {
         CardObject = cardSO;
 
-        _card.Initialize(CardObject);
+        _card.Initialize(CardObject, knowledge);
         _displayer.Initialize(CardObject);
         
     }

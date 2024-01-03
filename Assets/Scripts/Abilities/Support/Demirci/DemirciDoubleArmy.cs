@@ -6,18 +6,16 @@ using UnityEngine;
 public class DemirciDoubleArmy : AbilityBase
 {
     private Card _selfCard;
-    private GlobalKnowledge _knowledge;
     private PlayArea _selfPlayArea;
 
-    public override void Initialize()
+    public override void Initialize(GlobalKnowledge knowledge)
     {
         _selfCard = GetComponentInParent<Card>();
-        _knowledge = GlobalKnowledge.Instance;
-        _selfPlayArea = _knowledge.PlayArea(_selfCard.Faction);
+        _selfPlayArea = knowledge.PlayArea(_selfCard.Faction);
 
         _abilityPhase.Add(DoubleCardPowers);
 
-        base.Initialize();
+        base.Initialize(knowledge);
     }
 
     private void DoubleCardPowers()

@@ -35,14 +35,18 @@ public class GlobalKnowledge : MonoBehaviour
     [SerializeField] private PlayArea _greenPlayArea;
 
     [Header("Players")]
-    [SerializeField] GameObject _redPlayer;
-    [SerializeField] GameObject _greenPlayer;
+    [SerializeField] private GameObject _redPlayer;
+    [SerializeField] private GameObject _greenPlayer;
 
-    [SerializeField] PlayerBehaviour _greenBehaviour;
-    [SerializeField] PlayerBehaviour _redBehaviour;
+    [SerializeField] private PlayerBehaviour _greenBehaviour;
+    [SerializeField] private PlayerBehaviour _redBehaviour;
 
-    [SerializeField] PlayerStateVariables _greenStates;
-    [SerializeField] PlayerStateVariables _redStates;
+    [SerializeField] private PlayerStateVariables _greenStates;
+    [SerializeField] private PlayerStateVariables _redStates;
+
+    [Header("Factions")]
+    [SerializeField] private Affiliation _humanFaction;
+    [SerializeField] private Affiliation _computerFaction;
 
     private Dictionary<Affiliation, Vector3> _lookDirection;
 
@@ -173,5 +177,15 @@ public class GlobalKnowledge : MonoBehaviour
     public bool AIPLayer(Affiliation faction)
     {
         return Behaviour(faction).TryGetComponent(out AIPlayer aiPlayer);
+    }
+
+    public Affiliation HumanFaction()
+    {
+        return _humanFaction;
+    }
+
+    public Affiliation ComputerFaction()
+    {
+        return _computerFaction;
     }
 }

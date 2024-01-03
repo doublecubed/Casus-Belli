@@ -4,11 +4,11 @@ using UnityEngine;
 
 public class BarbarAbility : AbilityBase
 {
-    public override void Initialize()
+    public override void Initialize(GlobalKnowledge knowledge)
     {
         _abilityPhase.Add(ByPass);
 
-        base.Initialize();
+        base.Initialize(knowledge);
     }
 
     private void ByPass()

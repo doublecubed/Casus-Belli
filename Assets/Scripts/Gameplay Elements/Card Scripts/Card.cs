@@ -15,6 +15,7 @@ public class Card : MonoBehaviour, IButtonClickReceiver
     private PlayerStateVariables _selfStates;
     private PlayerBehaviour _selfBehaviour;
 
+
     #endregion
 
     #region VARIABLES
@@ -53,7 +54,7 @@ public class Card : MonoBehaviour, IButtonClickReceiver
 
     #region Initialization
 
-    public void Initialize(CardSO cardSO)
+    public void Initialize(CardSO cardSO, GlobalKnowledge knowledge)
     {
         _cardObject = cardSO;
 
@@ -68,7 +69,7 @@ public class Card : MonoBehaviour, IButtonClickReceiver
         StartingDeck = transform.parent.GetComponentInParent<Deck>();
         AffectsDeck = _cardObject.affectsDeck;
 
-        _knowledge = GlobalKnowledge.Instance;
+        _knowledge = knowledge;
         _endState = _knowledge.EndState;
         _endState.OnTurnEnded += ResetPower;
         _selfStates = _knowledge.PlayerStates(Faction);
@@ -80,7 +81,7 @@ public class Card : MonoBehaviour, IButtonClickReceiver
         {
             GameObject abilityObject = Instantiate(Abilities[i], transform);
             _abilityScripts[i] = abilityObject.GetComponent<AbilityBase>();
-            _abilityScripts[i].Initialize();
+            _abilityScripts[i].Initialize(knowledge);
 
             _abilityScripts[i].OnAbilityExecutionCompleted += AbilityResolved;
         }
@@ -152,9 +153,9 @@ public class Card : MonoBehaviour, IButtonClickReceiver
 
     public void ButtonClicked(int index)
     {
-        _abilityScripts[index].UseAbility();
-
         Debug.Log($"Button no {index} is clicked");
+
+        _abilityScripts[index].UseAbility();
     }
 
     #endregion

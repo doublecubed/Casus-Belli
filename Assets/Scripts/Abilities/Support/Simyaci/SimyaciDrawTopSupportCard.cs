@@ -5,26 +5,24 @@ using UnityEngine;
 public class SimyaciDrawTopSupportCard : AbilityBase
 {
     private Card _selfCard;
-    private GlobalKnowledge _knowledge;
     private CardMover _selfMover;
 
     private Affiliation _targetFaction;
     private Deck _opponentSupportDeck;
     private Deck _opponentSupportTrash;
 
-    public override void Initialize()
+    public override void Initialize(GlobalKnowledge knowledge)
     {
         _selfCard = GetComponentInParent<Card>();
-        _knowledge = GlobalKnowledge.Instance;
-        _selfMover = _knowledge.Mover(_selfCard.Faction);
+        _selfMover = knowledge.Mover(_selfCard.Faction);
 
-        _targetFaction = _knowledge.OpponentFaction(_selfCard.Faction);
-        _opponentSupportDeck = _knowledge.SupportDeck(_targetFaction);
-        _opponentSupportTrash = _knowledge.SupportTrash(_targetFaction);
+        _targetFaction = knowledge.OpponentFaction(_selfCard.Faction);
+        _opponentSupportDeck = knowledge.SupportDeck(_targetFaction);
+        _opponentSupportTrash = knowledge.SupportTrash(_targetFaction);
 
         base._abilityPhase.Add(CheckTopCard);
 
-        base.Initialize();
+        base.Initialize(knowledge);
     }
 
     private void CheckTopCard()

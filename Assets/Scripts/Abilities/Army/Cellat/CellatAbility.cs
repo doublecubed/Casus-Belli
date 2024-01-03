@@ -5,25 +5,23 @@ using UnityEngine;
 public class CellatAbility : AbilityBase
 {
     private Card _selfCard;
-    private GlobalKnowledge _knowledge;
     private Affiliation _opponentFaction;
     private PlayerStateVariables _opponentStates;
     private CardMover _mover;
 
 
-    public override void Initialize()
+    public override void Initialize(GlobalKnowledge knowledge)
     {
         _selfCard = GetComponentInParent<Card>();
-        _knowledge = GlobalKnowledge.Instance;
-        _opponentFaction = _knowledge.OpponentFaction(_selfCard.Faction);
-        _opponentStates = _knowledge.PlayerStates(_opponentFaction);
-        _mover = _knowledge.Mover(_selfCard.Faction);
+        _opponentFaction = knowledge.OpponentFaction(_selfCard.Faction);
+        _opponentStates = knowledge.PlayerStates(_opponentFaction);
+        _mover = knowledge.Mover(_selfCard.Faction);
 
         base._abilityPhase.Add(RiseCard);
         base._abilityPhase.Add(SetUpCannotPlaySupport);
         base._abilityPhase.Add(LowerCard);
 
-        base.Initialize();
+        base.Initialize(knowledge);
     }
 
     private void RiseCard()

@@ -20,6 +20,8 @@ public class Deck : MonoBehaviour, ICardContainer
 
     [SerializeField] private CardSO[] _startingCards;
 
+    public GlobalKnowledge Knowledge;
+
     #endregion
 
     #region VARIABLES
@@ -66,7 +68,7 @@ public class Deck : MonoBehaviour, ICardContainer
         {
             GameObject nextCard = Instantiate(_cardPrefab, _cardParent);
             nextCard.name = _startingCards[i].faction.ToString() + " " + _startingCards[i].cardName;
-            nextCard.GetComponent<CardInitializer>().Initialize(_startingCards[i]);
+            nextCard.GetComponent<CardInitializer>().Initialize(_startingCards[i], Knowledge);
             nextCard.transform.localPosition = Vector3.zero;
             nextCard.transform.forward = Vector3.down;
         }

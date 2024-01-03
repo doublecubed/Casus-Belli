@@ -5,7 +5,6 @@ using System.Linq;
 
 public class AvciSupportToTrash : AbilityBase, IButtonClickReceiver
 {
-    [SerializeField] private GlobalKnowledge _knowledge;
     [SerializeField] private CardMover _mover;
     [SerializeField] private Card _selfCard;
     [SerializeField] private AbilityPlayPhase _playPhase;
@@ -16,19 +15,18 @@ public class AvciSupportToTrash : AbilityBase, IButtonClickReceiver
     private List<Card> _opponentSupportCards;
     private PlayerBehaviour _selfBehaviour;
 
-    public override void Initialize()
+    public override void Initialize(GlobalKnowledge knowledge)
     {
         _selfCard = GetComponentInParent<Card>();
-        _knowledge = GlobalKnowledge.Instance;
-        _mover = _knowledge.Mover(_selfCard.Faction);
-        _playPhase = _knowledge.AbilityPhase;
-        _selfBehaviour = _knowledge.Behaviour(_selfCard.Faction);
+        _mover = knowledge.Mover(_selfCard.Faction);
+        _playPhase = knowledge.AbilityPhase;
+        _selfBehaviour = knowledge.Behaviour(_selfCard.Faction);
 
         _abilityPhase.Add(SelectOpponentSupportCard);
         _abilityPhase.Add(RemoveCardFromResolveStack);
         _abilityPhase.Add(MoveOpponentSupportCard);
 
-        base.Initialize();
+        base.Initialize(knowledge);
     }
 
 

@@ -5,7 +5,6 @@ using UnityEngine;
 
 public class DemirciTakeFromTrash : AbilityBase, IButtonClickReceiver
 {
-    [SerializeField] private GlobalKnowledge _knowledge;
     [SerializeField] private CardMover _mover;
     [SerializeField] private Card _selfCard;
     [SerializeField] private AbilityPlayPhase _playPhase;
@@ -18,27 +17,28 @@ public class DemirciTakeFromTrash : AbilityBase, IButtonClickReceiver
     private List<Card> _allArmyCardsInTrash;
     private Card _selectedCard;
 
-    public override void Initialize()
+    public override void Initialize(GlobalKnowledge knowledge)
     {
         _selfCard = GetComponentInParent<Card>();
-        _knowledge = GlobalKnowledge.Instance;
-        _mover = _knowledge.Mover(_selfCard.Faction);
-        _playPhase = _knowledge.AbilityPhase;
-        _selfBehaviour = _knowledge.Behaviour(_selfCard.Faction);
-        _selfPlayArea = _knowledge.PlayArea(_selfCard.Faction);
+        _mover = knowledge.Mover(_selfCard.Faction);
+        _playPhase = knowledge.AbilityPhase;
+        _selfBehaviour = knowledge.Behaviour(_selfCard.Faction);
+        _selfPlayArea = knowledge.PlayArea(_selfCard.Faction);
 
-        _armyTrash = _knowledge.ArmyTrash(_selfCard.Faction);
-        _supportTrash = _knowledge.SupportTrash(_selfCard.Faction);
+        _armyTrash = knowledge.ArmyTrash(_selfCard.Faction);
+        _supportTrash = knowledge.SupportTrash(_selfCard.Faction);
 
         _abilityPhase.Add(ShowArmyCards);
         _abilityPhase.Add(PutIntoPlay);
 
 
-        base.Initialize();
+        base.Initialize(knowledge);
     }
 
     private void ShowArmyCards()
     {
+        Debug.Log("Demirci show army cards running");
+
         _allArmyCardsInTrash = new List<Card>();
 
         List<Card> cardsInArmyTrash = _armyTrash.LookAtCards(DeckSide.Top, _armyTrash.NumberOfCardsInDeck()).Where(x => x.CardType == CardType.Army).ToList();
@@ -55,9 +55,11 @@ public class DemirciTakeFromTrash : AbilityBase, IButtonClickReceiver
 
         if (_knowledge.HumanPlayer(_selfBehaviour))
         {
+            Debug.Log("Human player, choose your card");
             UIManager.Instance.GetComponent<CardSelectionDisplayer>().DisplaySelection(_allArmyCardsInTrash, this);
         } else
         {
+            Debug.Log("AI Player, card chosen automatically");
             _selectedCard = _allArmyCardsInTrash[0];
             _phaseCompleted = true;
         }
@@ -79,6 +81,7 @@ public class DemirciTakeFromTrash : AbilityBase, IButtonClickReceiver
 
     public void ButtonClicked(int index)
     {
+        Debug.Log("Demirci card selection button clicked");
         _selectedCard = _allArmyCardsInTrash[index];
         _phaseCompleted = true;
     }

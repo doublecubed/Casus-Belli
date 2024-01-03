@@ -7,7 +7,6 @@ public class HirsizSwitchCards : AbilityBase, IButtonClickReceiver
 {
     [SerializeField] private List<Sprite> _sprites;
 
-    [SerializeField] private GlobalKnowledge _knowledge;
     [SerializeField] private CardMover _mover;
     [SerializeField] private Card _selfCard;
 
@@ -20,20 +19,19 @@ public class HirsizSwitchCards : AbilityBase, IButtonClickReceiver
     private int _cardsMoved;
     private int _totalCardsToMove;
 
-    public override void Initialize()
+    public override void Initialize(GlobalKnowledge knowledge)
     {
         _selfCard = GetComponentInParent<Card>();
-        _knowledge = GlobalKnowledge.Instance;
-        _mover = _knowledge.Mover(_selfCard.Faction);
+        _mover = knowledge.Mover(_selfCard.Faction);
 
-        _targetFaction = _knowledge.OpponentFaction(_selfCard.Faction);
-        _opponentArmyDeck = _knowledge.ArmyDeck(_targetFaction);
-        _opponentSupportDeck = _knowledge.SupportDeck(_targetFaction);
+        _targetFaction = knowledge.OpponentFaction(_selfCard.Faction);
+        _opponentArmyDeck = knowledge.ArmyDeck(_targetFaction);
+        _opponentSupportDeck = knowledge.SupportDeck(_targetFaction);
 
         _abilityPhase.Add(SelectTopOrBottom);
         _abilityPhase.Add(SwitchCards);
 
-        base.Initialize();
+        base.Initialize(knowledge);
     }
 
     private void SelectTopOrBottom()

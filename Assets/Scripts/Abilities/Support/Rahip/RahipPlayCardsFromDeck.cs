@@ -5,7 +5,6 @@ using UnityEngine;
 public class RahipPlayCardsFromDeck : AbilityBase, IButtonClickReceiver
 {
     private Card _selfCard;
-    private GlobalKnowledge _knowledge;
     private CardMover _mover;
     private AbilityPlayPhase _playPhase;
     private PlayerStateVariables _selfStates;
@@ -27,17 +26,16 @@ public class RahipPlayCardsFromDeck : AbilityBase, IButtonClickReceiver
     private int _numberOfCardsToMove;
     private int _numberOfCardsMoved;
 
-    public override void Initialize()
+    public override void Initialize(GlobalKnowledge knowledge)
     {
         _selfCard = GetComponentInParent<Card>();
-        _knowledge = GlobalKnowledge.Instance;
-        _mover = _knowledge.Mover(_selfCard.Faction);
-        _playPhase = _knowledge.AbilityPhase;
-        _selfStates = _knowledge.PlayerStates(_selfCard.Faction);
+        _mover = knowledge.Mover(_selfCard.Faction);
+        _playPhase = knowledge.AbilityPhase;
+        _selfStates = knowledge.PlayerStates(_selfCard.Faction);
 
-        _selfArmyDeck = _knowledge.ArmyDeck(_selfCard.Faction);
-        _selfSupportDeck = _knowledge.SupportDeck(_selfCard.Faction);
-        _selfPlayArea = _knowledge.PlayArea(_selfCard.Faction);
+        _selfArmyDeck = knowledge.ArmyDeck(_selfCard.Faction);
+        _selfSupportDeck = knowledge.SupportDeck(_selfCard.Faction);
+        _selfPlayArea = knowledge.PlayArea(_selfCard.Faction);
         
 
         base._abilityPhase.Add(SelectArmyCard);
@@ -46,7 +44,7 @@ public class RahipPlayCardsFromDeck : AbilityBase, IButtonClickReceiver
         base._abilityPhase.Add(PlaySupportCard);
         base._abilityPhase.Add(EndAbility);
 
-        base.Initialize();
+        base.Initialize(knowledge);
     }
 
     private void SelectArmyCard()

@@ -4,12 +4,12 @@ using UnityEngine;
 
 public class DummyAbility : AbilityBase
 {
-    public override void Initialize()
+    public override void Initialize(GlobalKnowledge knowledge)
     {
 
         _abilityPhase.Add(StartAbility);
 
-        base.Initialize();
+        base.Initialize(knowledge);
     }
 
     private void StartAbility()

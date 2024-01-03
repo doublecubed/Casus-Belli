@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class KuzeyliAbility : AbilityBase
 {
-    [SerializeField] private GlobalKnowledge _knowledge;
     [SerializeField] private CardMover _mover;
     [SerializeField] private Card _selfCard;
     [SerializeField] private Deck _opponentSupportDeck;
@@ -12,22 +11,21 @@ public class KuzeyliAbility : AbilityBase
     [SerializeField] private Affiliation _targetFaction;
     [SerializeField] private Vector3 _deckLookDirection;
 
-    public override void Initialize()
+    public override void Initialize(GlobalKnowledge knowledge)
     {
         _selfCard = GetComponentInParent<Card>();
-        _knowledge = GlobalKnowledge.Instance;
 
         _targetFaction = _selfCard.Faction == Affiliation.Red ? Affiliation.Green : Affiliation.Red;
 
-        _mover = _knowledge.Mover(_targetFaction);
-        _opponentSupportDeck = _knowledge.SupportDeck(_targetFaction);
-        _deckLookDirection = _knowledge.LookDirection(_targetFaction);
+        _mover = knowledge.Mover(_targetFaction);
+        _opponentSupportDeck = knowledge.SupportDeck(_targetFaction);
+        _deckLookDirection = knowledge.LookDirection(_targetFaction);
 
         _abilityPhase.Add(RiseCard);
         _abilityPhase.Add(ReturnCards);
         _abilityPhase.Add(LowerCard);
 
-        base.Initialize();
+        base.Initialize(knowledge);
     }
 
     private void RiseCard()

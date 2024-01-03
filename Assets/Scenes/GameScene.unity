@@ -1603,11 +1603,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _stateMachine: {fileID: 0}
   _isDone: 0
-  _playerKnowledge: {fileID: 354957182}
-  _opponentKnowledge: {fileID: 322678629}
+  _knowledge: {fileID: 1861117266}
   _cardMover: {fileID: 354957181}
   _playerCards: []
   _opponentCards: []
+  _playerArmyCards: []
+  _playerSupportCards: []
+  _opponentArmyCards: []
+  _opponentSupportCards: []
+  _playerArmyDeck: {fileID: 1468153271}
+  _playerArmyTrash: {fileID: 779924764}
+  _playerSupportTrash: {fileID: 2131242560}
+  _opponentArmyDeck: {fileID: 2111402768}
+  _opponentArmyTrash: {fileID: 765859810}
+  _opponentSupportTrash: {fileID: 704459120}
 --- !u!1001 &538225140
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2373,6 +2382,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _stateMachine: {fileID: 0}
   _isDone: 0
+  _knowledge: {fileID: 0}
   _humanPlayer: {fileID: 354957180}
   _aiPlayer: {fileID: 322678627}
   _playerInput: {fileID: 354957186}
@@ -3075,6 +3085,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _stateMachine: {fileID: 0}
   _isDone: 0
+  _knowledge: {fileID: 0}
 --- !u!1001 &1113287223
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3393,6 +3404,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _stateMachine: {fileID: 0}
   _isDone: 0
+  _knowledge: {fileID: 0}
   _playerArea: {fileID: 1754032585}
   _opponentArea: {fileID: 508519119}
   _cardsInPlay: []
@@ -3477,6 +3489,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _stateMachine: {fileID: 177022889}
   _isDone: 0
+  _knowledge: {fileID: 0}
   _playerArmyDeck: {fileID: 1468153271}
   _playerSupportDeck: {fileID: 1113287227}
   _opponentArmyDeck: {fileID: 2111402768}
@@ -3923,6 +3936,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _stateMachine: {fileID: 0}
   _isDone: 0
+  _knowledge: {fileID: 0}
   _cameraController: {fileID: 1006997309}
   _playerKnowledge: {fileID: 354957182}
   _opponentKnowledge: {fileID: 322678629}
@@ -4038,6 +4052,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _stateMachine: {fileID: 0}
   _isDone: 0
+  _knowledge: {fileID: 0}
   _playerHand: {fileID: 925598683}
   _opponentHand: {fileID: 1122524890}
   _playerStats: {fileID: 354957184}
@@ -4133,6 +4148,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _stateMachine: {fileID: 0}
   _isDone: 0
+  _knowledge: {fileID: 0}
   _cameraController: {fileID: 1006997309}
   _playerArea: {fileID: 1754032585}
   _opponentArea: {fileID: 508519119}
@@ -4585,6 +4601,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _stateMachine: {fileID: 0}
   _isDone: 0
+  _knowledge: {fileID: 0}
 --- !u!1 &1840232911
 GameObject:
   m_ObjectHideFlags: 0
@@ -4689,6 +4706,8 @@ MonoBehaviour:
   _redBehaviour: {fileID: 322678630}
   _greenStates: {fileID: 354957187}
   _redStates: {fileID: 322678631}
+  _humanFaction: 1
+  _computerFaction: 0
 --- !u!1 &2084414714
 GameObject:
   m_ObjectHideFlags: 0

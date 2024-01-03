@@ -5,7 +5,6 @@ using UnityEngine;
 public class RahipTakeCardFromTrash : AbilityBase, IButtonClickReceiver
 {
     private Card _selfCard;
-    private GlobalKnowledge _knowledge;
     private CardMover _mover;
     private Affiliation _opponentFaction;
     private Deck _opponentArmyTrash;
@@ -18,21 +17,20 @@ public class RahipTakeCardFromTrash : AbilityBase, IButtonClickReceiver
     private List<Card> _allCardsInTrash;
     private Card _selectedCard;
 
-    public override void Initialize()
+    public override void Initialize(GlobalKnowledge knowledge)
     {
         _selfCard = GetComponentInParent<Card>();
-        _knowledge = GlobalKnowledge.Instance;
-        _mover = _knowledge.Mover(_selfCard.Faction);
-        _opponentFaction = _knowledge.OpponentFaction(_selfCard.Faction);
-        _opponentArmyTrash = _knowledge.ArmyTrash(_opponentFaction);
-        _opponentSupportTrash = _knowledge.SupportTrash(_opponentFaction);
-        _selfArmyDeck = _knowledge.ArmyDeck(_selfCard.Faction);
-        _selfBehaviour = _knowledge.Behaviour(_selfCard.Faction);
+        _mover = knowledge.Mover(_selfCard.Faction);
+        _opponentFaction = knowledge.OpponentFaction(_selfCard.Faction);
+        _opponentArmyTrash = knowledge.ArmyTrash(_opponentFaction);
+        _opponentSupportTrash = knowledge.SupportTrash(_opponentFaction);
+        _selfArmyDeck = knowledge.ArmyDeck(_selfCard.Faction);
+        _selfBehaviour = knowledge.Behaviour(_selfCard.Faction);
 
         base._abilityPhase.Add(DisplayTrashCards);
         base._abilityPhase.Add(MoveSelectedCardToDeck);
 
-        base.Initialize();
+        base.Initialize(knowledge);
     }
 
     private void DisplayTrashCards()

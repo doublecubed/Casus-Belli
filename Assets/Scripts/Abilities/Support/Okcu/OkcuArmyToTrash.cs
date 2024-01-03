@@ -6,7 +6,6 @@ using UnityEngine;
 public class OkcuArmyToTrash : AbilityBase
 {
     private Card _selfCard;
-    private GlobalKnowledge _knowledge;
     private CardMover _mover;
 
     private Affiliation _targetFaction;
@@ -16,19 +15,18 @@ public class OkcuArmyToTrash : AbilityBase
     private int _numberOfCardsMoved;
     private int _numberOfCardsToMove;
 
-    public override void Initialize()
+    public override void Initialize(GlobalKnowledge knowledge)
     {
         _selfCard = GetComponentInParent<Card>();
-        _knowledge = GlobalKnowledge.Instance;
-        _mover = _knowledge.Mover(_selfCard.Faction);
+        _mover = knowledge.Mover(_selfCard.Faction);
 
-        _targetFaction = _knowledge.OpponentFaction(_selfCard.Faction);
-        _opponentArmyDeck = _knowledge.ArmyDeck(_targetFaction);
-        _opponentArmyTrash = _knowledge.ArmyTrash(_targetFaction);
+        _targetFaction = knowledge.OpponentFaction(_selfCard.Faction);
+        _opponentArmyDeck = knowledge.ArmyDeck(_targetFaction);
+        _opponentArmyTrash = knowledge.ArmyTrash(_targetFaction);
 
         base._abilityPhase.Add(MoveArmyCardsToTrash);
 
-        base.Initialize();
+        base.Initialize(knowledge);
     }
 
     private void MoveArmyCardsToTrash()
