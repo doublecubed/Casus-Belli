@@ -77,7 +77,7 @@ public class AvciArmyToSelf : AbilityBase, IButtonClickReceiver
 
     private void MoveOpponentArmyCard()
     {
-        Deck selfArmyDeck = _knowledge.SupportTrash(_selfCard.Faction);
+        Deck selfArmyDeck = _knowledge.ArmyDeck(_selfCard.Faction);
 
         _mover.OnCardMovementCompleted += CardMovementCompleted;
         _mover.MoveCard(_selectedCard, selfArmyDeck, selfArmyDeck.transform.position, PlacementFacing.Down, DeckSide.Bottom, _knowledge.LookDirection(_targetFaction));

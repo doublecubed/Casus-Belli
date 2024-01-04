@@ -12,6 +12,7 @@ public class BuyucuAbility : AbilityBase
     private EndState _endState;
 
     private List<Card> _selfSupportCards;
+    private Deck _selfSupportDeck;
 
     public override void Initialize(GlobalKnowledge knowledge)
     {
@@ -20,6 +21,7 @@ public class BuyucuAbility : AbilityBase
         _mover = knowledge.Mover(_selfCard.Faction);
         _selfStates = knowledge.PlayerStates(_selfCard.Faction);
         _endState = knowledge.EndState;
+        _selfSupportDeck = knowledge.SupportDeck(_selfCard.Faction);
 
         base._abilityPhase.Add(RiseCard);
         base._abilityPhase.Add(GetCardsToReturnToHand);
@@ -37,7 +39,7 @@ public class BuyucuAbility : AbilityBase
 
     private void GetCardsToReturnToHand()
     {
-        List<Card> supportCards = _selfPlayArea.CardsInPlay.Where(x => x.CardType == CardType.Support).ToList();
+        _selfSupportCards = _selfPlayArea.CardsInPlay.Where(x => x.CardType == CardType.Support).ToList();
         _endState.OnTurnEnded += AbilityTriggered;
         _phaseCompleted = true;
     }
@@ -65,6 +67,9 @@ public class BuyucuAbility : AbilityBase
 
     private void AbilityTriggered()
     {
-
+        for (int i = 0; i <  _selfSupportCards.Count; i++)
+        {
+            _mover.MoveCard(_selfSupportCards[i], _selfSupportDeck, _selfSupportDeck.transform.position, PlacementFacing.Down, DeckSide.Bottom, _knowledge.LookDirection(_selfCard.Faction));
+        }
     }
 }

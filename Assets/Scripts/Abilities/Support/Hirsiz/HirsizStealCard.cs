@@ -128,6 +128,8 @@ public class HirsizStealCard : AbilityBase, IButtonClickReceiver
             {
                 _targetCards.Add(bottomCard);
             }
+
+            _phaseCompleted = true;
         }
     }
 
