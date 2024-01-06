@@ -6,9 +6,9 @@ public class HumanPlayer : MonoBehaviour
 {
     [SerializeField] private MonoBehaviourStateMachine _stateMachine;
 
+    private PlayerStateVariables _playerVariables;
     private PlayerBehaviour _playerBehaviour;
     private PlayerKnowledge _playerKnowledge;
-    private PlayerStats _playerStats;
     private CardPicker _cardPicker;
 
     public bool DoneDrawing {  get; private set; }
@@ -18,7 +18,7 @@ public class HumanPlayer : MonoBehaviour
     {
         _playerBehaviour = GetComponent<PlayerBehaviour>();
         _playerKnowledge = GetComponent<PlayerKnowledge>();
-        _playerStats = GetComponent<PlayerStats>();
+        _playerVariables = GetComponent<PlayerStateVariables>();
         _cardPicker = GetComponent<CardPicker>();
     }
 
@@ -44,7 +44,7 @@ public class HumanPlayer : MonoBehaviour
 
         if (clickedDeck == _playerKnowledge.ArmyDeckSelf || clickedDeck == _playerKnowledge.SupportDeckSelf)
         {
-            if (_playerKnowledge.HandSelf.CardsInHand.Count < _playerStats.MaxCardsPerRound)
+            if (_playerKnowledge.HandSelf.CardsInHand.Count < _playerVariables.CardsToDraw)
             {
                 _playerBehaviour.DrawFromDeckToHand(clickedDeck);
             }

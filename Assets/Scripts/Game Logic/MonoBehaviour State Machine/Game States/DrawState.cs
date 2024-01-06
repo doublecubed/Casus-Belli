@@ -11,10 +11,6 @@ public class DrawState : GameStateBase
     [SerializeField] private Hand _playerHand;
     [SerializeField] private Hand _opponentHand;
 
-    [Header("Stats")]
-    [SerializeField] private PlayerStats _playerStats;
-    [SerializeField] private PlayerStats _opponentStats;
-
     [Header("Players")]
     [SerializeField] private AIPlayer _opponentPlayer;
     [SerializeField] private PlayerInput _playerInput;
@@ -24,6 +20,9 @@ public class DrawState : GameStateBase
 
     [SerializeField] private PlayerKnowledge _playerKnowledge;
     [SerializeField] private PlayerKnowledge _opponentKnowledge;
+
+    [SerializeField] private PlayerStateVariables _playerVariables;
+    [SerializeField] private PlayerStateVariables _opponentVariables;
 
     public bool _hasMovingCard;
 
@@ -50,12 +49,12 @@ public class DrawState : GameStateBase
 
         if (_opponentPlayer.DoneDrawing)
         {
-            if (_playerHand.CardsInHand.Count < _playerStats.MaxCardsPerRound && _playerKnowledge.ArmyDeckSelf.NumberOfCardsInDeck() == 0 && _playerKnowledge.SupportDeckSelf.NumberOfCardsInDeck() == 0)
+            if (_playerHand.CardsInHand.Count < _playerVariables.CardsToDraw && _playerKnowledge.ArmyDeckSelf.NumberOfCardsInDeck() == 0 && _playerKnowledge.SupportDeckSelf.NumberOfCardsInDeck() == 0)
             {
                 base._isDone = true;
             }
 
-            if (_playerHand.CardsInHand.Count >= _playerStats.MaxCardsPerRound)
+            if (_playerHand.CardsInHand.Count >= _playerVariables.CardsToDraw)
             {
                 base._isDone = true;
             }

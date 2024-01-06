@@ -61,7 +61,20 @@ public class PlayerStateVariables : MonoBehaviour, IButtonClickReceiver
 
     private Dictionary<PlayerStateVariable, PropertyInfo> _propertyDictionary;
 
-    public int CardsToDraw { get; private set; }
+    private int _cardsToDraw;
+
+    public int CardsToDraw 
+    {
+        get
+        {
+            int multiplier = DrawTwiceCards >= 1 ? 2 : 1;
+            return _cardsToDraw * multiplier;
+        }
+        private set
+        {
+            _cardsToDraw = value;
+        } 
+    }
 
     [field: SerializeField] public bool AIPlayer { get; private set; }
 

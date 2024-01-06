@@ -24,7 +24,7 @@ public class KralSetArmyToOne : AbilityBase
 
     private void SetUpArmyToOne()
     {
-        _opponentStates.UpdateState(PlayerStateVariable.SetArmiesToOne, 2, true);
+        _opponentStates.UpdateState(PlayerStateVariable.SetArmiesToOne, 3, true);
         base.AbilityCompleted();
     }
 

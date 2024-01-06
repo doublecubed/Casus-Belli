@@ -881,7 +881,6 @@ GameObject:
   m_Component:
   - component: {fileID: 322678625}
   - component: {fileID: 322678629}
-  - component: {fileID: 322678628}
   - component: {fileID: 322678630}
   - component: {fileID: 322678627}
   - component: {fileID: 322678626}
@@ -934,19 +933,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f209eccee332bbe429f21cc182266df9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &322678628
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 322678624}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4187eebc5410a9a4ba589147a010ba0c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  <MaxCardsPerRound>k__BackingField: 2
 --- !u!114 &322678629
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1161,7 +1147,6 @@ GameObject:
   m_Component:
   - component: {fileID: 354957179}
   - component: {fileID: 354957182}
-  - component: {fileID: 354957184}
   - component: {fileID: 354957185}
   - component: {fileID: 354957180}
   - component: {fileID: 354957181}
@@ -1241,19 +1226,6 @@ MonoBehaviour:
   HandSelf: {fileID: 925598683}
   HandOpponent: {fileID: 1122524890}
   TableDirection: {x: 0, y: 0, z: 1}
---- !u!114 &354957184
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 354957178}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4187eebc5410a9a4ba589147a010ba0c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  <MaxCardsPerRound>k__BackingField: 2
 --- !u!114 &354957185
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1609,6 +1581,8 @@ MonoBehaviour:
   _stateMachine: {fileID: 0}
   _isDone: 0
   _knowledge: {fileID: 1861117266}
+  _playerStateVariables: {fileID: 354957187}
+  _opponentStateVariables: {fileID: 322678631}
   _cardMover: {fileID: 354957181}
   _playerCards: []
   _opponentCards: []
@@ -4080,14 +4054,14 @@ MonoBehaviour:
   _knowledge: {fileID: 0}
   _playerHand: {fileID: 925598683}
   _opponentHand: {fileID: 1122524890}
-  _playerStats: {fileID: 354957184}
-  _opponentStats: {fileID: 322678628}
   _opponentPlayer: {fileID: 322678627}
   _playerInput: {fileID: 354957186}
   _playerBehaviour: {fileID: 354957185}
   _playerCardMover: {fileID: 354957181}
   _playerKnowledge: {fileID: 354957182}
   _opponentKnowledge: {fileID: 322678629}
+  _playerVariables: {fileID: 354957187}
+  _opponentVariables: {fileID: 322678631}
   _hasMovingCard: 0
 --- !u!1 &1604814209
 GameObject:

@@ -7,6 +7,8 @@ public class CombatPhase : GameStateBase
 {
     #region VARIABLES
 
+    [SerializeField] private PlayerStateVariables _playerStateVariables;
+    [SerializeField] private PlayerStateVariables _opponentStateVariables;
     private GameStateBase _resolveState;
 
     [SerializeField] private CardMover _cardMover;
@@ -108,13 +110,18 @@ public class CombatPhase : GameStateBase
         for (int i = 0; i < _playerArmyCards.Count; i++)
         {
             _cardMover.RiseInPlace(_playerArmyCards[i]);
-            _playerPower += _playerArmyCards[i].Power;
+
+            int powerToAdd = _playerStateVariables.SetArmiesToOne >= 1 ? 1 : _playerArmyCards[i].Power;
+
+            _playerPower += powerToAdd;
         }
 
         for (int i = 0; i < _opponentArmyCards.Count; i++)
         {
             _cardMover.RiseInPlace(_opponentArmyCards[i]);
-            _opponentPower += _opponentArmyCards[i].Power;
+
+            int powerToAdd = _opponentStateVariables.SetArmiesToOne >= 1 ? 1 : _opponentArmyCards[i].Power;
+            _opponentPower += powerToAdd;
         }
 
         Debug.Log("Player power is: " + _playerPower);
