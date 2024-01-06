@@ -56,8 +56,9 @@ public class CardSelectionDisplayer : MonoBehaviour
             CardImage cardImage = selection.GetComponent<CardImage>();
             _cardImageComponents.Add(cardImage);
             cardImage.Initialize(spritesToDisplay[i], i, definitions[i]);
-            cardImage.OnButtonPressed += _currentReceiver.ButtonClicked;
             cardImage.OnButtonPressed += ButtonClickedFirst;
+            cardImage.OnButtonPressed += _currentReceiver.ButtonClicked;
+
 
             // TODO: These events have to be unsubscribed in some way after selection is done.
         }
@@ -118,7 +119,7 @@ public class CardSelectionDisplayer : MonoBehaviour
             _cardImageComponents[i].OnButtonPressed -= ButtonClickedFirst;
         }
 
-        //_uiManager.DisplayCardSelectionUI(false); 
+        _uiManager.DisplayCardSelectionUI(false); 
     }
 
     private void ButtonClickedSecond(int index)
