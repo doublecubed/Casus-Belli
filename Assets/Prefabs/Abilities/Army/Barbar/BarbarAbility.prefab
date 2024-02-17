@@ -46,3 +46,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   AbilityDescription: "Kendi taraf\u0131 dahil hi\xE7bir karttan pozitif veya negatif
     \u015Fekilde  etkilenemez. Sadece puan y\xFCz\xFCnden kaybedebilir."
+  AbilityImage: {fileID: 21300000, guid: f70ca571dc3ab0141ab8c385f3623b99, type: 3}

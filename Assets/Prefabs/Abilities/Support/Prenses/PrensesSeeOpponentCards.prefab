@@ -46,3 +46,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   AbilityDescription: "Oynad\u0131ktan sonraki 2 tur boyunca rakibin \xE7ekti\u011Fi
     kartlar\u0131 g\xF6rebilirsiniz. Bu \xF6zellik biriktirilebilir."
+  AbilityImage: {fileID: 21300000, guid: 22715cdaf0802a34e9d2d80bfa596a06, type: 3}

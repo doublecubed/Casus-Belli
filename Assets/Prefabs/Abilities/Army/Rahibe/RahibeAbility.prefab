@@ -46,7 +46,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   AbilityDescription: "Oynad\u0131\u011F\u0131n\u0131zda ordu destesinin en \xFCst\xFCndeki
     kart\u0131 masaya a\xE7\u0131n\u0131z ve o kart\u0131n da \xF6zelliklerini uygulay\u0131n\u0131z."
-  _knowledge: {fileID: 0}
+  AbilityImage: {fileID: 21300000, guid: bada0d7d2ad7f5b47b97dfd2168b3a75, type: 3}
   _mover: {fileID: 0}
   _selfCard: {fileID: 0}
   _selfArmyDeck: {fileID: 0}

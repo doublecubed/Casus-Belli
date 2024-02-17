@@ -46,3 +46,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   AbilityDescription: "Rakip 2 tur boyunca hi\xE7bir destek kart\u0131 oynayamaz.
     Bu \xF6zellik biriktirilebilir."
+  AbilityImage: {fileID: 21300000, guid: 0e8bd38fc8e8c3c42a59da8764899a3d, type: 3}

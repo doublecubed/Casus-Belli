@@ -46,6 +46,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   AbilityDescription: "Masada yan\u0131nda ba\u015Fka bir ordu kart\u0131 varsa 4
     puan kabul ediniz."
-  _knowledge: {fileID: 0}
+  AbilityImage: {fileID: 21300000, guid: b75f079b0ef4f1c44bc41942ee3e6739, type: 3}
   _mover: {fileID: 0}
   _selfCard: {fileID: 0}

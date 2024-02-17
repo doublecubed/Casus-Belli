@@ -22,8 +22,6 @@ public class CardSelectionDisplayer : MonoBehaviour
 
     private IButtonClickReceiver _currentReceiver;
 
-    private bool _cardSelected;
-
     #endregion
 
     #region MONOBEHAVIOUR
@@ -69,8 +67,6 @@ public class CardSelectionDisplayer : MonoBehaviour
     public void DisplaySelection(List<Card> cardsToDisplay, IButtonClickReceiver receiver)
     {
         Debug.Log($"Second display selection overload running, with {receiver} as the receiver");
-
-        _cardSelected = false;
 
         List<Sprite> sprites = cardsToDisplay.Select(card => card.CardImage).ToList();
 

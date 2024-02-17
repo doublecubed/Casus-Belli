@@ -46,3 +46,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   AbilityDescription: "Oynad\u0131\u011F\u0131n\u0131zdan sonraki tur rakip, destek
     kart\u0131 kullanamaz."
+  AbilityImage: {fileID: 21300000, guid: 0ff482b77576b9c4ca598774f96e64ad, type: 3}

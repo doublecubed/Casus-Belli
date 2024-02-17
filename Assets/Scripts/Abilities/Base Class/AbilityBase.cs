@@ -18,6 +18,8 @@ public abstract class AbilityBase : MonoBehaviour
 
     public string AbilityDescription;
 
+    public Sprite AbilityImage;
+
     protected GlobalKnowledge _knowledge;
 
 

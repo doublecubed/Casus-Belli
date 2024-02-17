@@ -46,7 +46,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   AbilityDescription: "Masadaki bir rakip Destek kart\u0131n\u0131, \xF6zellikleri
     kullan\u0131lmadan, direkt olarak \xC7\xF6p\u2019e g\xF6nderiniz."
-  _knowledge: {fileID: 0}
+  AbilityImage: {fileID: 21300000, guid: ba7840f7c226e1d40ab314a4c9862a26, type: 3}
   _mover: {fileID: 0}
   _selfCard: {fileID: 0}
   _playPhase: {fileID: 0}

@@ -46,3 +46,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   AbilityDescription: "Rakip ordu kart\u0131 destesinden en \xFCstteki \xFC\xE7 kart\u0131,
     e\u011Fer 3 ve daha d\xFC\u015F\xFCk puanl\u0131ysa, \xE7\xF6pe g\xF6nderiniz."
+  AbilityImage: {fileID: 21300000, guid: e0f6625ebaa47d14290cf79a2e0ec110, type: 3}

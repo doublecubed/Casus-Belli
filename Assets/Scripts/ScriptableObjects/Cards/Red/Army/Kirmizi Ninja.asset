@@ -15,11 +15,11 @@ MonoBehaviour:
   cardName: Ninja
   cardType: 0
   faction: 0
+  cardImage: {fileID: 21300000, guid: 41d605d495df4ef43bb54d3fface460e, type: 3}
   faceSprite: {fileID: 21300000, guid: 7da16e4657d2abb4ca30ce2812ca0ea4, type: 3}
   backSprite: {fileID: 21300000, guid: e4af4c280d06c92458841c18bada45a0, type: 3}
-  faceImage: {fileID: 2800000, guid: 7da16e4657d2abb4ca30ce2812ca0ea4, type: 3}
-  backImage: {fileID: 2800000, guid: e4af4c280d06c92458841c18bada45a0, type: 3}
   priority: 0
   power: 4
+  affectsDeck: 0
   abilities:
   - {fileID: 4618966640663425598, guid: 065039a920340a649bb07747694fe442, type: 3}

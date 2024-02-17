@@ -47,6 +47,6 @@ MonoBehaviour:
   AbilityDescription: "Se\xE7ilen bir rakip destesinin en alt ve en \xFCst kartlar\u0131na
     bak\u0131n\u0131z. Se\xE7ti\u011Finiz kart\u0131 kendi destenize ekleyiniz ve
     H\u0131rs\u0131z kart\u0131n\u0131 rakibinizin \xE7\xF6p\xFCne koyunuz."
-  _knowledge: {fileID: 0}
+  AbilityImage: {fileID: 21300000, guid: ea04390ee977a2c42bb9e808568b9a7e, type: 3}
   _mover: {fileID: 0}
   _selfCard: {fileID: 0}

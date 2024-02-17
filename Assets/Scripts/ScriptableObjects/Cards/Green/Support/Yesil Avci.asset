@@ -15,10 +15,9 @@ MonoBehaviour:
   cardName: "Avc\u0131"
   cardType: 1
   faction: 1
+  cardImage: {fileID: 21300000, guid: a3a9254016e9fe349948565d17a26b93, type: 3}
   faceSprite: {fileID: 21300000, guid: f4fd69066271b0d4ab1b7f7f57c720ef, type: 3}
   backSprite: {fileID: 21300000, guid: 5e8acc0fa49617f4286dc5d6730bae73, type: 3}
-  faceImage: {fileID: 2800000, guid: f4fd69066271b0d4ab1b7f7f57c720ef, type: 3}
-  backImage: {fileID: 2800000, guid: 5e8acc0fa49617f4286dc5d6730bae73, type: 3}
   priority: 40
   power: 0
   affectsDeck: 1

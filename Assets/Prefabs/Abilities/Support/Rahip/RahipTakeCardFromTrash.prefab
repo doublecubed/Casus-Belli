@@ -45,3 +45,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   AbilityDescription: "Rakibin \xE7\xF6p\xFCnden bir kart\u0131 destenize ekleyiniz."
+  AbilityImage: {fileID: 21300000, guid: 7c5294ad5946d7843bd6c46c3705c366, type: 3}

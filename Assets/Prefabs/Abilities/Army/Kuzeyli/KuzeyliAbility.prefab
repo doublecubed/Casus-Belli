@@ -46,7 +46,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   AbilityDescription: "Rakibin masadaki t\xFCm \xE7ok yava\u015F destek kartlar\u0131
     kullan\u0131lmadan direkt destelerine geri d\xF6ner."
-  _knowledge: {fileID: 0}
+  AbilityImage: {fileID: 21300000, guid: d81ec86df13d69146bcba8f2cec298c7, type: 3}
   _mover: {fileID: 0}
   _selfCard: {fileID: 0}
   _opponentSupportDeck: {fileID: 0}

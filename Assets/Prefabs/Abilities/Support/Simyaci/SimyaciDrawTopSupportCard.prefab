@@ -46,3 +46,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   AbilityDescription: "Rakibin destek kartlar\u0131ndan en \xFCstteki kart\u0131
     \xE7ekiniz. \xC7ok yava\u015F ya da yava\u015F bir kartsa \xE7\xF6pe g\xF6nderiniz."
+  AbilityImage: {fileID: 21300000, guid: 8c653ec71647cd64dbebc01786598bc3, type: 3}

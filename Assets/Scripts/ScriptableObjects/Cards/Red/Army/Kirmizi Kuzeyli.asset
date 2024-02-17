@@ -15,11 +15,11 @@ MonoBehaviour:
   cardName: Kuzeyli
   cardType: 0
   faction: 0
+  cardImage: {fileID: 21300000, guid: 00ca1edab807da94bb7759446376a26d, type: 3}
   faceSprite: {fileID: 21300000, guid: 806749d64b9a03241b37fbb5373da5e2, type: 3}
   backSprite: {fileID: 21300000, guid: e4af4c280d06c92458841c18bada45a0, type: 3}
-  faceImage: {fileID: 2800000, guid: 806749d64b9a03241b37fbb5373da5e2, type: 3}
-  backImage: {fileID: 2800000, guid: e4af4c280d06c92458841c18bada45a0, type: 3}
   priority: 0
   power: 6
+  affectsDeck: 0
   abilities:
   - {fileID: 9001742177247925168, guid: 024a9d39904929a4ebe6c365ab462b6e, type: 3}

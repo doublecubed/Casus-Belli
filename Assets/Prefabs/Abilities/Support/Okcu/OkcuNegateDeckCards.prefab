@@ -46,3 +46,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   AbilityDescription: "Sonraki turdan itibaren, 3 tur boyunca rakibin destelere etki
     eden herhangi bir kart\u0131 etkisiz olur."
+  AbilityImage: {fileID: 21300000, guid: 9ca5e0da135d2894f92213b824b0aeb1, type: 3}

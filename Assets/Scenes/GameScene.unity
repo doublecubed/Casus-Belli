@@ -4707,6 +4707,13 @@ MonoBehaviour:
   _redStates: {fileID: 322678631}
   _humanFaction: 1
   _computerFaction: 0
+  RedFactionColor: {r: 0.882353, g: 0.12941177, b: 0.1137255, a: 1}
+  GreenFactionColor: {r: 0.28235295, g: 0.68235296, b: 0.3137255, a: 1}
+  SlowSprite: {fileID: 21300000, guid: 37833ea75940f8349a2700bab7fa6ab7, type: 3}
+  FastSprite: {fileID: 21300000, guid: d341c1b077cd1ae4497bf61fdfe20450, type: 3}
+  VeryFastSprite: {fileID: 21300000, guid: 8fc222a4b4c02be439e2b4f65dafac14, type: 3}
+  ArmyCardSprite: {fileID: 21300000, guid: 1f4c562cbda19a743942e4d155de21a0, type: 3}
+  SupportCardSprite: {fileID: 21300000, guid: d613d0ace02dc4344bed5071302d1366, type: 3}
 --- !u!1 &2084414714
 GameObject:
   m_ObjectHideFlags: 0

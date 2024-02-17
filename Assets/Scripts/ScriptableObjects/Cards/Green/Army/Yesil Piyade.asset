@@ -15,10 +15,10 @@ MonoBehaviour:
   cardName: Piyade
   cardType: 0
   faction: 1
+  cardImage: {fileID: 21300000, guid: e343bf75f6af525479765e60bb7bfcab, type: 3}
   faceSprite: {fileID: 21300000, guid: b6238336e7c556e4494d2570c07f5bfc, type: 3}
   backSprite: {fileID: 21300000, guid: 383a939f5b6f2cc4d9cdcac49403f8a4, type: 3}
-  faceImage: {fileID: 2800000, guid: b6238336e7c556e4494d2570c07f5bfc, type: 3}
-  backImage: {fileID: 2800000, guid: 383a939f5b6f2cc4d9cdcac49403f8a4, type: 3}
   priority: 0
   power: 4
+  affectsDeck: 0
   abilities: []

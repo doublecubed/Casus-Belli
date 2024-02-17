@@ -46,3 +46,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   AbilityDescription: "Rakibin en alttaki destek kart\u0131 ile kendi ordu destenizin
     en alt\u0131ndaki kart\u0131 yer de\u011Fi\u015Ftiriniz."
+  AbilityImage: {fileID: 21300000, guid: f4cfd71fba4d5384f8654c5868d13078, type: 3}

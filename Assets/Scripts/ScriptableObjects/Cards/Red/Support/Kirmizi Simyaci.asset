@@ -15,10 +15,9 @@ MonoBehaviour:
   cardName: "Simyac\u0131"
   cardType: 1
   faction: 0
+  cardImage: {fileID: 21300000, guid: 7621ecf8e18cf2645ab21111e1890f04, type: 3}
   faceSprite: {fileID: 21300000, guid: 36eea7cdc3eeafc4182f61ee614fbee9, type: 3}
   backSprite: {fileID: 21300000, guid: dfcf59a60056b244d83f7f6eff591d17, type: 3}
-  faceImage: {fileID: 2800000, guid: 36eea7cdc3eeafc4182f61ee614fbee9, type: 3}
-  backImage: {fileID: 2800000, guid: dfcf59a60056b244d83f7f6eff591d17, type: 3}
   priority: 20
   power: 0
   affectsDeck: 1

@@ -46,3 +46,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   AbilityDescription: "Masadaki t\xFCm dost destek kartlar\u0131 tur bitiminde destesine
     d\xF6ner."
+  AbilityImage: {fileID: 21300000, guid: e9b0518bc9b84734682ddf3475e0b456, type: 3}

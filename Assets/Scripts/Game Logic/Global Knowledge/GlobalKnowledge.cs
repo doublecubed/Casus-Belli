@@ -48,6 +48,24 @@ public class GlobalKnowledge : MonoBehaviour
     [SerializeField] private Affiliation _humanFaction;
     [SerializeField] private Affiliation _computerFaction;
 
+    [Space(20)]
+    [Header("Colors & Icons")]
+
+    public Color RedFactionColor;
+    public Color GreenFactionColor;
+
+    [Space(5)]
+    public Sprite SlowSprite;
+    public Sprite FastSprite;
+    public Sprite VeryFastSprite;
+
+    [Space(5)]
+    public Sprite ArmyCardSprite;
+    public Sprite SupportCardSprite;
+
+    
+
+
     private Dictionary<Affiliation, Vector3> _lookDirection;
 
     private Dictionary<Affiliation, Deck> _armyDecks;

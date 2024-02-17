@@ -47,6 +47,6 @@ MonoBehaviour:
   AbilityDescription: "Kar\u015F\u0131s\u0131na Prens veya Kral gelirse \xF6zelliklerini
     kullanmalar\u0131n\u0131 engeller. Prens, sadece puan\u0131yla kal\u0131r. Kral,
     direkt olarak \xE7\xF6pe gider."
-  _knowledge: {fileID: 0}
+  AbilityImage: {fileID: 21300000, guid: a148125164fc73d47ae891dfa0c90b0f, type: 3}
   _mover: {fileID: 0}
   _selfCard: {fileID: 0}

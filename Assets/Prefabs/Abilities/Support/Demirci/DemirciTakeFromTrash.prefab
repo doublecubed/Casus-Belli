@@ -46,7 +46,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   AbilityDescription: "\u0130stedi\u011Finiz bir ordu kart\u0131n\u0131 \xE7\xF6pten
     al\u0131n\u0131z ve masaya koyunuz. Kart\u0131n \xF6zelliklerini uygulay\u0131n\u0131z."
-  _knowledge: {fileID: 0}
+  AbilityImage: {fileID: 21300000, guid: 55d72619d81b18a4ebb7a82173335011, type: 3}
   _mover: {fileID: 0}
   _selfCard: {fileID: 0}
   _playPhase: {fileID: 0}

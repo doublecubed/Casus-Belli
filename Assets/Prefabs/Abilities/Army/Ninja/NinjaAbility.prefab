@@ -46,6 +46,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   AbilityDescription: "Masadaki rakip ordu kartlar\u0131ndan \xE7ift puanl\u0131lar\u0131
     sadece 2 puan olarak kabul ediniz."
-  _knowledge: {fileID: 0}
+  AbilityImage: {fileID: 21300000, guid: 5fbbf6fcf377bfd439a55808fe81c55b, type: 3}
   _mover: {fileID: 0}
   _selfCard: {fileID: 0}

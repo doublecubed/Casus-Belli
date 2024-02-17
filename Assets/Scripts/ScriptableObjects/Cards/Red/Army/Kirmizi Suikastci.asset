@@ -15,11 +15,11 @@ MonoBehaviour:
   cardName: "Suikast\xE7\u0131"
   cardType: 0
   faction: 0
+  cardImage: {fileID: 21300000, guid: ca038fcf85ff67a4283cb4b052c8c801, type: 3}
   faceSprite: {fileID: 21300000, guid: 9828efe87ca2d154998e368f1fbfe9d1, type: 3}
   backSprite: {fileID: 21300000, guid: e4af4c280d06c92458841c18bada45a0, type: 3}
-  faceImage: {fileID: 2800000, guid: 9828efe87ca2d154998e368f1fbfe9d1, type: 3}
-  backImage: {fileID: 2800000, guid: e4af4c280d06c92458841c18bada45a0, type: 3}
   priority: 0
   power: 2
+  affectsDeck: 0
   abilities:
   - {fileID: 5684219836642239006, guid: 66f2fcad11b57f5479edbf912afe0e05, type: 3}

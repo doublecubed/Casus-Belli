@@ -15,10 +15,10 @@ MonoBehaviour:
   cardName: "\u015E\xF6valye"
   cardType: 0
   faction: 0
+  cardImage: {fileID: 21300000, guid: a33c8a4fdb0d5af44af201c2b50a748c, type: 3}
   faceSprite: {fileID: 21300000, guid: 8a86569a389f221459f289c8a48988e5, type: 3}
   backSprite: {fileID: 21300000, guid: e4af4c280d06c92458841c18bada45a0, type: 3}
-  faceImage: {fileID: 2800000, guid: 8a86569a389f221459f289c8a48988e5, type: 3}
-  backImage: {fileID: 2800000, guid: e4af4c280d06c92458841c18bada45a0, type: 3}
   priority: 0
   power: 5
+  affectsDeck: 0
   abilities: []
