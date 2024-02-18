@@ -7,15 +7,13 @@ public class PlayerBehaviour : MonoBehaviour
     [SerializeField] GlobalKnowledge _globalKnowledge;
     public Affiliation SelfFaction;
 
-    private CardMover _cardMover;
+    [SerializeField] private CardMover _cardMover;
     private PlayerStateVariables _selfStates;
 
     private void Awake()
     {
-        _cardMover = GetComponent<CardMover>();
         _selfStates = GetComponent<PlayerStateVariables>();
     }
-
 
     public void DrawFromDeckToHand(Deck deckDrawnFrom)
     {

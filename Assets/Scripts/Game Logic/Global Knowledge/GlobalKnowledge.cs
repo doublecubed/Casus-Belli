@@ -12,6 +12,8 @@ public class GlobalKnowledge : MonoBehaviour
 
     public PlayerInput PlayerInput;
 
+    private CardMover _defaultMover;
+
     [Header("Draw Decks")]
     [SerializeField] private Deck _redArmyDeck;
     [SerializeField] private Deck _greenArmyDeck;
@@ -90,6 +92,8 @@ public class GlobalKnowledge : MonoBehaviour
         }
 
         CreateDictionaries();
+
+        _defaultMover = GetComponent<CardMover>();
     }
 
     private void CreateDictionaries()
@@ -164,7 +168,13 @@ public class GlobalKnowledge : MonoBehaviour
 
     public CardMover Mover(Affiliation faction)
     {
-        return _movers[faction];
+        return _defaultMover;
+        //return _movers[faction];
+    }
+
+    public CardMover Mover()
+    {
+        return _defaultMover;
     }
 
     public Vector3 LookDirection(Affiliation faction)
