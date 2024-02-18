@@ -14,8 +14,7 @@ public class PlayState : GameStateBase
 
     [SerializeField] private PlayerBehaviour _playerBehaviour;
 
-    [SerializeField] private PlayerKnowledge _playerKnowledge;
-    [SerializeField] private PlayerKnowledge _opponentKnowledge;
+    [SerializeField] private GlobalKnowledge _globalKnowledge;
 
     private Affiliation _playerFaction = Affiliation.Green;
     private Affiliation _aiFaction = Affiliation.Red;
@@ -78,7 +77,7 @@ public class PlayState : GameStateBase
 
     private void CardClicked(Card card)
     {
-        if (card.transform.parent = _playerKnowledge.HandSelf.transform)
+        if (card.transform.parent = _globalKnowledge.Hand(_globalKnowledge.HumanFaction()).transform)
         {
             if (!_playerStates.StateActive(PlayerStateVariable.CantPlaySupportCards) || card.CardType != CardType.Support)
             {

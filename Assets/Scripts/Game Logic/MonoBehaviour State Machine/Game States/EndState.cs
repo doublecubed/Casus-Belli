@@ -6,8 +6,9 @@ using UnityEngine;
 public class EndState : GameStateBase
 {
     [SerializeField] private CameraController _cameraController;
-    [SerializeField] private PlayerKnowledge _playerKnowledge;
-    [SerializeField] private PlayerKnowledge _opponentKnowledge;
+    [SerializeField] private GlobalKnowledge _globalKnowledge;
+
+
 
     public event Action OnTurnEnded;
 
@@ -17,13 +18,13 @@ public class EndState : GameStateBase
 
         _cameraController.MoveCameraTo(_cameraController.GeneralPosition);
 
-        if (_playerKnowledge.ArmyDeckSelf.NumberOfCardsInDeck() == 0 && _playerKnowledge.SupportDeckSelf.NumberOfCardsInDeck() == 0)
+        if (_globalKnowledge.SupportDeck(_globalKnowledge.HumanFaction()).NumberOfCardsInDeck() <= 0 && _globalKnowledge.ArmyDeck(_globalKnowledge.HumanFaction()).NumberOfCardsInDeck() <= 0)
         {
             UIManager.Instance.SetWinningPlayer("Yeşil Kazandı");
             _stateMachine.StopMachine();
         }
 
-        if (_opponentKnowledge.ArmyDeckSelf.NumberOfCardsInDeck() == 0 && _opponentKnowledge.SupportDeckOpponent.NumberOfCardsInDeck() == 0)
+        if (_globalKnowledge.SupportDeck(_globalKnowledge.ComputerFaction()).NumberOfCardsInDeck() <= 0 && _globalKnowledge.ArmyDeck(_globalKnowledge.ComputerFaction()).NumberOfCardsInDeck() <= 0)
         {
             UIManager.Instance.SetWinningPlayer("Kırmızı Kazandı");
             _stateMachine.StopMachine();

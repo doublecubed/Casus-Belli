@@ -14,8 +14,7 @@ public class ResolveState : GameStateBase
     [SerializeField] private CardMover _playerMover;
     [SerializeField] private CardMover _opponentMover;
 
-    [SerializeField] private PlayerKnowledge _playerKnowledge;
-    [SerializeField] private PlayerKnowledge _opponentKnowledge;
+    [SerializeField] private GlobalKnowledge _globalKnowledge;
 
     protected override void Awake()
     {
@@ -40,12 +39,12 @@ public class ResolveState : GameStateBase
     {
         for (int i = 0; i < _playerArea.CardsInPlay.Count; i++)
         {
-            _playerMover.FlipCardUp(_playerArea.CardsInPlay[i], _playerKnowledge.TableDirection);
+            _playerMover.FlipCardUp(_playerArea.CardsInPlay[i], _globalKnowledge.LookDirection(_globalKnowledge.HumanFaction()));
         }
 
         for (int i = 0; i < _opponentArea.CardsInPlay.Count; i++)
         {
-            _opponentMover.FlipCardUp(_opponentArea.CardsInPlay[i], _playerKnowledge.TableDirection);
+            _opponentMover.FlipCardUp(_opponentArea.CardsInPlay[i], _globalKnowledge.LookDirection(_globalKnowledge.ComputerFaction()));
         }
     }
 

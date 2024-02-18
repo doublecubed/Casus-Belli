@@ -8,7 +8,7 @@ public class HumanPlayer : MonoBehaviour
 
     private PlayerStateVariables _playerVariables;
     private PlayerBehaviour _playerBehaviour;
-    private PlayerKnowledge _playerKnowledge;
+    [SerializeField] private GlobalKnowledge _globalKnowledge;
     private CardPicker _cardPicker;
 
     public bool DoneDrawing {  get; private set; }
@@ -17,7 +17,6 @@ public class HumanPlayer : MonoBehaviour
     private void Awake()
     {
         _playerBehaviour = GetComponent<PlayerBehaviour>();
-        _playerKnowledge = GetComponent<PlayerKnowledge>();
         _playerVariables = GetComponent<PlayerStateVariables>();
         _cardPicker = GetComponent<CardPicker>();
     }
@@ -25,7 +24,7 @@ public class HumanPlayer : MonoBehaviour
     public void ClickedOnCard(Card clickedCard)
     {
 
-        if (clickedCard.transform.parent = _playerKnowledge.HandSelf.transform)
+        if (clickedCard.transform.parent = _globalKnowledge.Hand(_globalKnowledge.HumanFaction()).transform)
         {
             _playerBehaviour.PutFromHandToPlay(clickedCard);
         }
@@ -42,9 +41,9 @@ public class HumanPlayer : MonoBehaviour
     public void ClickedOnDeck(Deck clickedDeck)
     {
 
-        if (clickedDeck == _playerKnowledge.ArmyDeckSelf || clickedDeck == _playerKnowledge.SupportDeckSelf)
+        if (clickedDeck == _globalKnowledge.ArmyDeck(_globalKnowledge.HumanFaction()) || clickedDeck == _globalKnowledge.SupportDeck(_globalKnowledge.HumanFaction()))
         {
-            if (_playerKnowledge.HandSelf.CardsInHand.Count < _playerVariables.CardsToDraw)
+            if (_globalKnowledge.Hand(_globalKnowledge.HumanFaction()).CardsInHand.Count < _playerVariables.CardsToDraw)
             {
                 _playerBehaviour.DrawFromDeckToHand(clickedDeck);
             }
@@ -54,11 +53,11 @@ public class HumanPlayer : MonoBehaviour
 
     public void SendUnPlayedCardsToDecks()
     {
-        int numberOfCards = _playerKnowledge.HandSelf.CardsInHand.Count;
+        int numberOfCards = _globalKnowledge.Hand(_globalKnowledge.HumanFaction()).CardsInHand.Count;
 
         for (int i = 0; i < numberOfCards; i++)
         {
-            _playerBehaviour.PutBackAtDeckBottom(_playerKnowledge.HandSelf.CardsInHand[0]);
+            _playerBehaviour.PutBackAtDeckBottom(_globalKnowledge.Hand(_globalKnowledge.HumanFaction()).CardsInHand[0]);
         }
     }
 

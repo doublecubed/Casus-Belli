@@ -4,13 +4,14 @@ using UnityEngine;
 
 public class PlayerBehaviour : MonoBehaviour
 {
-    private PlayerKnowledge _playerKnowledge;
+    [SerializeField] GlobalKnowledge _globalKnowledge;
+    public Affiliation SelfFaction;
+
     private CardMover _cardMover;
     private PlayerStateVariables _selfStates;
 
     private void Awake()
     {
-        _playerKnowledge = GetComponent<PlayerKnowledge>();
         _cardMover = GetComponent<CardMover>();
         _selfStates = GetComponent<PlayerStateVariables>();
     }
@@ -21,13 +22,13 @@ public class PlayerBehaviour : MonoBehaviour
         if (deckDrawnFrom.NumberOfCardsInDeck() == 0) return;
 
         Card drawnCard = deckDrawnFrom.DrawFrom(DeckSide.Top);
-        Transform targetParent = _playerKnowledge.HandSelf.transform;
-        Vector3 targetPosition = _playerKnowledge.HandSelf.PlacementPosition();
+        Transform targetParent = _globalKnowledge.Hand(SelfFaction).transform;
+        Vector3 targetPosition = _globalKnowledge.Hand(SelfFaction).PlacementPosition();
         Vector3 targetRotation = new Vector3(-126f, 0f, 180f);
 
-        PlacementFacing facing = _playerKnowledge.ArmyDeckSelf.Faction == Affiliation.Red ? PlacementFacing.FromCamera : PlacementFacing.ToCamera;
+        PlacementFacing facing = SelfFaction == Affiliation.Red ? PlacementFacing.FromCamera : PlacementFacing.ToCamera;
 
-        _cardMover.MoveCard(drawnCard, _playerKnowledge.HandSelf, targetPosition, facing, _playerKnowledge.TableDirection);
+        _cardMover.MoveCard(drawnCard, _globalKnowledge.Hand(SelfFaction), targetPosition, facing, _globalKnowledge.LookDirection(SelfFaction));
 
     }
 
@@ -36,21 +37,21 @@ public class PlayerBehaviour : MonoBehaviour
         if (deckDrawnFrom.NumberOfCardsInDeck() == 0) return null;
         
         Card drawnCard = deckDrawnFrom.DrawFrom(DeckSide.Top);
-        PlayArea targetArea = _playerKnowledge.AreaSelf;
-        Vector3 targetPosition = _playerKnowledge.AreaSelf.PlacementPosition();
+        PlayArea targetArea = _globalKnowledge.PlayArea(SelfFaction);
+        Vector3 targetPosition = _globalKnowledge.PlayArea(SelfFaction).PlacementPosition();
 
-        _cardMover.MoveCard(drawnCard, targetArea, targetPosition, PlacementFacing.Up, _playerKnowledge.TableDirection);
+        _cardMover.MoveCard(drawnCard, targetArea, targetPosition, PlacementFacing.Up, _globalKnowledge.LookDirection(SelfFaction));
 
         return drawnCard;
     }
 
     public void PutFromHandToPlay(Card cardToPlay)
     {
-        Transform targetParent = _playerKnowledge.AreaSelf.transform;
-        Vector3 targetPosition = _playerKnowledge.AreaSelf.PlacementPosition();
+        Transform targetParent = _globalKnowledge.PlayArea(SelfFaction).transform;
+        Vector3 targetPosition = _globalKnowledge.PlayArea(SelfFaction).PlacementPosition();
         Vector3 targetRotation = targetParent.rotation.eulerAngles;
 
-        _cardMover.MoveCard(cardToPlay, _playerKnowledge.AreaSelf, targetPosition, PlacementFacing.Down, _playerKnowledge.TableDirection);
+        _cardMover.MoveCard(cardToPlay, _globalKnowledge.PlayArea(SelfFaction), targetPosition, PlacementFacing.Down, _globalKnowledge.LookDirection(SelfFaction));
 
         //_cardMover.MoveCard(cardToPlay, targetParent, targetPosition, PlacementFacing.Up);
     }
@@ -63,7 +64,7 @@ public class PlayerBehaviour : MonoBehaviour
 
     public void PutBackAtDeckBottom(Card card)
     {
-        _cardMover.MoveCard(card, card.StartingDeck, card.StartingDeck.transform.position, PlacementFacing.Down, _playerKnowledge.TableDirection);
+        _cardMover.MoveCard(card, card.StartingDeck, card.StartingDeck.transform.position, PlacementFacing.Down, _globalKnowledge.LookDirection(SelfFaction));
     }
 
     public void SelectAbility(Card card, AbilityBase[] abilities)

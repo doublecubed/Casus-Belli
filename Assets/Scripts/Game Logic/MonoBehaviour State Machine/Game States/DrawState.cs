@@ -18,8 +18,7 @@ public class DrawState : GameStateBase
     [SerializeField] private PlayerBehaviour _playerBehaviour;
     [SerializeField] private CardMover _playerCardMover;
 
-    [SerializeField] private PlayerKnowledge _playerKnowledge;
-    [SerializeField] private PlayerKnowledge _opponentKnowledge;
+    [SerializeField] private GlobalKnowledge _globalKnowledge;
 
     [SerializeField] private PlayerStateVariables _playerVariables;
     [SerializeField] private PlayerStateVariables _opponentVariables;
@@ -49,7 +48,7 @@ public class DrawState : GameStateBase
 
         if (_opponentPlayer.DoneDrawing)
         {
-            if (_playerHand.CardsInHand.Count < _playerVariables.CardsToDraw && _playerKnowledge.ArmyDeckSelf.NumberOfCardsInDeck() == 0 && _playerKnowledge.SupportDeckSelf.NumberOfCardsInDeck() == 0)
+            if (_playerHand.CardsInHand.Count < _playerVariables.CardsToDraw && _globalKnowledge.ArmyDeck(_globalKnowledge.HumanFaction()).NumberOfCardsInDeck() == 0 && _globalKnowledge.SupportDeck(_globalKnowledge.HumanFaction()).NumberOfCardsInDeck() == 0)
             {
                 base._isDone = true;
             }
@@ -76,7 +75,7 @@ public class DrawState : GameStateBase
     {
         if (_hasMovingCard) return;
 
-        if (deck != _playerKnowledge.ArmyDeckSelf && deck != _playerKnowledge.SupportDeckSelf) return;
+        if (deck != _globalKnowledge.ArmyDeck(_globalKnowledge.HumanFaction()) && deck != _globalKnowledge.SupportDeck(_globalKnowledge.HumanFaction())) return;
         
         _playerBehaviour.DrawFromDeckToHand(deck);
         

@@ -352,7 +352,7 @@ MeshRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 7
   m_AdditionalVertexStreams: {fileID: 0}
 --- !u!114 &6148699441267337403
 MonoBehaviour:
@@ -1453,6 +1453,8 @@ MonoBehaviour:
   _secondAbility: {fileID: 298784500949720892}
   _border: {fileID: 2730535268679588870}
   _powerText: {fileID: 6148699441267337403}
+  _priorityObject: {fileID: 8540852740670402426}
+  _firstAbilityObject: {fileID: 5399509578922948559}
   _secondAbilityObject: {fileID: 5647342284396859235}
   _powerObject: {fileID: 4569451523152501896}
 --- !u!114 &6990357367236005958

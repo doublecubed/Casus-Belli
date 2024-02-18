@@ -880,7 +880,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 322678625}
-  - component: {fileID: 322678629}
   - component: {fileID: 322678630}
   - component: {fileID: 322678627}
   - component: {fileID: 322678626}
@@ -933,31 +932,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f209eccee332bbe429f21cc182266df9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &322678629
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 322678624}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 90bf0c46f1dffd442b127b33911ceebd, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  ArmyDeckSelf: {fileID: 2111402768}
-  SupportDeckSelf: {fileID: 1396374244}
-  ArmyTrashSelf: {fileID: 765859810}
-  SupportTrashSelf: {fileID: 704459120}
-  ArmyDeckOpponent: {fileID: 1468153271}
-  SupportDeckOpponent: {fileID: 1113287227}
-  ArmyTrashOpponent: {fileID: 779924764}
-  SupportTrashOpponent: {fileID: 2131242560}
-  AreaSelf: {fileID: 508519119}
-  AreaOpponent: {fileID: 1754032585}
-  HandSelf: {fileID: 1122524890}
-  HandOpponent: {fileID: 925598683}
-  TableDirection: {x: 0, y: 0, z: -1}
 --- !u!114 &322678630
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -970,6 +944,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8a08d670d94821547845ed6215175da6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _globalKnowledge: {fileID: 1861117266}
+  SelfFaction: 1
 --- !u!114 &322678631
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1146,7 +1122,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 354957179}
-  - component: {fileID: 354957182}
   - component: {fileID: 354957185}
   - component: {fileID: 354957180}
   - component: {fileID: 354957181}
@@ -1187,6 +1162,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _stateMachine: {fileID: 177022889}
+  _globalKnowledge: {fileID: 1861117266}
 --- !u!114 &354957181
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1201,31 +1177,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _defaultMoveDuration: 0.5
   _defaultRiseDistance: 0.5
---- !u!114 &354957182
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 354957178}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 90bf0c46f1dffd442b127b33911ceebd, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  ArmyDeckSelf: {fileID: 1468153271}
-  SupportDeckSelf: {fileID: 1113287227}
-  ArmyTrashSelf: {fileID: 779924764}
-  SupportTrashSelf: {fileID: 2131242560}
-  ArmyDeckOpponent: {fileID: 2111402768}
-  SupportDeckOpponent: {fileID: 1396374244}
-  ArmyTrashOpponent: {fileID: 765859810}
-  SupportTrashOpponent: {fileID: 704459120}
-  AreaSelf: {fileID: 1754032585}
-  AreaOpponent: {fileID: 508519119}
-  HandSelf: {fileID: 925598683}
-  HandOpponent: {fileID: 1122524890}
-  TableDirection: {x: 0, y: 0, z: 1}
 --- !u!114 &354957185
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1238,6 +1189,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8a08d670d94821547845ed6215175da6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _globalKnowledge: {fileID: 1861117266}
+  SelfFaction: 0
 --- !u!114 &354957186
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2376,14 +2329,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _stateMachine: {fileID: 0}
   _isDone: 0
-  _knowledge: {fileID: 0}
+  _knowledge: {fileID: 1861117266}
   _humanPlayer: {fileID: 354957180}
   _aiPlayer: {fileID: 322678627}
   _playerInput: {fileID: 354957186}
   _playerCardMover: {fileID: 354957181}
   _playerBehaviour: {fileID: 354957185}
-  _playerKnowledge: {fileID: 354957182}
-  _opponentKnowledge: {fileID: 322678629}
+  _globalKnowledge: {fileID: 0}
 --- !u!1 &925598680
 GameObject:
   m_ObjectHideFlags: 0
@@ -3488,7 +3440,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _stateMachine: {fileID: 177022889}
   _isDone: 0
-  _knowledge: {fileID: 0}
+  _knowledge: {fileID: 1861117266}
   _playerArmyDeck: {fileID: 1468153271}
   _playerSupportDeck: {fileID: 1113287227}
   _opponentArmyDeck: {fileID: 2111402768}
@@ -3935,10 +3887,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _stateMachine: {fileID: 0}
   _isDone: 0
-  _knowledge: {fileID: 0}
+  _knowledge: {fileID: 1861117266}
   _cameraController: {fileID: 1006997309}
-  _playerKnowledge: {fileID: 354957182}
-  _opponentKnowledge: {fileID: 322678629}
+  _globalKnowledge: {fileID: 0}
 --- !u!1 &1567546825
 GameObject:
   m_ObjectHideFlags: 0
@@ -4051,15 +4002,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _stateMachine: {fileID: 0}
   _isDone: 0
-  _knowledge: {fileID: 0}
+  _knowledge: {fileID: 1861117266}
   _playerHand: {fileID: 925598683}
   _opponentHand: {fileID: 1122524890}
   _opponentPlayer: {fileID: 322678627}
   _playerInput: {fileID: 354957186}
   _playerBehaviour: {fileID: 354957185}
   _playerCardMover: {fileID: 354957181}
-  _playerKnowledge: {fileID: 354957182}
-  _opponentKnowledge: {fileID: 322678629}
+  _globalKnowledge: {fileID: 0}
   _playerVariables: {fileID: 354957187}
   _opponentVariables: {fileID: 322678631}
   _hasMovingCard: 0
@@ -4147,14 +4097,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _stateMachine: {fileID: 0}
   _isDone: 0
-  _knowledge: {fileID: 0}
+  _knowledge: {fileID: 1861117266}
   _cameraController: {fileID: 1006997309}
   _playerArea: {fileID: 1754032585}
   _opponentArea: {fileID: 508519119}
   _playerMover: {fileID: 354957181}
   _opponentMover: {fileID: 322678626}
-  _playerKnowledge: {fileID: 354957182}
-  _opponentKnowledge: {fileID: 322678629}
+  _globalKnowledge: {fileID: 0}
 --- !u!114 &1608002671
 MonoBehaviour:
   m_ObjectHideFlags: 0
