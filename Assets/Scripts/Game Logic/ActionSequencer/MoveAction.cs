@@ -3,9 +3,14 @@ using System.Collections.Generic;
 using Cysharp.Threading.Tasks;
 using System.Threading;
 using UnityEngine;
+using DG.Tweening;
+using System;
+using UnityEngine.UIElements.Experimental;
+using UnityEngine.UIElements;
 
 public class MoveAction : GameAction
 {
+    private Camera _camera;
     private Card _card;
     private CardMover _mover;
     private ICardContainer _targetContainer;
@@ -13,9 +18,15 @@ public class MoveAction : GameAction
     private PlacementFacing _facing;
     private DeckSide _deckSide;
     private Vector3 _lookDirection;
+    private CancellationToken _cancellationToken;
+    private float _moveDuration;
 
-    public MoveAction(Card card, CardMover mover, ICardContainer targetContainer, Vector3 position, PlacementFacing facing, DeckSide order, Vector3 lookDirection)
+    public event Action<Card> OnCardMovementCompleted;
+    public event Action<Card> OnCardMovementStarted;
+
+    public MoveAction(Card card, CardMover mover, ICardContainer targetContainer, Vector3 position, PlacementFacing facing, DeckSide order, Vector3 lookDirection, CancellationToken cancellationToken, float moveDuration)
     {
+        _camera = Camera.main;
         _card = card;
         _mover = mover;
         _targetContainer = targetContainer;
@@ -23,11 +34,39 @@ public class MoveAction : GameAction
         _facing = facing;
         _deckSide = order;
         _lookDirection = lookDirection;
+        _cancellationToken = cancellationToken;
+        _moveDuration = moveDuration;
     }
 
     public override async UniTask ExecuteAction(CancellationToken token)
     {
+        OnCardMovementStarted?.Invoke(_card);
 
+        ICardContainer exitingContainer = _card.GetComponentInParent<ICardContainer>();
+        exitingContainer.RemoveCard(_card);
+
+        UniTask[] tasks = new UniTask[2]; 
+
+        tasks[0] = _card.transform.DOMove(_containerPosition, _moveDuration).OnComplete(() =>
+        {
+            _targetContainer.AddCard(_card, _deckSide);
+            OnCardMovementCompleted?.Invoke(_card);
+        }).WithCancellation(_cancellationToken);
+        tasks[1] = _card.transform.DORotateQuaternion(CardRotation(_facing, _lookDirection), _moveDuration).WithCancellation(_cancellationToken);
+
+        await UniTask.WhenAll(tasks);
     }
 
+    public Quaternion CardRotation(PlacementFacing facing, Vector3 lookDirection)
+    {
+        if (facing == PlacementFacing.Up) return Quaternion.LookRotation(Vector3.up, lookDirection);
+
+        if (facing == PlacementFacing.Down) return Quaternion.LookRotation(Vector3.down, lookDirection);
+
+        if (facing == PlacementFacing.ToCamera) return Quaternion.LookRotation(-_camera.transform.forward, Vector3.up);
+
+        if (facing == PlacementFacing.FromCamera) return Quaternion.LookRotation(_camera.transform.forward, Vector3.up);
+
+        return Quaternion.identity;
+    }
 }
