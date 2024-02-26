@@ -43,7 +43,7 @@ public class AbilityPlayPhase : GameStateBase, IButtonClickReceiver
 
         SortCardOrder();
         await StartCardResolution();
-        ResolveNextCard();
+        //ResolveNextCard();
 
         //EditorApplication.hierarchyChanged += CardsInPlayUpdated;
     }
@@ -83,18 +83,24 @@ public class AbilityPlayPhase : GameStateBase, IButtonClickReceiver
     {
         int numberOfCards = _cardResolveOrder.Count;
 
+
+
         var ct = this.GetCancellationTokenOnDestroy();
 
-        for (int i = 0; i < numberOfCards; i++)
+        while (_cardResolveOrder.Count > 0)
         {
-             await ResolveCard(_cardResolveOrder[i], ct);
+            await ResolveCard(_cardResolveOrder[0], ct);
+            _cardResolveOrder.RemoveAt(0);
         }
 
+        base._isDone = true;
     }
 
     private async UniTask ResolveCard(Card card, CancellationToken cancellationToken)
     {
         Debug.Log(card.CardName);
+        Debug.Log("Starting ability use for " + card.CardName);
+        card.StartAbilityUse();
     }
 
     private void ResolveNextCard()
@@ -133,18 +139,23 @@ public class AbilityPlayPhase : GameStateBase, IButtonClickReceiver
         List<Card> veryFastCards = _cardsInPlay.Where(x => x.Priority == CardPriority.VeryFast).ToList();
         _cardResolveOrder.AddRange(veryFastCards);
 
+
         List<Card> fastCards = _cardsInPlay.Where(x => x.Priority == CardPriority.Fast).ToList();
         _cardResolveOrder.AddRange(fastCards);
+
 
         List<Card> slowCards = _cardsInPlay.Where(x => x.Priority == CardPriority.Slow).ToList();
         _cardResolveOrder.AddRange(slowCards);
 
+
         List<Card> verySlowSupportCards = _cardsInPlay.Where(x => x.Priority == CardPriority.VerySlow && x.CardType == CardType.Support).ToList();
         _cardResolveOrder.AddRange(verySlowSupportCards);
+
 
         List<Card> verySlowArmyCards = _cardsInPlay.Where(x => x.Priority == CardPriority.VerySlow && x.CardType == CardType.Army).ToList();
         verySlowArmyCards = verySlowArmyCards.OrderBy(x => x.Power).ToList();
         _cardResolveOrder.AddRange(verySlowArmyCards);
+
     }
 
     private void CardsInPlayUpdated()
