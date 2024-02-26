@@ -35,6 +35,6 @@ public abstract class GameStateBase : MonoBehaviour
     {
         if (_isDone) _stateMachine.ProceedToNextState();
     }
-
+    
     #endregion
 }

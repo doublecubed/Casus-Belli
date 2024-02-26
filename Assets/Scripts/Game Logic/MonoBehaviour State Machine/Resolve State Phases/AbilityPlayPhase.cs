@@ -1,11 +1,22 @@
+using Cysharp.Threading.Tasks;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
 using UnityEngine;
 
 public class AbilityPlayPhase : GameStateBase, IButtonClickReceiver
 {
+    #region REFERENCES
+
     [SerializeField] private PlayArea _playerArea;
     [SerializeField] private PlayArea _opponentArea;
+
+    private PlayerStateVariables _greenStates;
+    private PlayerStateVariables _redStates;
+
+    #endregion
+
+    #region VARIABLES
 
     [SerializeField] private List<Card> _cardsInPlay;
     [SerializeField] private List<Card> _cardResolveOrder;
@@ -13,10 +24,11 @@ public class AbilityPlayPhase : GameStateBase, IButtonClickReceiver
     private int _cardsToPlay;
     private int _cardResolveIndex;
 
-    private PlayerStateVariables _greenStates;
-    private PlayerStateVariables _redStates;
-
     [SerializeField] private Card _cardInEffect;
+
+    #endregion
+
+    #region MONOBEHAVIOUR
 
     protected override void Start()
     {
@@ -25,11 +37,12 @@ public class AbilityPlayPhase : GameStateBase, IButtonClickReceiver
         _redStates = base._knowledge.PlayerStates(Affiliation.Red);
     }
 
-    protected override void OnEnable()
+    protected async override void OnEnable()
     {
         base.OnEnable();
 
         SortCardOrder();
+        await StartCardResolution();
         ResolveNextCard();
 
         //EditorApplication.hierarchyChanged += CardsInPlayUpdated;
@@ -46,6 +59,10 @@ public class AbilityPlayPhase : GameStateBase, IButtonClickReceiver
     }
 
 
+    #endregion
+
+
+    #region METHODS
 
     public void ButtonClicked(int index)
     {
@@ -60,6 +77,24 @@ public class AbilityPlayPhase : GameStateBase, IButtonClickReceiver
 
         _cardsToPlay = _cardResolveOrder.Count;
         _cardResolveIndex = 0;
+    }
+
+    private async UniTask StartCardResolution()
+    {
+        int numberOfCards = _cardResolveOrder.Count;
+
+        var ct = this.GetCancellationTokenOnDestroy();
+
+        for (int i = 0; i < numberOfCards; i++)
+        {
+             await ResolveCard(_cardResolveOrder[i], ct);
+        }
+
+    }
+
+    private async UniTask ResolveCard(Card card, CancellationToken cancellationToken)
+    {
+        Debug.Log(card.CardName);
     }
 
     private void ResolveNextCard()
@@ -132,4 +167,6 @@ public class AbilityPlayPhase : GameStateBase, IButtonClickReceiver
     {
         _cardResolveOrder.Add(card);
     }
+
+    #endregion
 }
