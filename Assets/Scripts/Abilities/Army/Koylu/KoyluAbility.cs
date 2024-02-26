@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class KoyluAbility : AbilityBase
 {
+    private ActionSequencer _sequencer;
+
     [SerializeField] private CardMover _mover;
     [SerializeField] private Card _selfCard;
 
@@ -11,6 +13,7 @@ public class KoyluAbility : AbilityBase
     {
         _selfCard = GetComponentInParent<Card>();
         _mover = knowledge.Mover(_selfCard.Faction);
+        _sequencer = knowledge.Sequencer;
 
         _abilityPhase.Add(RiseCard);
         _abilityPhase.Add(UpdatePower);

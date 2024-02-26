@@ -7,11 +7,11 @@ public class CardAnimator : MonoBehaviour
 {
     [SerializeField] private float _highlightDuration;
 
-    public async void HighlightFirstAbility() {
+    public void HighlightFirstAbility() {
 
     }
 
-    public async void HighlightSecondAbility()
+    public void HighlightSecondAbility()
     {
 
     }

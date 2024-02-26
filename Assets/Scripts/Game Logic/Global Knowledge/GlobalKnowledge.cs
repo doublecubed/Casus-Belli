@@ -6,6 +6,7 @@ public class GlobalKnowledge : MonoBehaviour
 {
     public static GlobalKnowledge Instance;
 
+    public ActionSequencer Sequencer;
 
     public AbilityPlayPhase AbilityPhase;
     public EndState EndState;
@@ -94,6 +95,7 @@ public class GlobalKnowledge : MonoBehaviour
         CreateDictionaries();
 
         _defaultMover = GetComponent<CardMover>();
+        Sequencer = GetComponent<ActionSequencer>();
     }
 
     private void CreateDictionaries()

@@ -15,6 +15,8 @@ public class ActionSequencer : MonoBehaviour
 
     private CancellationToken ct;
 
+    public bool isProcessing;
+
     private void Start()
     {
         _knowledge = GetComponent<GlobalKnowledge>();
@@ -32,17 +34,23 @@ public class ActionSequencer : MonoBehaviour
     public void InsertAction(GameAction action)
     {
         _actionsQueue.Enqueue(action);
+        ProcessActions();
     }
 
 
-    private async void Update()
+    public async void ProcessActions()
     {
+        if (isProcessing) return;
+
+        isProcessing = true;
+
         while (_actionsQueue.Count > 0)
         {
             GameAction currentAction = _actionsQueue.Dequeue();
-            await currentAction.ExecuteAction(ct);
+            await currentAction.ExecuteAction();
         }
-    }
 
+        isProcessing = false;
+    }
 
 }
