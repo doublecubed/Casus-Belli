@@ -17,6 +17,8 @@ public class CardDisplayer : MonoBehaviour
     [SerializeField] private SpriteRenderer _border;
     [SerializeField] private TextMeshPro _powerText;
 
+    public TextMeshPro PowerText { get { return _powerText; } }
+
     [SerializeField] private GameObject _priorityObject;
     [SerializeField] private GameObject _firstAbilityObject;
     [SerializeField] private GameObject _secondAbilityObject;
