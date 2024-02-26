@@ -38,7 +38,7 @@ public class MoveAction : GameAction
         _moveDuration = moveDuration;
     }
 
-    public override async UniTask ExecuteAction(CancellationToken token)
+    public override async UniTask ExecuteAction()
     {
         OnCardMovementStarted?.Invoke(_card);
 
@@ -52,21 +52,9 @@ public class MoveAction : GameAction
             _targetContainer.AddCard(_card, _deckSide);
             OnCardMovementCompleted?.Invoke(_card);
         }).WithCancellation(_cancellationToken);
-        tasks[1] = _card.transform.DORotateQuaternion(CardRotation(_facing, _lookDirection), _moveDuration).WithCancellation(_cancellationToken);
+        tasks[1] = _card.transform.DORotateQuaternion(CardCalculations.CardRotation(_facing, _camera, _lookDirection), _moveDuration).WithCancellation(_cancellationToken);
 
         await UniTask.WhenAll(tasks);
     }
 
-    public Quaternion CardRotation(PlacementFacing facing, Vector3 lookDirection)
-    {
-        if (facing == PlacementFacing.Up) return Quaternion.LookRotation(Vector3.up, lookDirection);
-
-        if (facing == PlacementFacing.Down) return Quaternion.LookRotation(Vector3.down, lookDirection);
-
-        if (facing == PlacementFacing.ToCamera) return Quaternion.LookRotation(-_camera.transform.forward, Vector3.up);
-
-        if (facing == PlacementFacing.FromCamera) return Quaternion.LookRotation(_camera.transform.forward, Vector3.up);
-
-        return Quaternion.identity;
-    }
 }

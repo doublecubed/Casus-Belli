@@ -6,7 +6,7 @@ using UnityEngine;
 
 public class GameAction
 {
-    public virtual async UniTask ExecuteAction(CancellationToken ct)
+    public virtual async UniTask ExecuteAction()
     {
 
     }

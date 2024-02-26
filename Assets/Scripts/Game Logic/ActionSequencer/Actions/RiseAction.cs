@@ -26,7 +26,7 @@ public class RiseAction : GameAction
         _cancellationToken = cancellationToken;
     }
 
-    public override async UniTask ExecuteAction(CancellationToken token)
+    public override async UniTask ExecuteAction()
     {
         OnCardMovementStarted?.Invoke(_card);
 
