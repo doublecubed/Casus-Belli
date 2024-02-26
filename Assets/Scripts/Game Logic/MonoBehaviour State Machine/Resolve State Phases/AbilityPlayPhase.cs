@@ -42,8 +42,8 @@ public class AbilityPlayPhase : GameStateBase, IButtonClickReceiver
         base.OnEnable();
 
         SortCardOrder();
-        await StartCardResolution();
-        //ResolveNextCard();
+        //await StartCardResolution();
+        ResolveNextCard();
 
         //EditorApplication.hierarchyChanged += CardsInPlayUpdated;
     }
