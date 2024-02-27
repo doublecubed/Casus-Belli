@@ -18,10 +18,14 @@ public class CardDisplayer : MonoBehaviour
     [SerializeField] private TextMeshPro _powerText;
 
     public TextMeshPro PowerText { get { return _powerText; } }
+    public GameObject FirstAbilityCancelIcon { get { return _firstAbilityCancelIcon; } }
+    public GameObject SecondAbilityCancelIcon { get { return _secondAbilityCancelIcon; } }
 
     [SerializeField] private GameObject _priorityObject;
     [SerializeField] private GameObject _firstAbilityObject;
+    [SerializeField] private GameObject _firstAbilityCancelIcon;
     [SerializeField] private GameObject _secondAbilityObject;
+    [SerializeField] private GameObject _secondAbilityCancelIcon;
     [SerializeField] private GameObject _powerObject;
 
     public bool IsVisible { get; private set; }
@@ -75,6 +79,9 @@ public class CardDisplayer : MonoBehaviour
                 break;
         }
 
+        _firstAbilityCancelIcon.SetActive(false);
+        _secondAbilityCancelIcon.SetActive(false);
+
         if (cardSO.power != 0)
         {
             _powerObject.SetActive(true);
@@ -85,5 +92,6 @@ public class CardDisplayer : MonoBehaviour
         }
 
     }
+
 
 }

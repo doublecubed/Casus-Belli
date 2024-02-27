@@ -2,16 +2,18 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
+using Cysharp.Threading.Tasks;
+using System.Threading;
 
 public class CardAnimator : MonoBehaviour
 {
     [SerializeField] private float _highlightDuration;
 
-    public void HighlightFirstAbility() {
+    public async UniTask HighlightFirstAbility() {
 
     }
 
-    public void HighlightSecondAbility()
+    public async UniTask HighlightSecondAbility()
     {
 
     }
