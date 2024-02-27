@@ -31,7 +31,7 @@ public class ActionSequencer : MonoBehaviour
         _cardOrder = cards;
     }
 
-    public void InsertAction(GameAction action)
+    public async UniTask InsertAction(GameAction action)
     {
         _actionsQueue.Enqueue(action);
         ProcessActions();
