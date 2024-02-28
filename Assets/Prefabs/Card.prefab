@@ -1542,9 +1542,9 @@ MonoBehaviour:
   _powerText: {fileID: 6148699441267337403}
   _priorityObject: {fileID: 8540852740670402426}
   _firstAbilityObject: {fileID: 5399509578922948559}
-  _firstAbilityCancelIcon: {fileID: 0}
+  _firstAbilityCancelIcon: {fileID: 1975256181704296788}
   _secondAbilityObject: {fileID: 5647342284396859235}
-  _secondAbilityCancelIcon: {fileID: 0}
+  _secondAbilityCancelIcon: {fileID: 8646307033737177927}
   _powerObject: {fileID: 4569451523152501896}
 --- !u!114 &6990357367236005958
 MonoBehaviour:

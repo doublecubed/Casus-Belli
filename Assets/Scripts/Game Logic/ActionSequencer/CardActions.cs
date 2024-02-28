@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Cysharp.Threading.Tasks;
 using System.Threading;
+using UnityEditor;
 
 public static class CardActions
 {
@@ -27,6 +28,12 @@ public static class CardActions
     {
         RiseAction action = new RiseAction(card, riseDistance, riseDuration, false, ct);
         await sequencer.InsertAction(action);
+    }
+
+
+    public static async UniTask FlipCard(Card card, CancellationToken ct, ActionSequencer sequencer)
+    {
+
     }
 
     public static async UniTask HighlightAbility(Card card, Transform targetTransform, CancellationToken ct, ActionSequencer sequencer)

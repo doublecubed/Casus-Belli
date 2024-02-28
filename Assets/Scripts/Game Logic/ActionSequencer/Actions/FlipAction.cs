@@ -26,7 +26,7 @@ public class FlipAction : GameAction
 
     public override async UniTask ExecuteAction()
     {
-        Quaternion newRotation = CardCalculations.CardRotation(PlacementFacing.Up, _camera, _lookRotation);
+        Quaternion newRotation = CardCalculations.CardRotation(_facing, _camera, _lookRotation);
         await _card.transform.DORotateQuaternion(newRotation, _flipDuration).WithCancellation(_cancellationToken);
     }
 }

@@ -14,10 +14,11 @@ public class CameraController : MonoBehaviour
 
     [SerializeField] private float _cameraMovementDuration;
 
-    public async void MoveCameraTo(Transform target)
+    public async UniTask MoveCameraTo(Transform target)
     {
         CameraMoveAction moveAction = new CameraMoveAction(_camera, target, _cameraMovementDuration, this.GetCancellationTokenOnDestroy());
-        await _sequencer.InsertAction(moveAction);
+        await moveAction.ExecuteAction();
+        //await _sequencer.InsertAction(moveAction);
 
 
         //_camera.DOMove(target.position, _cameraMovementDuration);

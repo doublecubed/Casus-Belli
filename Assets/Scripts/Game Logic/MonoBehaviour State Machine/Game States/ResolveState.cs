@@ -1,6 +1,8 @@
+using Cysharp.Threading.Tasks;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Threading;
 
 public class ResolveState : GameStateBase
 {
@@ -16,41 +18,56 @@ public class ResolveState : GameStateBase
 
     [SerializeField] private GlobalKnowledge _globalKnowledge;
 
+    private CancellationToken _cancellationToken;
+
+    private const float _flipDuration = 0.5f;
+
     protected override void Awake()
     {
         base.Awake();
         _resolveStateMachine = GetComponent<MonoBehaviourStateMachine>();
+        _cancellationToken = this.GetCancellationTokenOnDestroy();
     }
 
-    protected override void OnEnable()
+    protected async override void OnEnable()
     {
         base.OnEnable();
 
-        FlipCardsInPlay();
+        await MoveCameraCloser();
 
-        MoveCameraCloser();
+        await FlipCardsInPlay();
 
         RotateOpponentCardsInPlay();
 
         _resolveStateMachine.StartMachine();
     }
 
-    private void FlipCardsInPlay()
+    private async UniTask FlipCardsInPlay()
     {
+        List<UniTask> tasks = new List<UniTask>();
+
         for (int i = 0; i < _playerArea.CardsInPlay.Count; i++)
         {
-            _playerMover.FlipCardUp(_playerArea.CardsInPlay[i], _globalKnowledge.LookDirection(_globalKnowledge.HumanFaction()));
+            FlipAction flip = new FlipAction(Camera.main, _playerArea.CardsInPlay[i], _flipDuration, PlacementFacing.Up, _cancellationToken, _knowledge.LookDirection(_knowledge.HumanFaction()));
+            tasks.Add(flip.ExecuteAction());
+            //_playerMover.FlipCardUp(_playerArea.CardsInPlay[i], _globalKnowledge.LookDirection(_globalKnowledge.HumanFaction()));
         }
 
         for (int i = 0; i < _opponentArea.CardsInPlay.Count; i++)
         {
-            _opponentMover.FlipCardUp(_opponentArea.CardsInPlay[i], _globalKnowledge.LookDirection(_globalKnowledge.ComputerFaction()));
+            FlipAction flip = new FlipAction(Camera.main, _opponentArea.CardsInPlay[i], _flipDuration, PlacementFacing.Up, _cancellationToken, _knowledge.LookDirection(_knowledge.ComputerFaction()));
+            tasks.Add(flip.ExecuteAction());
+            //_opponentMover.FlipCardUp(_opponentArea.CardsInPlay[i], _globalKnowledge.LookDirection(_globalKnowledge.ComputerFaction()));
         }
+
+        await UniTask.WhenAll(tasks);
     }
 
-    private void MoveCameraCloser()
+ 
+
+    private async UniTask MoveCameraCloser()
     {
-        _cameraController.MoveCameraTo(_cameraController.ResolvePosition);
+        await _cameraController.MoveCameraTo(_cameraController.ResolvePosition);
     }
 
     private void RotateOpponentCardsInPlay()

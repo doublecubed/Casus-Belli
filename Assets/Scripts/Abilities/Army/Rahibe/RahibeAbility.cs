@@ -1,5 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Threading;
+using Cysharp.Threading.Tasks;
 using UnityEngine;
 
 public class RahibeAbility : AbilityBase
@@ -9,6 +11,8 @@ public class RahibeAbility : AbilityBase
     [SerializeField] private Deck _selfArmyDeck;
     [SerializeField] private PlayArea _selfPlayArea;
     [SerializeField] private PlayerBehaviour _selfBehaviour;
+    private CancellationToken _ct;
+    private ActionSequencer _sequencer;
 
     public override void Initialize(GlobalKnowledge knowledge)
     {
@@ -17,12 +21,23 @@ public class RahibeAbility : AbilityBase
         _selfArmyDeck = knowledge.ArmyDeck(_selfCard.Faction);
         _selfPlayArea = knowledge.PlayArea(_selfCard.Faction);
         _selfBehaviour = knowledge.Behaviour(_selfCard.Faction);
+        _sequencer = knowledge.Sequencer;
 
-        _abilityPhase.Add(RiseCard);
-        _abilityPhase.Add(BringInCard);
-        _abilityPhase.Add(LowerCard);
+        _abilityPhase.Add(AbilityPhase);
+
+        //_abilityPhase.Add(RiseCard);
+        //_abilityPhase.Add(BringInCard);
+        //_abilityPhase.Add(LowerCard);
 
         base.Initialize(knowledge);
+    }
+
+    private async void AbilityPhase()
+    {
+        await CardActions.RiseCard(_selfCard, _ct, _sequencer);
+
+
+        await CardActions.LowerCard(_selfCard, _ct, _sequencer);
     }
 
     private void RiseCard()
