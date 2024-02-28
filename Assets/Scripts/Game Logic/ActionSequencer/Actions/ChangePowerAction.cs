@@ -20,6 +20,7 @@ public class ChangePowerAction : GameAction
 
     public override async UniTask ExecuteAction()
     {
+        _card.GetComponent<Card>().SetPower(_newPower);
         _powerText.text = _newPower.ToString();
     }
 }

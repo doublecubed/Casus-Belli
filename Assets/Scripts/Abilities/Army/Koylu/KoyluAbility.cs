@@ -9,6 +9,7 @@ public class KoyluAbility : AbilityBase
 
     private Card _selfCard;
     private ActionSequencer _sequencer;
+    private CancellationToken _ct;
 
     #endregion
 
@@ -18,6 +19,7 @@ public class KoyluAbility : AbilityBase
     {
         _selfCard = GetComponentInParent<Card>();
         _sequencer = knowledge.Sequencer;
+        _ct = this.GetCancellationTokenOnDestroy();
 
         _abilityPhase.Add(AbilityPhase);
 
@@ -26,13 +28,11 @@ public class KoyluAbility : AbilityBase
 
     private async void AbilityPhase()
     {
-        CancellationToken ct = this.GetCancellationTokenOnDestroy();
-
-        await CardActions.RiseCard(_selfCard, ct, _sequencer);
+        await CardActions.RiseCard(_selfCard, _ct, _sequencer);
 
         await CheckPowerUpdate();
 
-        await CardActions.LowerCard(_selfCard, ct, _sequencer);
+        await CardActions.LowerCard(_selfCard, _ct, _sequencer);
 
         AbilityCompleted();
     }
@@ -45,8 +45,7 @@ public class KoyluAbility : AbilityBase
         {
             if (cardsInPlay[i].CardType == CardType.Army && cardsInPlay[i] != _selfCard)
             {
-                ChangePowerAction changePower = new ChangePowerAction(_selfCard, 4);
-                await _sequencer.InsertAction(changePower);
+                await CardActions.ChangePower(_selfCard, 4, _ct, _sequencer);
             }
         }
     }

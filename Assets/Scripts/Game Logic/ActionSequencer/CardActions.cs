@@ -50,4 +50,10 @@ public static class CardActions
 
         await UniTask.WhenAll(tasks);
     }
+
+    public static async UniTask ChangePower(Card card, int newPower, CancellationToken ct, ActionSequencer sequencer)
+    {
+        ChangePowerAction changePower = new ChangePowerAction(card, newPower);
+        await sequencer.InsertAction(changePower);
+    }
 }

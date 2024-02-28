@@ -45,14 +45,18 @@ public class SuikastciAbility : AbilityBase
         Affiliation targetFaction = _selfCard.Faction == Affiliation.Red ? Affiliation.Green : Affiliation.Red;
 
         List<Card> cardsInPlay = _knowledge.PlayArea(targetFaction).CardsInPlay;
+        List<UniTask> tasks = new List<UniTask>();
 
         for (int i = 0; i < cardsInPlay.Count; i++)
         {
             if (cardsInPlay[i].CardName == "Prens" || cardsInPlay[i].CardName == "Kral")
             {
-                await CardActions.CancelAbilities(cardsInPlay[i], ct, _sequencer);
+                tasks.Add(CardActions.CancelAbilities(cardsInPlay[i], ct, _sequencer));
             }
         }
+
+        await UniTask.WhenAll(tasks);
+
     }
 
     #endregion
