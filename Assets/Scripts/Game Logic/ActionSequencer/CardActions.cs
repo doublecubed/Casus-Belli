@@ -4,6 +4,7 @@ using UnityEngine;
 using Cysharp.Threading.Tasks;
 using System.Threading;
 using UnityEditor;
+using DG.Tweening;
 
 public static class CardActions
 {
@@ -16,6 +17,7 @@ public static class CardActions
     private const float cancelAbilityScale = 1.5f;
     private const float cancelAbilityDuration = 0.5f;
 
+    private const float cardMoveDuration = 0.5f;
 
 
     public static async UniTask RiseCard(Card card, CancellationToken cancellationToken, ActionSequencer sequencer)
@@ -28,6 +30,22 @@ public static class CardActions
     {
         RiseAction action = new RiseAction(card, riseDistance, riseDuration, false, ct);
         await sequencer.InsertAction(action);
+    }
+
+    public static async UniTask MoveCard(Card card, ICardContainer container, Vector3 position, PlacementFacing facing, DeckSide order, Vector3 lookDirection, CancellationToken ct)
+    {
+        UniTask[] tasks = new UniTask[2];
+
+        ICardContainer exitingContainer = card.GetComponentInParent<ICardContainer>();
+        exitingContainer.RemoveCard(card);
+
+        tasks[0] = card.transform.DOMove(position, cardMoveDuration).OnComplete(() =>
+        {
+            container.AddCard(card, order);
+        }).WithCancellation(ct);
+        tasks[1] = card.transform.DORotateQuaternion(CardCalculations.CardRotation(facing, Camera.main, lookDirection), cardMoveDuration).WithCancellation(ct);
+
+        await UniTask.WhenAll(tasks);
     }
 
 

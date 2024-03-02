@@ -36,9 +36,29 @@ public class RahibeAbility : AbilityBase
     {
         await CardActions.RiseCard(_selfCard, _ct, _sequencer);
 
+        await PutCardIntoPlay();
 
         await CardActions.LowerCard(_selfCard, _ct, _sequencer);
+
+        AbilityCompleted();
     }
+
+    private async UniTask PutCardIntoPlay()
+    {
+        if (_selfArmyDeck.NumberOfCardsInDeck() <= 0) return;
+
+        Card nextCard = _selfArmyDeck.DrawFrom(DeckSide.Top);
+        Vector3 position = _selfPlayArea.PlacementPosition();
+        PlacementFacing facing = PlacementFacing.Up;
+        DeckSide side = DeckSide.Bottom;
+        Vector3 lookDirection = _knowledge.LookDirection(_selfCard.Faction);
+
+        await CardActions.MoveCard(nextCard, _selfPlayArea, position, facing, side, lookDirection, _ct);
+
+        _knowledge.AbilityPhase.AddCardToStack(nextCard);
+
+    }
+
 
     private void RiseCard()
     {
